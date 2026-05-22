@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>E-DEFENCE — Portail de cybersécurité</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['Inter','sans-serif'] },
+      colors: {
+        ed: { bg:'#07111f', surface:'#0d1e33', card:'#112240', border:'#1e3a5f',
+              blue:'#00d4ff', green:'#00c896', red:'#ff3b5c', warn:'#ffa500',
+              muted:'#4a6b8a', text:'#e8f4ff' }
+      }
+    }
+  }
+}
+</script>
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- Header include placeholder (chargé dynamiquement from includes/header.html) -->
+<div id="include-header"></div>
+
+<!-- ═══════════════════════════════════════ HERO ═══ -->
+<section class="hero-bg grid-overlay min-h-screen flex items-center pt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-24 w-full">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-8 anim-1" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">
+        <div class="pulse-dot"></div>
+        Protection active — Portail de cybersécurité d'entreprise
+      </div>
+      <h1 class="font-display font-bold leading-none mb-6 anim-2" style="font-size:clamp(2.8rem,6vw,5rem)">
+        Sécurisez votre<br>
+        organisation avec<br>
+        <span class="g-text">E-DEFENCE</span>
+      </h1>
+      <p class="text-ed-muted text-lg leading-relaxed mb-8 max-w-xl mx-auto anim-3">
+        Portail unifié d'audit, d'inventaire et de formation en cybersécurité. Diagnostiquez vos vulnérabilités, corrigez-les, formez vos équipes.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 anim-4">
+        <a href="#portail" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-ed-bg btn-primary text-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Accéder au portail
+        </a>
+        <button onclick="openModal('signup')" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm btn-ghost">
+          Obtenir mon audit gratuit
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </button>
+      </div>
+      <!-- KPI row -->
+      <div class="flex flex-wrap justify-center gap-8 mt-12 anim-4">
+        <div><div class="text-2xl font-bold text-white font-display">+2 4**</div><div class="text-xs text-ed-muted mt-0.5">Entreprises protégées</div></div>
+        <div class="w-px bg-white/10 self-stretch"></div>
+        <div><div class="text-2xl font-bold text-white font-display">8</div><div class="text-xs text-ed-muted mt-0.5">Modules de sécurité</div></div>
+        <div class="w-px bg-white/10 self-stretch"></div>
+        <div><div class="text-2xl font-bold text-white font-display">ISO 27001</div><div class="text-xs text-ed-muted mt-0.5">Référentiel couvert</div></div>
+        <div class="w-px bg-white/10 self-stretch"></div>
+        <div><div class="text-2xl font-bold text-white font-display">NIS2</div><div class="text-xs text-ed-muted mt-0.5">Conformité vérifiée</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PORTAIL 8 ONGLETS ═══ -->
+<section id="portail" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-10">
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896">PORTAIL UNIFIÉ</div>
+      <h2 class="font-display font-bold text-4xl text-white mb-3">Tableau de bord E-DEFENCE</h2>
+      <p class="text-ed-muted max-w-lg mx-auto text-sm">Centralisez votre posture de sécurité en un seul espace. Huit modules, une vision complète.</p>
+    </div>
+
+    <!-- Portail shell -->
+    <div class="rounded-2xl overflow-hidden" style="border:1px solid #1e3a5f;background:#0d1e33">
+      <!-- Top bar -->
+      <div class="flex items-center justify-between px-5 py-3" style="background:#07111f;border-bottom:1px solid #1e3a5f">
+        <div class="flex items-center gap-3">
+          <div class="flex gap-1.5">
+            <div class="w-3 h-3 rounded-full" style="background:#ff5f57"></div>
+            <div class="w-3 h-3 rounded-full" style="background:#febc2e"></div>
+            <div class="w-3 h-3 rounded-full" style="background:#28c840"></div>
+          </div>
+          <span class="text-xs font-mono" style="color:#4a6b8a">Console E-DEFENCE — Portail sécurisé</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="pulse-dot"></div>
+          <span class="text-xs" style="color:#4a6b8a">Protection active</span>
+          <div class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(0,212,255,.15);color:#00d4ff">Score : 42/100</div>
+        </div>
+      </div>
+
+      <!-- Tab nav -->
+      <div class="flex overflow-x-auto" style="background:#07111f;border-bottom:2px solid #1e3a5f;scrollbar-width:none">
+        <button onclick="switchPortalTab('decouverte',this)" class="portal-nav-item active px-4 py-3 text-xs font-medium tracking-wide uppercase">Découverte</button>
+        <button onclick="switchPortalTab('inventaire',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Inventaire</button>
+        <button onclick="switchPortalTab('performance',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Performance</button>
+        <button onclick="switchPortalTab('securite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Sécurité</button>
+        <button onclick="switchPortalTab('wifi',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Audit WiFi</button>
+        <button onclick="switchPortalTab('antivirus',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Antivirus</button>
+        <button onclick="switchPortalTab('conformite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Hub Conformité</button>
+        <button onclick="switchPortalTab('academy',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Cyber-Academy</button>
+      </div>
+
+      <!-- Tab contents -->
+      <div class="p-6" style="min-height:420px">
+
+        <!-- ── DECOUVERTE ── -->
+        <div id="ptab-decouverte" class="portal-tab active">
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="md:col-span-1">
+              <div class="sec-label">Score global</div>
+              <div class="flex flex-col items-center py-4">
+                <svg width="130" height="130" viewBox="0 0 130 130" class="score-ring-svg mb-3">
+                  <circle cx="65" cy="65" r="54" fill="none" stroke="#1e3a5f" stroke-width="10"/>
+                  <circle cx="65" cy="65" r="54" fill="none" stroke="#ffa500" stroke-width="10" stroke-dasharray="339" stroke-dashoffset="197" stroke-linecap="round"/>
+                  <text x="65" y="65" dominant-baseline="middle" text-anchor="middle" fill="#ffa500" font-size="26" font-weight="700" transform="rotate(90,65,65)">42</text>
+                </svg>
+                <div class="text-xs text-ed-muted tracking-widest uppercase">Score cyber global</div>
+                <div class="mt-3 space-y-2 w-full">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1"><span class="text-ed-muted">Réseau</span><span style="color:#ff3b5c">28/100</span></div>
+                    <div class="prog-track h-1"><div class="prog-fill" style="width:28%;background:#ff3b5c"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1"><span class="text-ed-muted">Endpoints</span><span style="color:#ffa500">54/100</span></div>
+                    <div class="prog-track h-1"><div class="prog-fill" style="width:54%;background:#ffa500"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1"><span class="text-ed-muted">Identités</span><span style="color:#ffa500">61/100</span></div>
+                    <div class="prog-track h-1"><div class="prog-fill" style="width:61%;background:#ffa500"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1"><span class="text-ed-muted">Données</span><span style="color:#ff3b5c">19/100</span></div>
+                    <div class="prog-track h-1"><div class="prog-fill" style="width:19%;background:#ff3b5c"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <div class="sec-label">Alertes récentes</div>
+              <div class="space-y-3">
+                <div class="flex gap-3 p-3 rounded-lg" style="background:rgba(255,59,92,.06);border:1px solid rgba(255,59,92,.2)">
+                  <div class="tl-dot" style="background:#ff3b5c"></div>
+                  <div><div class="text-xs text-ed-muted mb-0.5">Aujourd'hui 08:42</div><div class="text-sm text-white">Tentative d'accès non autorisé — <span style="color:#ff3b5c;font-family:monospace">192.168.1.47</span></div></div>
+                </div>
+                <div class="flex gap-3 p-3 rounded-lg" style="background:rgba(255,165,0,.06);border:1px solid rgba(255,165,0,.2)">
+                  <div class="tl-dot" style="background:#ffa500"></div>
+                  <div><div class="text-xs text-ed-muted mb-0.5">Aujourd'hui 06:15</div><div class="text-sm text-white">Certificat SSL expiré — <span style="color:#ffa500;font-family:monospace">portail-rh.local</span></div></div>
+                </div>
+                <div class="flex gap-3 p-3 rounded-lg" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.2)">
+                  <div class="tl-dot" style="background:#00c896"></div>
+                  <div><div class="text-xs text-ed-muted mb-0.5">Hier 22:30</div><div class="text-sm text-white">Scan réseau terminé — <span style="color:#00c896">47 équipements cartographiés</span></div></div>
+                </div>
+                <div class="flex gap-3 p-3 rounded-lg" style="background:rgba(255,59,92,.06);border:1px solid rgba(255,59,92,.2)">
+                  <div class="tl-dot" style="background:#ff3b5c"></div>
+                  <div><div class="text-xs text-ed-muted mb-0.5">Hier 14:11</div><div class="text-sm text-white">Malware détecté — <span style="color:#ff3b5c;font-family:monospace">WORKSTATION-12</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── INVENTAIRE ── -->
+        <div id="ptab-inventaire" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Postes</div><div class="text-3xl font-bold text-white font-display">23</div><div class="text-xs text-ed-muted mt-1">18 Windows · 5 macOS</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Serveurs</div><div class="text-3xl font-bold font-display" style="color:#ffa500">8</div><div class="text-xs text-ed-muted mt-1">3 hors garantie</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Mobiles</div><div class="text-3xl font-bold text-white font-display">16</div><div class="text-xs text-ed-muted mt-1">9 non gérés MDM</div></div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="ed-table">
+              <thead><tr><th>Équipement</th><th>Adresse IP</th><th>Système</th><th>Dernière MAJ</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono text-xs">WORKSTATION-01</td><td class="font-mono text-xs">192.168.1.10</td><td>Windows 11</td><td>2025-05-18</td><td><span class="badge badge-ok">OK</span></td></tr>
+                <tr><td class="font-mono text-xs">WORKSTATION-12</td><td class="font-mono text-xs">192.168.1.22</td><td>Windows 10</td><td>2024-11-02</td><td><span class="badge badge-crit">Compromis</span></td></tr>
+                <tr><td class="font-mono text-xs">SRV-PROD-01</td><td class="font-mono text-xs">192.168.0.5</td><td>Ubuntu 22.04</td><td>2025-04-30</td><td><span class="badge badge-ok">OK</span></td></tr>
+                <tr><td class="font-mono text-xs">SRV-BACKUP</td><td class="font-mono text-xs">192.168.0.8</td><td>Win Server 2016</td><td>2023-08-14</td><td><span class="badge badge-crit">EOL</span></td></tr>
+                <tr><td class="font-mono text-xs">LAPTOP-DG</td><td class="font-mono text-xs">192.168.1.31</td><td>macOS 14</td><td>2025-05-19</td><td><span class="badge badge-ok">OK</span></td></tr>
+                <tr><td class="font-mono text-xs">MOBILE-CEO</td><td class="font-mono text-xs">DHCP</td><td>iOS 17</td><td>2025-03-01</td><td><span class="badge badge-warn">Non MDM</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── PERFORMANCE ── -->
+        <div id="ptab-performance" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Disponibilité</div><div class="text-3xl font-bold font-display" style="color:#00c896">99.2%</div><div class="text-xs text-ed-muted mt-1">30 derniers jours</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Latence moy.</div><div class="text-3xl font-bold font-display" style="color:#ffa500">48 ms</div><div class="text-xs text-ed-muted mt-1">Seuil critique : 30 ms</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Bande passante</div><div class="text-3xl font-bold text-white font-display">7.2 Gb</div><div class="text-xs text-ed-muted mt-1">Capacité totale : 10 Gb</div></div>
+          </div>
+          <div class="sec-label">Charge des serveurs</div>
+          <div class="overflow-x-auto">
+            <table class="ed-table">
+              <thead><tr><th>Serveur</th><th>CPU</th><th>RAM</th><th>Disque</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono text-xs">SRV-PROD-01</td><td>34%</td><td>58%</td><td>41%</td><td><span class="badge badge-ok">Nominal</span></td></tr>
+                <tr><td class="font-mono text-xs">SRV-PROD-02</td><td>87%</td><td>91%</td><td>78%</td><td><span class="badge badge-crit">Surcharge</span></td></tr>
+                <tr><td class="font-mono text-xs">SRV-BACKUP</td><td>12%</td><td>22%</td><td>94%</td><td><span class="badge badge-warn">Disque plein</span></td></tr>
+                <tr><td class="font-mono text-xs">SRV-DMZ</td><td>45%</td><td>61%</td><td>33%</td><td><span class="badge badge-ok">Nominal</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── SECURITE — TUNNEL FRUSTRATION ── -->
+        <div id="ptab-securite" class="portal-tab">
+          <div class="grid sm:grid-cols-2 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Vulnérabilités critiques</div><div class="text-3xl font-bold font-display" style="color:#ff3b5c">7</div><div class="text-xs text-ed-muted mt-1">Action immédiate requise</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">CVE détectés</div><div class="text-3xl font-bold font-display" style="color:#ffa500">23</div><div class="text-xs text-ed-muted mt-1">dont 3 zero-day</div></div>
+          </div>
+
+          <!-- Blurred table -->
+          <div id="secu-blurred" class="blur-mask overflow-x-auto mb-4">
+            <table class="ed-table">
+              <thead><tr><th>Vulnérabilité</th><th>CVE</th><th>CVSS</th><th>Cible</th><th>Priorité</th></tr></thead>
+              <tbody>
+                <tr><td>RCE OpenSSL</td><td class="font-mono">CVE-2024-1234</td><td>9.8</td><td class="font-mono text-xs">SRV-PROD-01</td><td><span class="badge badge-crit">Critique</span></td></tr>
+                <tr><td>Auth Bypass</td><td class="font-mono">CVE-2024-5678</td><td>8.1</td><td class="font-mono text-xs">Portail RH</td><td><span class="badge badge-crit">Critique</span></td></tr>
+                <tr><td>SMBv1 exposé</td><td class="font-mono">CVE-2017-0144</td><td>9.3</td><td class="font-mono text-xs">WORKSTATION-12</td><td><span class="badge badge-crit">Critique</span></td></tr>
+                <tr><td>Log4Shell</td><td class="font-mono">CVE-2021-44228</td><td>10.0</td><td class="font-mono text-xs">APP-LEGACY</td><td><span class="badge badge-crit">Critique</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Frustration gate -->
+          <div id="frustration-gate" class="rounded-xl p-6" style="border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.04)">
+            <div class="flex items-start gap-3 mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" class="flex-shrink-0 mt-0.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              <div>
+                <div class="font-semibold text-white text-sm mb-1">Rapport de vulnérabilités verrouillé</div>
+                <div class="text-xs text-ed-muted leading-relaxed">Vos <span style="color:#ff3b5c;font-weight:600">7 vulnérabilités critiques</span> et le plan de remédiation complet sont disponibles. Débloquez l'accès en renseignant votre organisation.</div>
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 mb-4">
+              <div>
+                <label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Organisation</label>
+                <input id="f-org" type="text" placeholder="Nom de votre entreprise" class="ed-input text-sm"/>
+              </div>
+              <div>
+                <label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email professionnel</label>
+                <input id="f-email" type="email" placeholder="contact@entreprise.com" class="ed-input text-sm"/>
+              </div>
+              <div>
+                <label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Taille de l'équipe</label>
+                <select id="f-size" class="ed-input ed-select text-sm">
+                  <option value="">Sélectionner...</option>
+                  <option>1 – 10 personnes</option>
+                  <option>11 – 50 personnes</option>
+                  <option>51 – 200 personnes</option>
+                  <option>200+ personnes</option>
+                </select>
+              </div>
+            </div>
+            <button onclick="unlockReport()" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-ed-bg btn-primary">
+              Débloquer le rapport complet
+            </button>
+          </div>
+
+          <!-- Unlock success -->
+          <div id="frustration-success" class="hidden rounded-xl p-5" style="border:1px solid rgba(0,200,150,.3);background:rgba(0,200,150,.06)">
+            <div class="flex items-center gap-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+              <div>
+                <div class="font-semibold text-sm" style="color:#00c896">Accès débloqué</div>
+                <div class="text-xs text-ed-muted mt-0.5">Votre rapport complet a été envoyé. Un expert E DEFENCE vous contactera sous 24h.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── AUDIT WIFI ── -->
+        <div id="ptab-wifi" class="portal-tab">
+          <div class="grid sm:grid-cols-2 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Réseaux autorisés</div><div class="text-3xl font-bold font-display" style="color:#00c896">5</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Réseaux suspects</div><div class="text-3xl font-bold font-display" style="color:#ff3b5c">2</div><div class="text-xs text-ed-muted mt-1">Evil Twin détecté</div></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4 p-3 rounded-xl" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1" fill="#00d4ff"/></svg></div>
+              <div class="flex-1 min-w-0"><div class="text-sm font-medium text-white">CORP-NET-5G</div><div class="text-xs text-ed-muted font-mono">AA:BB:CC:11:22:33 · WPA3 · Canal 36</div></div>
+              <div class="flex gap-0.5 items-end"><div class="w-1.5 rounded-sm sig-bar on" style="height:6px"></div><div class="w-1.5 rounded-sm sig-bar on" style="height:10px"></div><div class="w-1.5 rounded-sm sig-bar on" style="height:14px"></div><div class="w-1.5 rounded-sm sig-bar on" style="height:18px"></div></div>
+              <span class="badge badge-ok">Autorisé</span>
+            </div>
+            <div class="flex items-center gap-4 p-3 rounded-xl" style="background:rgba(255,59,92,.04);border:1px solid rgba(255,59,92,.3)">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(255,59,92,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1" fill="#ff3b5c"/></svg></div>
+              <div class="flex-1 min-w-0"><div class="text-sm font-medium" style="color:#ff3b5c">CORP-NET-5G (copie)</div><div class="text-xs text-ed-muted font-mono">FF:EE:DD:99:88:77 · WPA2 · Canal 36</div></div>
+              <div class="flex gap-0.5 items-end"><div class="w-1.5 rounded-sm" style="height:6px;background:#ff3b5c"></div><div class="w-1.5 rounded-sm" style="height:10px;background:#ff3b5c"></div><div class="w-1.5 rounded-sm" style="height:14px;background:#ff3b5c"></div><div class="w-1.5 rounded-sm" style="height:18px;background:#ff3b5c"></div></div>
+              <span class="badge badge-crit">Evil Twin</span>
+            </div>
+            <div class="flex items-center gap-4 p-3 rounded-xl" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1" fill="#ffa500"/></svg></div>
+              <div class="flex-1 min-w-0"><div class="text-sm font-medium text-white">FREEWIFI-BUREAU</div><div class="text-xs text-ed-muted font-mono">11:22:33:44:55:00 · Ouvert · Canal 1</div></div>
+              <div class="flex gap-0.5 items-end"><div class="w-1.5 rounded-sm sig-bar on" style="height:6px"></div><div class="w-1.5 rounded-sm sig-bar" style="height:10px"></div><div class="w-1.5 rounded-sm sig-bar" style="height:14px"></div><div class="w-1.5 rounded-sm sig-bar" style="height:18px"></div></div>
+              <span class="badge badge-warn">Non sécurisé</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ANTIVIRUS ── -->
+        <div id="ptab-antivirus" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Protégés</div><div class="text-3xl font-bold font-display" style="color:#00c896">34</div><div class="text-xs text-ed-muted mt-1">sur 47 équipements</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Non protégés</div><div class="text-3xl font-bold font-display" style="color:#ff3b5c">13</div><div class="text-xs text-ed-muted mt-1">Action requise</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Menaces bloquées</div><div class="text-3xl font-bold font-display" style="color:#ffa500">189</div><div class="text-xs text-ed-muted mt-1">Ce mois-ci</div></div>
+          </div>
+          <div class="sec-label">Détections récentes</div>
+          <div class="overflow-x-auto">
+            <table class="ed-table">
+              <thead><tr><th>Menace</th><th>Machine</th><th>Type</th><th>Action</th><th>Date</th></tr></thead>
+              <tbody>
+                <tr><td>Trojan.Win32.Agent</td><td class="font-mono text-xs">WORKSTATION-12</td><td>Trojan</td><td><span class="badge badge-crit">Quarantaine</span></td><td class="font-mono text-xs">21/05/26</td></tr>
+                <tr><td>Ransom.WannaCry</td><td class="font-mono text-xs">LAPTOP-07</td><td>Ransomware</td><td><span class="badge badge-ok">Bloqué</span></td><td class="font-mono text-xs">20/05/26</td></tr>
+                <tr><td>PUP.Optional.Tool</td><td class="font-mono text-xs">WORKSTATION-05</td><td>PUP</td><td><span class="badge badge-warn">Ignoré</span></td><td class="font-mono text-xs">19/05/26</td></tr>
+                <tr><td>Spyware.Keylogger</td><td class="font-mono text-xs">SRV-PROD-02</td><td>Spyware</td><td><span class="badge badge-ok">Supprimé</span></td><td class="font-mono text-xs">18/05/26</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── HUB CONFORMITE ── -->
+        <div id="ptab-conformite" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-2">RGPD</div><div class="text-3xl font-bold font-display" style="color:#ffa500">67%</div><div class="prog-track h-1 mt-2"><div class="prog-fill" style="width:67%;background:#ffa500"></div></div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-2">ISO 27001</div><div class="text-3xl font-bold font-display" style="color:#ff3b5c">41%</div><div class="prog-track h-1 mt-2"><div class="prog-fill" style="width:41%;background:#ff3b5c"></div></div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-2">NIS2</div><div class="text-3xl font-bold font-display" style="color:#ffa500">58%</div><div class="prog-track h-1 mt-2"><div class="prog-fill" style="width:58%;background:#ffa500"></div></div></div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:rgba(0,200,150,.15);color:#00c896">✓</div>
+              <div class="flex-1"><div class="text-sm text-white">Registre des traitements RGPD</div><div class="text-xs text-ed-muted">Art. 30 RGPD</div></div>
+              <span class="badge badge-ok">Conforme</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:rgba(255,59,92,.15);color:#ff3b5c">✗</div>
+              <div class="flex-1"><div class="text-sm text-white">Politique de mots de passe renforcée</div><div class="text-xs text-ed-muted">ISO 27001 — A.9.4</div></div>
+              <span class="badge badge-crit">Non conforme</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:rgba(255,165,0,.15);color:#ffa500">!</div>
+              <div class="flex-1"><div class="text-sm text-white">Plan de continuité d'activité (PCA)</div><div class="text-xs text-ed-muted">NIS2 — Art. 21</div></div>
+              <span class="badge badge-warn">En cours</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:rgba(255,59,92,.15);color:#ff3b5c">✗</div>
+              <div class="flex-1"><div class="text-sm text-white">Chiffrement des données au repos</div><div class="text-xs text-ed-muted">ISO 27001 — A.10</div></div>
+              <span class="badge badge-crit">Non conforme</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:rgba(0,200,150,.15);color:#00c896">✓</div>
+              <div class="flex-1"><div class="text-sm text-white">Procédure de notification de violation</div><div class="text-xs text-ed-muted">Art. 33 RGPD · délai 72h</div></div>
+              <span class="badge badge-ok">Conforme</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CYBER-ACADEMY ── -->
+        <div id="ptab-academy" class="portal-tab">
+          <div class="sec-label">Formations disponibles</div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="card-border rounded-xl p-4" style="background:rgba(255,255,255,.02)">
+              <div class="flex justify-between items-start mb-2">
+                <div class="text-xs text-ed-muted uppercase tracking-wide">Niveau 1 · 45 min</div>
+                <span class="badge badge-ok">Terminé</span>
+              </div>
+              <div class="text-sm font-semibold text-white mb-3">Phishing & ingénierie sociale</div>
+              <div class="prog-track h-1 mb-1"><div class="prog-fill" style="width:100%;background:#00c896"></div></div>
+              <div class="text-xs text-ed-muted">100% complété</div>
+            </div>
+            <div class="card-border rounded-xl p-4" style="background:rgba(255,255,255,.02)">
+              <div class="flex justify-between items-start mb-2">
+                <div class="text-xs text-ed-muted uppercase tracking-wide">Niveau 1 · 30 min</div>
+                <span class="badge badge-warn">En cours</span>
+              </div>
+              <div class="text-sm font-semibold text-white mb-3">Mots de passe et authentification MFA</div>
+              <div class="prog-track h-1 mb-1"><div class="prog-fill" style="width:60%;background:#ffa500"></div></div>
+              <div class="text-xs text-ed-muted">60% complété</div>
+            </div>
+            <div class="card-border rounded-xl p-4" style="background:rgba(255,255,255,.02)">
+              <div class="flex justify-between items-start mb-2">
+                <div class="text-xs text-ed-muted uppercase tracking-wide">Niveau 2 · 1h15</div>
+                <span class="badge badge-info">Disponible</span>
+              </div>
+              <div class="text-sm font-semibold text-white mb-3">Ransomware — réflexes essentiels</div>
+              <div class="prog-track h-1 mb-1"><div class="prog-fill" style="width:0%"></div></div>
+              <div class="text-xs text-ed-muted">Non commencé</div>
+            </div>
+            <div class="card-border rounded-xl p-4" style="background:rgba(255,255,255,.02)">
+              <div class="flex justify-between items-start mb-2">
+                <div class="text-xs text-ed-muted uppercase tracking-wide">Niveau 2 · 1h</div>
+                <span class="badge badge-info">Disponible</span>
+              </div>
+              <div class="text-sm font-semibold text-white mb-3">Sécurité des postes de travail</div>
+              <div class="prog-track h-1 mb-1"><div class="prog-fill" style="width:0%"></div></div>
+              <div class="text-xs text-ed-muted">Non commencé</div>
+            </div>
+            <div class="card-border rounded-xl p-4" style="background:rgba(255,255,255,.02)">
+              <div class="flex justify-between items-start mb-2">
+                <div class="text-xs text-ed-muted uppercase tracking-wide">Niveau 3 · 2h</div>
+                <span class="badge badge-info">Disponible</span>
+              </div>
+              <div class="text-sm font-semibold text-white mb-3">RGPD pour les équipes</div>
+              <div class="prog-track h-1 mb-1"><div class="prog-fill" style="width:0%"></div></div>
+              <div class="text-xs text-ed-muted">Non commencé</div>
+            </div>
+            <div class="card-border rounded-xl p-4" style="background:rgba(255,255,255,.02);opacity:.6">
+              <div class="flex justify-between items-start mb-2">
+                <div class="text-xs text-ed-muted uppercase tracking-wide">Certification · 8h</div>
+                <span class="badge" style="background:rgba(255,255,255,.05);border:1px solid #1e3a5f;color:#4a6b8a">Verrouillé</span>
+              </div>
+              <div class="text-sm font-semibold text-white mb-3">Cyber-Analyste E DEFENCE</div>
+              <div class="prog-track h-1 mb-1"><div class="prog-fill" style="width:0%"></div></div>
+              <div class="text-xs text-ed-muted">Prérequis requis</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end tab contents -->
+    </div><!-- end portal shell -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FEATURES ═══ -->
+<section id="features" class="py-20" style="background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896">FONCTIONNALITÉS</div>
+      <h2 class="font-display font-bold text-4xl text-white mb-3">Tout ce dont vous avez besoin</h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto">Une plateforme conçue pour les équipes IT et les dirigeants qui veulent maîtriser leur sécurité sans complexité.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,212,255,.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <h3 class="font-semibold text-white text-sm mb-2">Audit automatisé</h3>
+        <p class="text-xs text-ed-muted leading-relaxed">Analyse complète de votre parc informatique, de votre réseau et de vos configurations en quelques minutes.</p>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,200,150,.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="font-semibold text-white text-sm mb-2">Score de sécurité</h3>
+        <p class="text-xs text-ed-muted leading-relaxed">Un score global clair avec des axes d'amélioration priorisés pour guider vos actions correctrices.</p>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(255,165,0,.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3 class="font-semibold text-white text-sm mb-2">Alertes en temps réel</h3>
+        <p class="text-xs text-ed-muted leading-relaxed">Détection et notification immédiate de toute activité suspecte sur votre infrastructure.</p>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,212,255,.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        </div>
+        <h3 class="font-semibold text-white text-sm mb-2">Rapports de conformité</h3>
+        <p class="text-xs text-ed-muted leading-relaxed">Vérification automatique de votre conformité RGPD, ISO 27001 et NIS2 avec recommandations détaillées.</p>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,200,150,.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="font-semibold text-white text-sm mb-2">Formation des équipes</h3>
+        <p class="text-xs text-ed-muted leading-relaxed">Modules de sensibilisation intégrés pour former l'ensemble de votre organisation aux bonnes pratiques.</p>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(255,59,92,.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3 class="font-semibold text-white text-sm mb-2">Gestion des incidents</h3>
+        <p class="text-xs text-ed-muted leading-relaxed">Procédures de réponse guidées pour contenir et résoudre les incidents de sécurité efficacement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PARCOURS ═══ -->
+<section id="parcours" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">PARCOURS GUIDÉS</div>
+      <h2 class="font-display font-bold text-4xl text-white mb-3">De la découverte à l'expertise</h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto">Trois niveaux d'accompagnement pour sécuriser votre organisation progressivement.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card-border rounded-2xl p-6" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.25)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2">Découverte</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Audit initial</h3>
+        <p class="text-sm text-ed-muted mb-4 leading-relaxed">Cartographiez votre parc, obtenez votre score et identifiez vos vulnérabilités prioritaires.</p>
+        <div class="space-y-2 text-xs text-ed-muted">
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Inventaire automatique</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Score de sécurité initial</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Rapport de vulnérabilités</div>
+        </div>
+      </div>
+      <div class="rounded-2xl p-6" style="background:rgba(255,255,255,.02);border:2px solid rgba(0,212,255,.35)">
+        <div class="text-xs font-semibold px-2 py-0.5 rounded inline-block mb-3" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff">Le plus choisi</div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2">Protection</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Sécurisation active</h3>
+        <p class="text-sm text-ed-muted mb-4 leading-relaxed">Corrigez vos failles, formez vos équipes et atteignez la conformité réglementaire.</p>
+        <div class="space-y-2 text-xs text-ed-muted">
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Plan de remédiation guidé</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Formations sensibilisation</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Suivi RGPD / NIS2 / ISO 27001</div>
+        </div>
+      </div>
+      <div class="card-border rounded-2xl p-6" style="background:rgba(255,255,255,.02)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.25)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2">Maîtrise</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Cyber-résilience</h3>
+        <p class="text-sm text-ed-muted mb-4 leading-relaxed">Anticipez les menaces, répondez aux incidents et maintenez un niveau d'excellence durable.</p>
+        <div class="space-y-2 text-xs text-ed-muted">
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Simulation d'attaques</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Red team & pentest guidé</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Certification E DEFENCE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CERTIFICATIONS ═══ -->
+<section id="certifications" class="py-20" style="background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-5" style="background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.25);color:#ffa500">CERTIFICATIONS</div>
+        <h2 class="font-display font-bold text-4xl text-white mb-4">Des accréditations reconnues <span class="g-text-warm">à l'international</span></h2>
+        <p class="text-ed-muted text-base mb-6 leading-relaxed">Obtenez des certifications E DEFENCE et des badges numériques validés, partageables sur LinkedIn et vérifiables par vos recruteurs.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Badges numériques vérifiables</li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Partageables LinkedIn, CV, e-mail</li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Préparation CCST, CyberOps Cisco</li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Reconnus dans 190 pays</li>
+        </ul>
+        <button onclick="openModal('signup')" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">
+          Obtenir ma certification
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(0,212,255,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="text-sm font-semibold text-white mb-1">Introduction Cybersécurité</div>
+          <div class="text-xs text-ed-muted">Badge E DEFENCE officiel</div>
+        </div>
+        <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(0,200,150,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="text-sm font-semibold text-white mb-1">Conformité RGPD</div>
+          <div class="text-xs text-ed-muted">Accréditation entreprise</div>
+        </div>
+        <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(255,165,0,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+          <div class="text-sm font-semibold text-white mb-1">Audit Réseau</div>
+          <div class="text-xs text-ed-muted">Certification technique</div>
+        </div>
+        <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(255,59,92,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+          <div class="text-sm font-semibold text-white mb-1">Ethical Hacker</div>
+          <div class="text-xs text-ed-muted">Niveau avancé</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CONTACT ═══ -->
+<section id="contact" class="py-20">
+  <div class="max-w-xl mx-auto px-4 sm:px-6 text-center">
+    <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-5" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">CONTACT</div>
+    <h2 class="font-display font-bold text-4xl text-white mb-3">Parlons de votre sécurité</h2>
+    <p class="text-ed-muted mb-8 text-sm">Notre équipe d'experts vous répond sous 24 heures ouvrées.</p>
+    <form onsubmit="handleContact(event)" class="space-y-4 text-left">
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Prénom</label><input type="text" placeholder="Votre prénom" class="ed-input text-sm" required/></div>
+        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Nom</label><input type="text" placeholder="Votre nom" class="ed-input text-sm" required/></div>
+      </div>
+      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email professionnel</label><input type="email" placeholder="contact@entreprise.com" class="ed-input text-sm" required/></div>
+      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Organisation</label><input type="text" placeholder="Nom de votre entreprise" class="ed-input text-sm" required/></div>
+      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Message</label><textarea rows="4" placeholder="Décrivez votre besoin..." class="ed-input text-sm resize-none" required></textarea></div>
+      <button type="submit" class="w-full py-3.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Envoyer le message</button>
+    </form>
+    <div id="contact-ok" class="hidden mt-4 p-4 rounded-xl text-sm" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.3);color:#00c896">Message envoyé. Nous vous répondrons sous 24 heures.</div>
+  </div>
+</section>
+
+<!-- Footer include placeholder (chargé dynamiquement from includes/footer.html) -->
+<div id="include-footer"></div>
+
+<!-- ═══════════════════════════════════════ MODAL ═══ -->
+<div id="modal-bd" class="fixed inset-0 z-50 hidden items-center justify-center modal-bd">
+  <div id="modal-box" class="relative w-full max-w-md mx-4 rounded-2xl p-8" style="background:#0d1e33;border:1px solid rgba(0,212,255,.2)">
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-ed-muted hover:text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-5 py-3 rounded-xl text-sm font-medium text-white" style="background:linear-gradient(135deg,var(--accent1),var(--accent2))"></div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
