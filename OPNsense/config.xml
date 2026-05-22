@@ -27,7 +27,6 @@
 <expires/>
 <authorizedkeys/>
 <otp_seed/>
-<shell/>
 <password>
 process.env.MY_SECRET
 </password>
