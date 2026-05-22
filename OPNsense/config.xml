@@ -29,7 +29,7 @@
 <otp_seed/>
 <shell/>
 <password>
-$2y$10$YRVoF4SgskIsrXOvOQjGieB9XqHPRra9R7d80B3BZdbY/j21TwBfS
+process.env.MY_SECRET
 </password>
 <pwd_changed_at/>
 <landing_page/>
