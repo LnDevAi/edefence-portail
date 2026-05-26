@@ -1,33 +1,15 @@
-﻿# eDefence Portail
+## Lancement
 
-Portail web central de la plateforme eDefence — gestion des accès, tableau de bord et orchestration des modules métiers.
-
-## Branches
-
-| Branche | Rôle |
-|---------|------|
-| `main` | Production stable |
-| `dev` | Intégration continue |
-| `feature/frontend-neya` | Développement UI/UX |
-| `feature/security-zombre` | Sécurité & authentification |
-
-## Stack
-
-- Frontend : React / Next.js
-- Backend : Node.js / Express
-- Auth : JWT + OAuth2
-
-## Démarrage rapide
+***lancer d'abord le serveur de developpement:***
 
 ```bash
-git clone https://github.com/LnDevAi/edefence-portail.git
-cd edefence-portail
-cp .env.example .env
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Contributeurs
-
-- [@MoussaNEYA](https://github.com/MoussaNEYA)
-- [@Yamalr](https://github.com/Yamalr)
+***Ouvrir [http://localhost:3000](http://localhost:3000) dans le browser***
