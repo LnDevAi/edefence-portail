@@ -172,4 +172,41 @@ body.light-mode .site-logo{ background: linear-gradient(135deg,var(--accent1),va
 /* Ensure links readable */
 body.light-mode a{ color: var(--accent1) }
 
+/* ─── Admin sidebar ─── */
+.admin-sidebar{width:250px;min-height:100vh;background:#0d1e33;border-right:1px solid #1e3a5f;flex-shrink:0}
+.admin-nav-item{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;color:#4a6b8a;transition:all .2s;width:100%;background:transparent;border:none;text-align:left}
+.admin-nav-item:hover,.admin-nav-item.active{background:rgba(0,212,255,.08);color:#00d4ff}
+.admin-tab{display:none}.admin-tab.active{display:block}
+
+/* ─── Service cards hover glow ─── */
+.service-card-blue{transition:box-shadow .3s}
+.service-card-blue:hover{box-shadow:0 0 40px rgba(0,212,255,.12)}
+.service-card-green{transition:box-shadow .3s}
+.service-card-green:hover{box-shadow:0 0 40px rgba(0,200,150,.12)}
+.service-card-orange{transition:box-shadow .3s}
+.service-card-orange:hover{box-shadow:0 0 40px rgba(255,165,0,.12)}
+
+/* ─── Modal overlay (admin) ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.hidden{display:none}
+
+/* ─── Stat mini (admin KPI) ─── */
+.kpi-card{padding:20px;background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px}
+
+/* ─── btn-primary & btn-ghost overrides (if not already present) ─── */
+.btn-primary{background:linear-gradient(135deg,var(--accent1),var(--accent2));transition:opacity .2s}
+.btn-primary:hover{opacity:.9}
+.btn-ghost{border:1px solid rgba(255,255,255,.12);color:var(--text);border-radius:12px;transition:all .2s}
+.btn-ghost:hover{border-color:rgba(0,212,255,.4);color:#00d4ff}
+
+/* ─── Admin table row hover ─── */
+.admin-table tr:hover td{background:rgba(0,212,255,.025)}
+
+/* ─── Admin sidebar mobile drawer ─── */
+@media(max-width:768px){
+  .admin-sidebar{position:fixed;left:-260px;top:0;z-index:200;transition:left .3s}
+  .admin-sidebar.open{left:0}
+  .admin-content{margin-left:0!important}
+}
+
 

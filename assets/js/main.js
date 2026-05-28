@@ -145,8 +145,86 @@ document.addEventListener('click', function(e){
   }
 });
 
+// ----- Actualités cybersécurité -----
+window.loadActualites = async function() {
+  const container = document.getElementById('actualites-grid');
+  if (!container) return;
+
+  const fallback = [
+    {
+      title: "Vague de ransomwares cible les PME en Afrique de l'Ouest",
+      summary: "Une nouvelle campagne de ransomware exploite des vulnérabilités RDP non corrigées pour cibler les petites et moyennes entreprises burkinabè et sénégalaises.",
+      category: "alerte",
+      published_at: new Date().toISOString(),
+      is_ai_generated: false
+    },
+    {
+      title: "Zero Trust : adoption croissante dans les entreprises UEMOA",
+      summary: "Le modèle Zero Trust gagne du terrain dans les DSI de la zone UEMOA, porté par les exigences de conformité BCEAO et les incidents récents.",
+      category: "actualite",
+      published_at: new Date().toISOString(),
+      is_ai_generated: true
+    },
+    {
+      title: "RGPD au Burkina Faso : ce que change la nouvelle directive CIL",
+      summary: "La Commission de l'Informatique et des Libertés (CIL) du Burkina Faso renforce ses exigences — voici les points d'attention pour votre entreprise.",
+      category: "article_maison",
+      published_at: new Date().toISOString(),
+      is_ai_generated: false
+    }
+  ];
+
+  try {
+    const res = await fetch('http://localhost:8000/api/v1/articles?published=true&limit=6');
+    const articles = res.ok ? await res.json() : fallback;
+    renderActualites(container, (articles && articles.length) ? articles : fallback);
+  } catch {
+    renderActualites(container, fallback);
+  }
+};
+
+function renderActualites(container, articles) {
+  const catColors  = { actualite: '#00d4ff', alerte: '#ff3b5c', tutorial: '#00c896', article_maison: '#ffa500' };
+  const catLabels  = { actualite: 'Actualité', alerte: 'Alerte', tutorial: 'Tutoriel', article_maison: 'Article' };
+
+  container.innerHTML = articles.map(function(a) {
+    const color = catColors[a.category] || '#00d4ff';
+    const label = catLabels[a.category] || 'Article';
+    const rgb   = hexToRgb(color);
+    const date  = new Date(a.published_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+    const aiTag = a.is_ai_generated
+      ? '<span class="badge badge-info" style="font-size:9px">IA</span>'
+      : '';
+    return '<div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">'
+      + '<div class="flex items-center gap-2 mb-3">'
+      +   '<span class="badge" style="background:rgba(' + rgb + ',.12);border:1px solid rgba(' + rgb + ',.3);color:' + color + '">' + label + '</span>'
+      +   aiTag
+      + '</div>'
+      + '<h3 class="font-semibold text-white text-sm mb-2 leading-snug">' + escapeHtml(a.title) + '</h3>'
+      + '<p class="text-xs text-ed-muted leading-relaxed mb-3">' + escapeHtml(a.summary || '') + '</p>'
+      + '<div class="text-xs text-ed-muted">' + date + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function hexToRgb(hex) {
+  var r = parseInt(hex.slice(1, 3), 16);
+  var g = parseInt(hex.slice(3, 5), 16);
+  var b = parseInt(hex.slice(5, 7), 16);
+  return r + ',' + g + ',' + b;
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // ----- Initialisation au chargement -----
 window.addEventListener('DOMContentLoaded', function(){
   restoreLightModeFromStorage();
   loadIncludes();
+  loadActualites();
 });

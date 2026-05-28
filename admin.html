@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>E-DEFENCE — Administration</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['Inter','sans-serif'] },
+      colors: {
+        ed: { bg:'#07111f', surface:'#0d1e33', card:'#112240', border:'#1e3a5f',
+              blue:'#00d4ff', green:'#00c896', red:'#ff3b5c', warn:'#ffa500',
+              muted:'#4a6b8a', text:'#e8f4ff' }
+      }
+    }
+  }
+}
+</script>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<style>
+  body{font-family:'Inter',sans-serif;background:#07111f;color:#e8f4ff}
+  ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#07111f}::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:3px}
+
+  /* Login overlay */
+  #login-overlay{position:fixed;inset:0;background:#07111f;z-index:300;display:flex;align-items:center;justify-content:center}
+
+  /* Sidebar */
+  .admin-sidebar{width:250px;min-height:100vh;background:#0d1e33;border-right:1px solid #1e3a5f;flex-shrink:0;display:flex;flex-direction:column}
+  .admin-nav-item{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;color:#4a6b8a;transition:all .2s;width:100%;background:transparent;border:none;text-align:left}
+  .admin-nav-item:hover,.admin-nav-item.active{background:rgba(0,212,255,.08);color:#00d4ff}
+  .admin-tab{display:none}
+  .admin-tab.active{display:block}
+
+  /* Tables */
+  .admin-table{width:100%;border-collapse:collapse;font-size:12px}
+  .admin-table th{text-align:left;padding:10px 14px;color:#4a6b8a;font-size:10px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #1e3a5f}
+  .admin-table td{padding:12px 14px;border-bottom:1px solid rgba(30,58,95,.4);color:#e8f4ff;vertical-align:middle}
+  .admin-table tr:hover td{background:rgba(0,212,255,.025)}
+
+  /* Badges */
+  .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+  .badge-ok{background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.3);color:#00c896}
+  .badge-warn{background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.3);color:#ffa500}
+  .badge-crit{background:rgba(255,59,92,.12);border:1px solid rgba(255,59,92,.3);color:#ff3b5c}
+  .badge-info{background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff}
+  .badge-muted{background:rgba(74,107,138,.12);border:1px solid rgba(74,107,138,.3);color:#4a6b8a}
+
+  /* Service badge colors */
+  .badge-boitier{background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff}
+  .badge-soc{background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.3);color:#00c896}
+  .badge-sauvegarde{background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.3);color:#ffa500}
+  .badge-eaudit{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:#00d4ff}
+  .badge-academy{background:rgba(0,220,170,.12);border:1px solid rgba(0,220,170,.3);color:#00dca8}
+
+  /* Inputs */
+  .admin-input{width:100%;background:rgba(255,255,255,.05);border:1px solid #1e3a5f;border-radius:8px;padding:10px 14px;font-size:13px;color:#e8f4ff;font-family:inherit;outline:none;transition:border-color .2s}
+  .admin-input:focus{border-color:#00d4ff;background:rgba(0,212,255,.04)}
+  .admin-input::placeholder{color:#4a6b8a}
+
+  /* Buttons */
+  .btn-primary{background:linear-gradient(135deg,#00d4ff,#00c896);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s;border-radius:10px;padding:10px 20px;font-size:13px}
+  .btn-primary:hover{opacity:.9}
+  .btn-sm{padding:6px 14px;font-size:12px;border-radius:7px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+  .btn-edit{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:#00d4ff}
+  .btn-edit:hover{background:rgba(0,212,255,.2)}
+  .btn-delete{background:rgba(255,59,92,.1);border:1px solid rgba(255,59,92,.25);color:#ff3b5c}
+  .btn-delete:hover{background:rgba(255,59,92,.2)}
+  .btn-publish{background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);color:#00c896}
+  .btn-publish:hover{background:rgba(0,200,150,.2)}
+  .btn-pay{background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);color:#00c896;padding:4px 10px;font-size:11px;border-radius:6px;cursor:pointer;font-weight:600}
+  .btn-pay:hover{background:rgba(0,200,150,.2)}
+  .btn-ghost-admin{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#b0c8e0;cursor:pointer;transition:all .2s;border-radius:10px;padding:10px 18px;font-size:13px}
+  .btn-ghost-admin:hover{border-color:rgba(0,212,255,.4);color:#00d4ff}
+
+  /* Modal overlay */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:400;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+  .modal-overlay.hidden{display:none}
+  .modal-box{background:#0d1e33;border:1px solid rgba(0,212,255,.2);border-radius:18px;padding:32px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;position:relative}
+
+  /* KPI card */
+  .kpi-card{background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px;padding:20px}
+
+  /* Section label */
+  .sec-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#00d4ff}
+  .sec-label::after{content:'';flex:1;height:1px;background:#1e3a5f}
+
+  /* Gradient text */
+  .g-text{background:linear-gradient(135deg,#00d4ff,#00c896);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+  /* Pulse dot */
+  .pulse-dot{width:7px;height:7px;border-radius:50%;background:#00c896;animation:pulse-anim 2s ease-in-out infinite;display:inline-block}
+  @keyframes pulse-anim{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* Error / info messages */
+  .msg-error{background:rgba(255,59,92,.08);border:1px solid rgba(255,59,92,.25);color:#ff3b5c;border-radius:10px;padding:12px 16px;font-size:13px}
+  .msg-ok{background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896;border-radius:10px;padding:12px 16px;font-size:13px}
+
+  /* Textarea */
+  textarea.admin-input{resize:vertical;min-height:100px}
+
+  /* Filter bar */
+  .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+  .filter-btn{padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid #1e3a5f;background:rgba(255,255,255,.03);color:#4a6b8a;transition:all .2s}
+  .filter-btn:hover,.filter-btn.active{border-color:#00d4ff;color:#00d4ff;background:rgba(0,212,255,.06)}
+
+  /* Responsive mobile sidebar */
+  @media(max-width:768px){
+    .admin-sidebar{position:fixed;left:-260px;top:0;z-index:200;transition:left .3s;height:100vh}
+    .admin-sidebar.open{left:0;box-shadow:4px 0 20px rgba(0,0,0,.5)}
+    #admin-main{margin-left:0!important}
+    .sidebar-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:190;display:none}
+    .sidebar-backdrop.visible{display:block}
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ══════════════════ LOGIN OVERLAY ══════════════════ -->
+<div id="login-overlay">
+  <div style="background:#0d1e33;border:1px solid rgba(0,212,255,.2);border-radius:20px;padding:40px;width:100%;max-width:420px;margin:16px">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 justify-center mb-8">
+      <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#00d4ff,#00c896);display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#07111f" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <div class="font-display font-bold text-xl text-white">E<span class="g-text">-DEFENCE</span></div>
+        <div class="text-xs text-ed-muted -mt-0.5">Administration</div>
+      </div>
+    </div>
+
+    <h2 class="font-display font-bold text-2xl text-white text-center mb-1">Connexion</h2>
+    <p class="text-ed-muted text-sm text-center mb-7">Accès réservé aux administrateurs</p>
+
+    <div id="login-error" class="msg-error hidden mb-4"></div>
+
+    <form id="login-form" onsubmit="handleAdminLogin(event)">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email</label>
+          <input type="email" id="login-email" placeholder="admin@edefence.tech" class="admin-input" required/>
+        </div>
+        <div>
+          <label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Mot de passe</label>
+          <input type="password" id="login-password" placeholder="••••••••" class="admin-input" required/>
+        </div>
+        <button type="submit" class="btn-primary w-full py-3 mt-2">Se connecter</button>
+      </div>
+    </form>
+    <p class="text-center text-xs text-ed-muted mt-5">
+      <a href="edefence_portail.html" class="hover:underline" style="color:#4a6b8a">Retour au portail</a>
+    </p>
+  </div>
+</div>
+
+<!-- Sidebar backdrop for mobile -->
+<div id="sidebar-backdrop" class="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+<!-- ══════════════════ ADMIN APP (hidden until login) ══════════════════ -->
+<div id="admin-app" class="hidden flex min-h-screen">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 px-5 py-5 border-b" style="border-color:#1e3a5f">
+      <div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#00d4ff,#00c896);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#07111f" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <div class="font-display font-bold text-sm text-white">E-DEFENCE</div>
+        <div class="text-xs" style="color:#4a6b8a">Administration</div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="flex-1 px-3 py-4 space-y-1">
+      <button class="admin-nav-item active" onclick="loadTab('dashboard',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+      <button class="admin-nav-item" onclick="loadTab('clients',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Clients (CRM)
+      </button>
+      <button class="admin-nav-item" onclick="loadTab('contrats',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Contrats
+      </button>
+      <button class="admin-nav-item" onclick="loadTab('paiements',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Paiements
+      </button>
+      <button class="admin-nav-item" onclick="loadTab('actualites',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v2"/><path d="M4 22a2 2 0 01-2-2V8a2 2 0 012-2h8"/><line x1="9" y1="12" x2="17" y2="12"/><line x1="9" y1="16" x2="17" y2="16"/></svg>
+        Actualités
+      </button>
+    </nav>
+
+    <!-- Déconnexion -->
+    <div class="px-3 py-4 border-t" style="border-color:#1e3a5f">
+      <div id="sidebar-user" class="flex items-center gap-2 px-3 py-2 mb-2">
+        <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,212,255,.15);border:1px solid rgba(0,212,255,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#00d4ff">A</div>
+        <div>
+          <div class="text-xs font-semibold text-white" id="sidebar-username">Admin</div>
+          <div class="text-xs" style="color:#4a6b8a">Administrateur</div>
+        </div>
+      </div>
+      <button class="admin-nav-item" onclick="handleLogout()" style="color:#ff3b5c">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="admin-main" class="flex-1 flex flex-col min-h-screen">
+    <!-- Top bar -->
+    <div class="flex items-center justify-between px-6 py-4 border-b" style="background:#0d1e33;border-color:#1e3a5f">
+      <div class="flex items-center gap-3">
+        <button class="md:hidden p-2 text-ed-muted hover:text-white" onclick="toggleSidebar()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h1 id="page-title" class="font-display font-bold text-lg text-white">Dashboard</h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="pulse-dot"></div>
+        <span class="text-xs" style="color:#4a6b8a">API connectée</span>
+      </div>
+    </div>
+
+    <!-- Tab content area -->
+    <div class="flex-1 p-6">
+
+      <!-- ══ DASHBOARD ══ -->
+      <div id="tab-dashboard" class="admin-tab active">
+        <div id="dashboard-error" class="msg-error hidden mb-4"></div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="kpi-card">
+            <div class="text-xs text-ed-muted uppercase tracking-wide mb-2">Total clients</div>
+            <div id="kpi-total-clients" class="text-3xl font-bold font-display text-white">—</div>
+            <div class="text-xs text-ed-muted mt-1">Enregistrés</div>
+          </div>
+          <div class="kpi-card">
+            <div class="text-xs text-ed-muted uppercase tracking-wide mb-2">Clients actifs</div>
+            <div id="kpi-active-clients" class="text-3xl font-bold font-display" style="color:#00c896">—</div>
+            <div class="text-xs text-ed-muted mt-1">Abonnements en cours</div>
+          </div>
+          <div class="kpi-card">
+            <div class="text-xs text-ed-muted uppercase tracking-wide mb-2">Contrats actifs</div>
+            <div id="kpi-contracts" class="text-3xl font-bold font-display" style="color:#00d4ff">—</div>
+            <div class="text-xs text-ed-muted mt-1">Services déployés</div>
+          </div>
+          <div class="kpi-card">
+            <div class="text-xs text-ed-muted uppercase tracking-wide mb-2">Factures en attente</div>
+            <div id="kpi-pending-invoices" class="text-3xl font-bold font-display" style="color:#ffa500">—</div>
+            <div class="text-xs text-ed-muted mt-1">À recouvrer</div>
+          </div>
+        </div>
+
+        <div class="sec-label">Derniers clients</div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px;overflow:hidden">
+          <div class="overflow-x-auto">
+            <table class="admin-table">
+              <thead><tr><th>Entreprise</th><th>Contact</th><th>Email</th><th>Secteur</th><th>Statut</th><th>Date</th></tr></thead>
+              <tbody id="dashboard-recent-clients">
+                <tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ CLIENTS ══ -->
+      <div id="tab-clients" class="admin-tab">
+        <div class="flex items-center justify-between mb-5">
+          <div></div>
+          <button onclick="openAdminModal('client',null)" class="btn-primary flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nouveau client
+          </button>
+        </div>
+        <div id="clients-error" class="msg-error hidden mb-4"></div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px;overflow:hidden">
+          <div class="overflow-x-auto">
+            <table class="admin-table">
+              <thead><tr><th>Entreprise</th><th>Contact</th><th>Email</th><th>Secteur</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="clients-tbody">
+                <tr><td colspan="7" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ CONTRATS ══ -->
+      <div id="tab-contrats" class="admin-tab">
+        <div class="flex items-center justify-between mb-5">
+          <div></div>
+          <button onclick="openAdminModal('contrat',null)" class="btn-primary flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nouveau contrat
+          </button>
+        </div>
+        <div id="contrats-error" class="msg-error hidden mb-4"></div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px;overflow:hidden">
+          <div class="overflow-x-auto">
+            <table class="admin-table">
+              <thead><tr><th>Client</th><th>Service</th><th>Montant</th><th>Période</th><th>Statut</th><th>Début</th><th>Actions</th></tr></thead>
+              <tbody id="contrats-tbody">
+                <tr><td colspan="7" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PAIEMENTS ══ -->
+      <div id="tab-paiements" class="admin-tab">
+        <div class="flex items-center justify-between mb-4">
+          <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterInvoices('all',this)">Tous</button>
+            <button class="filter-btn" onclick="filterInvoices('en_attente',this)">En attente</button>
+            <button class="filter-btn" onclick="filterInvoices('paye',this)">Payé</button>
+            <button class="filter-btn" onclick="filterInvoices('en_retard',this)">En retard</button>
+            <button class="filter-btn" onclick="filterInvoices('annule',this)">Annulé</button>
+          </div>
+          <button onclick="openAdminModal('facture',null)" class="btn-primary flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nouvelle facture
+          </button>
+        </div>
+        <div id="paiements-error" class="msg-error hidden mb-4"></div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px;overflow:hidden">
+          <div class="overflow-x-auto">
+            <table class="admin-table">
+              <thead><tr><th>N° Facture</th><th>Client</th><th>Montant</th><th>Échéance</th><th>Statut</th><th>Actions</th></tr></thead>
+              <tbody id="paiements-tbody">
+                <tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ACTUALITÉS ══ -->
+      <div id="tab-actualites" class="admin-tab">
+        <div class="flex items-center gap-3 justify-end mb-5">
+          <button onclick="openAdminModal('ai-article',null)" class="btn-ghost-admin flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Générer avec IA
+          </button>
+          <button onclick="openAdminModal('article',null)" class="btn-primary flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nouvel article
+          </button>
+        </div>
+        <div id="actualites-error" class="msg-error hidden mb-4"></div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f;border-radius:14px;overflow:hidden">
+          <div class="overflow-x-auto">
+            <table class="admin-table">
+              <thead><tr><th>Titre</th><th>Catégorie</th><th>IA</th><th>Publié</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="actualites-tbody">
+                <tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /p-6 -->
+  </main>
+</div><!-- /admin-app -->
+
+<!-- ══════════════════ MODAL ══════════════════ -->
+<div id="admin-modal" class="modal-overlay hidden" onclick="handleModalBackdrop(event)">
+  <div class="modal-box" id="admin-modal-box">
+    <button onclick="closeAdminModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#4a6b8a;padding:4px" onmouseover="this.style.color='#e8f4ff'" onmouseout="this.style.color='#4a6b8a'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="admin-modal-content"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="admin-toast" style="position:fixed;bottom:24px;right:24px;z-index:500;display:none;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;color:#fff;background:linear-gradient(135deg,#00d4ff,#00c896);box-shadow:0 4px 20px rgba(0,212,255,.3)"></div>
+
+<!-- ══════════════════ JAVASCRIPT ══════════════════ -->
+<script>
+// ── Config ──────────────────────────────────────────
+const API = 'http://localhost:8000';
+let adminToken = null;
+let currentFilter = 'all';
+let allInvoices = [];
+let allClients = [];
+
+// ── Helpers ─────────────────────────────────────────
+function showToast(msg, type) {
+  const t = document.getElementById('admin-toast');
+  t.textContent = msg;
+  t.style.background = type === 'error'
+    ? 'linear-gradient(135deg,#ff3b5c,#cc2244)'
+    : 'linear-gradient(135deg,#00d4ff,#00c896)';
+  t.style.display = 'block';
+  setTimeout(function(){ t.style.display = 'none'; }, 3500);
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function fmtAmount(n) {
+  if (!n && n !== 0) return '—';
+  return Number(n).toLocaleString('fr-FR') + ' F CFA';
+}
+
+function escHtml(s) {
+  return String(s || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function apiFetch(url, opts) {
+  const headers = Object.assign({ 'Content-Type': 'application/json' }, (opts || {}).headers || {});
+  if (adminToken) headers['Authorization'] = 'Bearer ' + adminToken;
+  try {
+    const res = await fetch(API + url, Object.assign({}, opts, { headers: headers }));
+    if (res.status === 401 || res.status === 403) {
+      handleLogout();
+      throw new Error('Non autorisé');
+    }
+    return res;
+  } catch (e) {
+    throw e;
+  }
+}
+
+// ── Auth ─────────────────────────────────────────────
+window.handleAdminLogin = async function(e) {
+  e.preventDefault();
+  const email    = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  const errEl    = document.getElementById('login-error');
+  errEl.classList.add('hidden');
+
+  try {
+    const res = await fetch(API + '/api/v1/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password })
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(function(){ return {}; });
+      throw new Error(data.detail || 'Identifiants incorrects');
+    }
+    const data = await res.json();
+    adminToken = data.access_token || data.token || null;
+    try { localStorage.setItem('edefence:adminToken', adminToken); } catch(ex){}
+    const name = data.user && (data.user.name || data.user.email) ? (data.user.name || data.user.email) : email;
+    document.getElementById('sidebar-username').textContent = name;
+    showAdminApp();
+  } catch (err) {
+    errEl.textContent = err.message || 'Erreur de connexion. Vérifiez vos identifiants.';
+    errEl.classList.remove('hidden');
+  }
+};
+
+function showAdminApp() {
+  document.getElementById('login-overlay').style.display = 'none';
+  const app = document.getElementById('admin-app');
+  app.classList.remove('hidden');
+  app.style.display = 'flex';
+  loadTab('dashboard', document.querySelector('.admin-nav-item.active'));
+}
+
+window.handleLogout = function() {
+  adminToken = null;
+  try { localStorage.removeItem('edefence:adminToken'); } catch(e){}
+  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('admin-app').classList.add('hidden');
+};
+
+// ── Sidebar ──────────────────────────────────────────
+window.toggleSidebar = function() {
+  const s = document.getElementById('admin-sidebar');
+  const b = document.getElementById('sidebar-backdrop');
+  s.classList.toggle('open');
+  b.classList.toggle('visible');
+};
+window.closeSidebar = function() {
+  document.getElementById('admin-sidebar').classList.remove('open');
+  document.getElementById('sidebar-backdrop').classList.remove('visible');
+};
+
+// ── Tab routing ──────────────────────────────────────
+window.loadTab = function(name, el) {
+  document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.admin-nav-item').forEach(function(b){ b.classList.remove('active'); });
+  const tab = document.getElementById('tab-' + name);
+  if (tab) tab.classList.add('active');
+  if (el) el.classList.add('active');
+  const titles = { dashboard:'Dashboard', clients:'Clients (CRM)', contrats:'Contrats', paiements:'Paiements', actualites:'Actualités' };
+  document.getElementById('page-title').textContent = titles[name] || name;
+  closeSidebar();
+
+  switch(name) {
+    case 'dashboard':  loadDashboard();  break;
+    case 'clients':    loadClients();    break;
+    case 'contrats':   loadContracts();  break;
+    case 'paiements':  loadInvoices();   break;
+    case 'actualites': loadArticles();   break;
+  }
+};
+
+// ── DASHBOARD ────────────────────────────────────────
+async function loadDashboard() {
+  const errEl = document.getElementById('dashboard-error');
+  errEl.classList.add('hidden');
+  try {
+    const res = await apiFetch('/api/v1/stats');
+    if (res.ok) {
+      const d = await res.json();
+      document.getElementById('kpi-total-clients').textContent   = d.total_clients   ?? '—';
+      document.getElementById('kpi-active-clients').textContent  = d.active_clients  ?? '—';
+      document.getElementById('kpi-contracts').textContent       = d.active_contracts ?? '—';
+      document.getElementById('kpi-pending-invoices').textContent= d.pending_invoices ?? '—';
+    } else {
+      throw new Error('API indisponible');
+    }
+  } catch(e) {
+    // Show placeholder stats if API is down
+    ['kpi-total-clients','kpi-active-clients','kpi-contracts','kpi-pending-invoices'].forEach(function(id,i){
+      document.getElementById(id).textContent = ['—','—','—','—'][i];
+    });
+    errEl.textContent = 'API indisponible — données non chargées. Vérifiez que le backend tourne sur ' + API;
+    errEl.classList.remove('hidden');
+  }
+
+  // Load recent clients
+  try {
+    const res2 = await apiFetch('/api/v1/clients?limit=5');
+    const tbody = document.getElementById('dashboard-recent-clients');
+    if (res2.ok) {
+      const clients = await res2.json();
+      allClients = clients;
+      renderClientsRows(tbody, clients.slice(0,5));
+    } else {
+      throw new Error('');
+    }
+  } catch(e) {
+    document.getElementById('dashboard-recent-clients').innerHTML =
+      '<tr><td colspan="6" class="text-center py-4 text-ed-muted text-xs">Aucune donnée disponible</td></tr>';
+  }
+}
+
+// ── CLIENTS ──────────────────────────────────────────
+async function loadClients() {
+  const errEl = document.getElementById('clients-error');
+  errEl.classList.add('hidden');
+  const tbody = document.getElementById('clients-tbody');
+  tbody.innerHTML = '<tr><td colspan="7" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>';
+  try {
+    const res = await apiFetch('/api/v1/clients');
+    if (!res.ok) throw new Error('Erreur ' + res.status);
+    const clients = await res.json();
+    allClients = clients;
+    renderClientsRows(tbody, clients, true);
+  } catch(e) {
+    errEl.textContent = 'Impossible de charger les clients : ' + (e.message || 'API indisponible');
+    errEl.classList.remove('hidden');
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-ed-muted text-xs">Aucune donnée</td></tr>';
+  }
+}
+
+function renderClientsRows(tbody, clients, withActions) {
+  if (!clients || !clients.length) {
+    tbody.innerHTML = '<tr><td colspan="' + (withActions?7:6) + '" class="text-center py-6 text-ed-muted text-xs">Aucun client trouvé</td></tr>';
+    return;
+  }
+  var statusMap = { actif:'badge-ok', inactif:'badge-muted', prospect:'badge-info', suspendu:'badge-warn' };
+  tbody.innerHTML = clients.map(function(c) {
+    var badge = statusMap[c.status] || 'badge-info';
+    var actions = withActions
+      ? '<td><div class="flex gap-1">'
+          + '<button class="btn-sm btn-edit" onclick=\'openAdminModal("client",' + JSON.stringify(c) + ')\'>Modifier</button>'
+          + '<button class="btn-sm btn-delete" onclick="deleteClient(' + c.id + ')">Suppr.</button>'
+        + '</div></td>'
+      : '';
+    return '<tr>'
+      + '<td class="font-semibold">' + escHtml(c.company_name) + '</td>'
+      + '<td>' + escHtml(c.contact_name || '—') + '</td>'
+      + '<td class="font-mono text-xs">' + escHtml(c.email || '—') + '</td>'
+      + '<td>' + escHtml(c.sector || '—') + '</td>'
+      + '<td><span class="badge ' + badge + '">' + escHtml(c.status || 'prospect') + '</span></td>'
+      + '<td class="text-xs text-ed-muted">' + fmtDate(c.created_at) + '</td>'
+      + actions
+      + '</tr>';
+  }).join('');
+}
+
+async function deleteClient(id) {
+  if (!confirm('Supprimer ce client ?')) return;
+  try {
+    const res = await apiFetch('/api/v1/clients/' + id, { method: 'DELETE' });
+    if (res.ok) { showToast('Client supprimé'); loadClients(); }
+    else throw new Error('Erreur ' + res.status);
+  } catch(e) { showToast('Erreur suppression : ' + e.message, 'error'); }
+}
+window.deleteClient = deleteClient;
+
+// ── CONTRATS ─────────────────────────────────────────
+async function loadContracts() {
+  const errEl = document.getElementById('contrats-error');
+  errEl.classList.add('hidden');
+  const tbody = document.getElementById('contrats-tbody');
+  tbody.innerHTML = '<tr><td colspan="7" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>';
+  try {
+    const res = await apiFetch('/api/v1/contracts');
+    if (!res.ok) throw new Error('Erreur ' + res.status);
+    const contracts = await res.json();
+    renderContracts(tbody, contracts);
+  } catch(e) {
+    errEl.textContent = 'Impossible de charger les contrats : ' + (e.message || 'API indisponible');
+    errEl.classList.remove('hidden');
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-ed-muted text-xs">Aucune donnée</td></tr>';
+  }
+}
+
+function renderContracts(tbody, contracts) {
+  if (!contracts || !contracts.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-6 text-ed-muted text-xs">Aucun contrat trouvé</td></tr>';
+    return;
+  }
+  var svcBadge = { boitier:'badge-boitier', soc:'badge-soc', sauvegarde:'badge-sauvegarde', eaudit360:'badge-eaudit', cyber_academy:'badge-academy' };
+  var svcLabel = { boitier:'Boîtier', soc:'SOC', sauvegarde:'Sauvegarde', eaudit360:'E-AUDIT 360', cyber_academy:'Cyber Academy' };
+  var stMap    = { actif:'badge-ok', expire:'badge-crit', suspendu:'badge-warn', resilie:'badge-muted' };
+  tbody.innerHTML = contracts.map(function(c) {
+    var sb = svcBadge[c.service_type] || 'badge-info';
+    var sl = svcLabel[c.service_type] || escHtml(c.service_type);
+    var st = stMap[c.status] || 'badge-info';
+    return '<tr>'
+      + '<td class="font-semibold">' + escHtml(c.client_name || c.client_id || '—') + '</td>'
+      + '<td><span class="badge ' + sb + '">' + sl + '</span></td>'
+      + '<td>' + fmtAmount(c.amount_fcfa) + '</td>'
+      + '<td class="text-xs text-ed-muted">' + escHtml(c.billing_period || '—') + '</td>'
+      + '<td><span class="badge ' + st + '">' + escHtml(c.status || '—') + '</span></td>'
+      + '<td class="text-xs text-ed-muted">' + fmtDate(c.start_date) + '</td>'
+      + '<td><div class="flex gap-1">'
+          + '<button class="btn-sm btn-edit" onclick=\'openAdminModal("contrat",' + JSON.stringify(c) + ')\'>Modifier</button>'
+          + '<button class="btn-sm btn-delete" onclick="deleteContract(' + c.id + ')">Suppr.</button>'
+        + '</div></td>'
+      + '</tr>';
+  }).join('');
+}
+
+async function deleteContract(id) {
+  if (!confirm('Supprimer ce contrat ?')) return;
+  try {
+    const res = await apiFetch('/api/v1/contracts/' + id, { method: 'DELETE' });
+    if (res.ok) { showToast('Contrat supprimé'); loadContracts(); }
+    else throw new Error('Erreur ' + res.status);
+  } catch(e) { showToast('Erreur : ' + e.message, 'error'); }
+}
+window.deleteContract = deleteContract;
+
+// ── PAIEMENTS ────────────────────────────────────────
+async function loadInvoices() {
+  const errEl = document.getElementById('paiements-error');
+  errEl.classList.add('hidden');
+  const tbody = document.getElementById('paiements-tbody');
+  tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>';
+  try {
+    const res = await apiFetch('/api/v1/invoices');
+    if (!res.ok) throw new Error('Erreur ' + res.status);
+    allInvoices = await res.json();
+    renderInvoices(tbody, allInvoices, currentFilter);
+  } catch(e) {
+    errEl.textContent = 'Impossible de charger les factures : ' + (e.message || 'API indisponible');
+    errEl.classList.remove('hidden');
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-ed-muted text-xs">Aucune donnée</td></tr>';
+  }
+}
+
+window.filterInvoices = function(status, el) {
+  currentFilter = status;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  renderInvoices(document.getElementById('paiements-tbody'), allInvoices, status);
+};
+
+function renderInvoices(tbody, invoices, filter) {
+  var list = filter && filter !== 'all'
+    ? invoices.filter(function(i){ return i.status === filter; })
+    : invoices;
+  if (!list || !list.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Aucune facture trouvée</td></tr>';
+    return;
+  }
+  var stMap = { en_attente:'badge-warn', paye:'badge-ok', en_retard:'badge-crit', annule:'badge-muted' };
+  var stLbl = { en_attente:'En attente', paye:'Payé', en_retard:'En retard', annule:'Annulé' };
+  tbody.innerHTML = list.map(function(inv) {
+    var st = stMap[inv.status] || 'badge-info';
+    var sl = stLbl[inv.status] || escHtml(inv.status);
+    var payBtn = inv.status === 'en_attente' || inv.status === 'en_retard'
+      ? '<button class="btn-pay" onclick=\'openMarkPaid(' + JSON.stringify(inv) + ')\'>Marquer payé</button>'
+      : '';
+    return '<tr>'
+      + '<td class="font-mono text-xs">' + escHtml(inv.invoice_number || inv.id || '—') + '</td>'
+      + '<td>' + escHtml(inv.client_name || inv.client_id || '—') + '</td>'
+      + '<td class="font-semibold">' + fmtAmount(inv.amount_fcfa) + '</td>'
+      + '<td class="text-xs text-ed-muted">' + fmtDate(inv.due_date) + '</td>'
+      + '<td><span class="badge ' + st + '">' + sl + '</span></td>'
+      + '<td>' + payBtn + '</td>'
+      + '</tr>';
+  }).join('');
+}
+
+window.openMarkPaid = function(inv) {
+  document.getElementById('admin-modal-content').innerHTML =
+    '<h2 class="font-display text-xl font-bold text-white mb-1">Marquer comme payé</h2>'
+    + '<p class="text-ed-muted text-sm mb-6">Facture <strong style="color:#00d4ff">' + escHtml(inv.invoice_number || inv.id) + '</strong> — ' + fmtAmount(inv.amount_fcfa) + '</p>'
+    + '<form onsubmit="submitMarkPaid(event,' + inv.id + ')" class="space-y-4">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Mode de paiement</label>'
+    + '<select class="admin-input" name="payment_method" required>'
+    + '<option value="">Sélectionner…</option>'
+    + '<option>Virement bancaire</option><option>Mobile Money</option><option>Espèces</option><option>Chèque</option>'
+    + '</select></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Référence de paiement</label>'
+    + '<input type="text" name="payment_ref" placeholder="REF-12345" class="admin-input"/></div>'
+    + '<div id="markpaid-error" class="msg-error hidden"></div>'
+    + '<div class="flex gap-3 pt-2">'
+    + '<button type="submit" class="btn-primary flex-1">Confirmer le paiement</button>'
+    + '<button type="button" onclick="closeAdminModal()" class="btn-ghost-admin">Annuler</button>'
+    + '</div>'
+    + '</form>';
+  document.getElementById('admin-modal').classList.remove('hidden');
+};
+
+window.submitMarkPaid = async function(e, invoiceId) {
+  e.preventDefault();
+  const form   = e.target;
+  const method = form.payment_method.value;
+  const ref    = form.payment_ref.value;
+  const errEl  = document.getElementById('markpaid-error');
+  errEl.classList.add('hidden');
+  try {
+    const res = await apiFetch('/api/v1/invoices/' + invoiceId + '/pay', {
+      method: 'POST',
+      body: JSON.stringify({ payment_method: method, payment_ref: ref })
+    });
+    if (res.ok) {
+      closeAdminModal();
+      showToast('Paiement enregistré');
+      loadInvoices();
+    } else {
+      throw new Error('Erreur ' + res.status);
+    }
+  } catch(err) {
+    errEl.textContent = err.message || 'Erreur lors de l\'enregistrement';
+    errEl.classList.remove('hidden');
+  }
+};
+
+// ── ACTUALITÉS ───────────────────────────────────────
+async function loadArticles() {
+  const errEl = document.getElementById('actualites-error');
+  errEl.classList.add('hidden');
+  const tbody = document.getElementById('actualites-tbody');
+  tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Chargement…</td></tr>';
+  try {
+    const res = await apiFetch('/api/v1/articles');
+    if (!res.ok) throw new Error('Erreur ' + res.status);
+    const articles = await res.json();
+    renderArticles(tbody, articles);
+  } catch(e) {
+    errEl.textContent = 'Impossible de charger les articles : ' + (e.message || 'API indisponible');
+    errEl.classList.remove('hidden');
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-ed-muted text-xs">Aucune donnée</td></tr>';
+  }
+}
+
+function renderArticles(tbody, articles) {
+  if (!articles || !articles.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-ed-muted text-xs">Aucun article trouvé</td></tr>';
+    return;
+  }
+  var catMap = { actualite:'badge-info Actualité', alerte:'badge-crit Alerte', tutorial:'badge-ok Tutoriel', article_maison:'badge-warn Article' };
+  tbody.innerHTML = articles.map(function(a) {
+    var catParts = (catMap[a.category] || 'badge-info Article').split(' ');
+    var catBadge = catParts[0];
+    var catLabel = catParts.slice(1).join(' ');
+    var pubBadge = a.is_published ? '<span class="badge badge-ok">Oui</span>' : '<span class="badge badge-muted">Non</span>';
+    var aiBadge  = a.is_ai_generated ? '<span class="badge badge-info" style="font-size:9px">IA</span>' : '—';
+    return '<tr>'
+      + '<td class="font-semibold text-xs max-w-xs truncate">' + escHtml(a.title || '—') + '</td>'
+      + '<td><span class="badge ' + catBadge + '">' + catLabel + '</span></td>'
+      + '<td>' + aiBadge + '</td>'
+      + '<td>' + pubBadge + '</td>'
+      + '<td class="text-xs text-ed-muted">' + fmtDate(a.published_at || a.created_at) + '</td>'
+      + '<td><div class="flex gap-1">'
+          + '<button class="btn-sm btn-edit" onclick=\'openAdminModal("article",' + JSON.stringify(a) + ')\'>Modifier</button>'
+          + (a.is_published ? '' : '<button class="btn-sm btn-publish" onclick="publishArticle(' + a.id + ')">Publier</button>')
+          + '<button class="btn-sm btn-delete" onclick="deleteArticle(' + a.id + ')">Suppr.</button>'
+        + '</div></td>'
+      + '</tr>';
+  }).join('');
+}
+
+async function publishArticle(id) {
+  try {
+    const res = await apiFetch('/api/v1/articles/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({ is_published: true })
+    });
+    if (res.ok) { showToast('Article publié'); loadArticles(); }
+    else throw new Error('Erreur ' + res.status);
+  } catch(e) { showToast('Erreur : ' + e.message, 'error'); }
+}
+window.publishArticle = publishArticle;
+
+async function deleteArticle(id) {
+  if (!confirm('Supprimer cet article ?')) return;
+  try {
+    const res = await apiFetch('/api/v1/articles/' + id, { method: 'DELETE' });
+    if (res.ok) { showToast('Article supprimé'); loadArticles(); }
+    else throw new Error('Erreur ' + res.status);
+  } catch(e) { showToast('Erreur : ' + e.message, 'error'); }
+}
+window.deleteArticle = deleteArticle;
+
+// ── MODALS ───────────────────────────────────────────
+window.openAdminModal = function(type, data) {
+  var content = '';
+  switch(type) {
+    case 'client':    content = buildClientForm(data);    break;
+    case 'contrat':   content = buildContratForm(data);   break;
+    case 'facture':   content = buildFactureForm(data);   break;
+    case 'article':   content = buildArticleForm(data);   break;
+    case 'ai-article':content = buildAiArticleForm();     break;
+    default: return;
+  }
+  document.getElementById('admin-modal-content').innerHTML = content;
+  document.getElementById('admin-modal').classList.remove('hidden');
+};
+
+window.closeAdminModal = function() {
+  document.getElementById('admin-modal').classList.add('hidden');
+};
+
+window.handleModalBackdrop = function(e) {
+  if (e.target === document.getElementById('admin-modal')) closeAdminModal();
+};
+
+function buildClientForm(d) {
+  var v = d || {};
+  return '<h2 class="font-display text-xl font-bold text-white mb-6">' + (d ? 'Modifier le client' : 'Nouveau client') + '</h2>'
+    + '<form onsubmit="submitClientForm(event,' + (d ? d.id : 'null') + ')" class="space-y-3">'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Entreprise *</label><input name="company_name" value="' + escHtml(v.company_name||'') + '" class="admin-input" required/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Contact</label><input name="contact_name" value="' + escHtml(v.contact_name||'') + '" class="admin-input"/></div>'
+    + '</div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email *</label><input type="email" name="email" value="' + escHtml(v.email||'') + '" class="admin-input" required/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Téléphone</label><input name="phone" value="' + escHtml(v.phone||'') + '" class="admin-input"/></div>'
+    + '</div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Secteur</label><input name="sector" value="' + escHtml(v.sector||'') + '" placeholder="Finance, Telecom…" class="admin-input"/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Statut</label>'
+    + '<select name="status" class="admin-input"><option value="prospect"' + (v.status==='prospect'?' selected':'') + '>Prospect</option><option value="actif"' + (v.status==='actif'?' selected':'') + '>Actif</option><option value="inactif"' + (v.status==='inactif'?' selected':'') + '>Inactif</option><option value="suspendu"' + (v.status==='suspendu'?' selected':'') + '>Suspendu</option></select></div>'
+    + '</div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Ville</label><input name="city" value="' + escHtml(v.city||'') + '" class="admin-input"/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Pays</label><input name="country" value="' + escHtml(v.country||'Burkina Faso') + '" class="admin-input"/></div>'
+    + '</div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Adresse</label><input name="address" value="' + escHtml(v.address||'') + '" class="admin-input"/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Notes</label><textarea name="notes" class="admin-input" rows="2">' + escHtml(v.notes||'') + '</textarea></div>'
+    + '<div id="client-form-error" class="msg-error hidden"></div>'
+    + '<div class="flex gap-3 pt-2">'
+    + '<button type="submit" class="btn-primary flex-1">' + (d ? 'Enregistrer' : 'Créer le client') + '</button>'
+    + '<button type="button" onclick="closeAdminModal()" class="btn-ghost-admin">Annuler</button>'
+    + '</div></form>';
+}
+
+window.submitClientForm = async function(e, id) {
+  e.preventDefault();
+  const form = e.target;
+  const errEl = document.getElementById('client-form-error');
+  errEl.classList.add('hidden');
+  var payload = {};
+  new FormData(form).forEach(function(v, k){ payload[k] = v; });
+  try {
+    var url = id ? '/api/v1/clients/' + id : '/api/v1/clients';
+    var method = id ? 'PUT' : 'POST';
+    const res = await apiFetch(url, { method: method, body: JSON.stringify(payload) });
+    if (res.ok) {
+      closeAdminModal();
+      showToast(id ? 'Client mis à jour' : 'Client créé');
+      loadClients();
+    } else {
+      var d = await res.json().catch(function(){ return {}; });
+      throw new Error(d.detail || 'Erreur ' + res.status);
+    }
+  } catch(err) {
+    errEl.textContent = err.message;
+    errEl.classList.remove('hidden');
+  }
+};
+
+function buildContratForm(d) {
+  var v = d || {};
+  var clientOptions = allClients.map(function(c){
+    return '<option value="' + c.id + '"' + (v.client_id===c.id?' selected':'') + '>' + escHtml(c.company_name) + '</option>';
+  }).join('');
+  return '<h2 class="font-display text-xl font-bold text-white mb-6">' + (d ? 'Modifier le contrat' : 'Nouveau contrat') + '</h2>'
+    + '<form onsubmit="submitContratForm(event,' + (d ? d.id : 'null') + ')" class="space-y-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Client *</label>'
+    + '<select name="client_id" class="admin-input" required><option value="">Sélectionner…</option>' + clientOptions + '</select></div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Service *</label>'
+    + '<select name="service_type" class="admin-input" required>'
+    + '<option value="">Sélectionner…</option>'
+    + '<option value="boitier"' + (v.service_type==='boitier'?' selected':'') + '>Boîtier E-DEFENCE</option>'
+    + '<option value="soc"' + (v.service_type==='soc'?' selected':'') + '>SOC 24/7</option>'
+    + '<option value="sauvegarde"' + (v.service_type==='sauvegarde'?' selected':'') + '>Sauvegarde Cloud</option>'
+    + '<option value="eaudit360"' + (v.service_type==='eaudit360'?' selected':'') + '>E-AUDIT 360</option>'
+    + '<option value="cyber_academy"' + (v.service_type==='cyber_academy'?' selected':'') + '>Cyber Academy</option>'
+    + '</select></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Montant (F CFA) *</label><input type="number" name="amount_fcfa" value="' + (v.amount_fcfa||'') + '" class="admin-input" required/></div>'
+    + '</div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Début</label><input type="date" name="start_date" value="' + (v.start_date||'') + '" class="admin-input"/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Fin</label><input type="date" name="end_date" value="' + (v.end_date||'') + '" class="admin-input"/></div>'
+    + '</div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Facturation</label>'
+    + '<select name="billing_period" class="admin-input"><option value="mensuel"' + (v.billing_period==='mensuel'?' selected':'') + '>Mensuel</option><option value="trimestriel"' + (v.billing_period==='trimestriel'?' selected':'') + '>Trimestriel</option><option value="annuel"' + (v.billing_period==='annuel'?' selected':'') + '>Annuel</option></select></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Statut</label>'
+    + '<select name="status" class="admin-input"><option value="actif"' + (v.status==='actif'?' selected':'') + '>Actif</option><option value="suspendu"' + (v.status==='suspendu'?' selected':'') + '>Suspendu</option><option value="expire"' + (v.status==='expire'?' selected':'') + '>Expiré</option><option value="resilie"' + (v.status==='resilie'?' selected':'') + '>Résilié</option></select></div>'
+    + '</div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Notes</label><textarea name="notes" class="admin-input" rows="2">' + escHtml(v.notes||'') + '</textarea></div>'
+    + '<div id="contrat-form-error" class="msg-error hidden"></div>'
+    + '<div class="flex gap-3 pt-2">'
+    + '<button type="submit" class="btn-primary flex-1">' + (d ? 'Enregistrer' : 'Créer le contrat') + '</button>'
+    + '<button type="button" onclick="closeAdminModal()" class="btn-ghost-admin">Annuler</button>'
+    + '</div></form>';
+}
+
+window.submitContratForm = async function(e, id) {
+  e.preventDefault();
+  var payload = {};
+  new FormData(e.target).forEach(function(v, k){ payload[k] = v; });
+  const errEl = document.getElementById('contrat-form-error');
+  errEl.classList.add('hidden');
+  try {
+    var url = id ? '/api/v1/contracts/' + id : '/api/v1/contracts';
+    var method = id ? 'PUT' : 'POST';
+    const res = await apiFetch(url, { method: method, body: JSON.stringify(payload) });
+    if (res.ok) {
+      closeAdminModal();
+      showToast(id ? 'Contrat mis à jour' : 'Contrat créé');
+      loadContracts();
+    } else {
+      var d = await res.json().catch(function(){ return {}; });
+      throw new Error(d.detail || 'Erreur ' + res.status);
+    }
+  } catch(err) {
+    errEl.textContent = err.message;
+    errEl.classList.remove('hidden');
+  }
+};
+
+function buildFactureForm(d) {
+  var v = d || {};
+  var clientOptions = allClients.map(function(c){
+    return '<option value="' + c.id + '"' + (v.client_id===c.id?' selected':'') + '>' + escHtml(c.company_name) + '</option>';
+  }).join('');
+  return '<h2 class="font-display text-xl font-bold text-white mb-6">Nouvelle facture</h2>'
+    + '<form onsubmit="submitFactureForm(event)" class="space-y-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Client *</label>'
+    + '<select name="client_id" class="admin-input" required><option value="">Sélectionner…</option>' + clientOptions + '</select></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">N° Contrat (optionnel)</label><input name="contract_id" value="' + escHtml(v.contract_id||'') + '" class="admin-input" placeholder="ID du contrat"/></div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Montant (F CFA) *</label><input type="number" name="amount_fcfa" class="admin-input" required/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Échéance *</label><input type="date" name="due_date" class="admin-input" required/></div>'
+    + '</div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Notes</label><textarea name="notes" class="admin-input" rows="2"></textarea></div>'
+    + '<div id="facture-form-error" class="msg-error hidden"></div>'
+    + '<div class="flex gap-3 pt-2">'
+    + '<button type="submit" class="btn-primary flex-1">Créer la facture</button>'
+    + '<button type="button" onclick="closeAdminModal()" class="btn-ghost-admin">Annuler</button>'
+    + '</div></form>';
+}
+
+window.submitFactureForm = async function(e) {
+  e.preventDefault();
+  var payload = {};
+  new FormData(e.target).forEach(function(v, k){ payload[k] = v; });
+  const errEl = document.getElementById('facture-form-error');
+  errEl.classList.add('hidden');
+  try {
+    const res = await apiFetch('/api/v1/invoices', { method: 'POST', body: JSON.stringify(payload) });
+    if (res.ok) {
+      closeAdminModal();
+      showToast('Facture créée');
+      loadInvoices();
+    } else {
+      var d = await res.json().catch(function(){ return {}; });
+      throw new Error(d.detail || 'Erreur ' + res.status);
+    }
+  } catch(err) {
+    errEl.textContent = err.message;
+    errEl.classList.remove('hidden');
+  }
+};
+
+function buildArticleForm(d) {
+  var v = d || {};
+  return '<h2 class="font-display text-xl font-bold text-white mb-6">' + (d ? 'Modifier l\'article' : 'Nouvel article') + '</h2>'
+    + '<form onsubmit="submitArticleForm(event,' + (d ? d.id : 'null') + ')" class="space-y-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Titre *</label><input name="title" value="' + escHtml(v.title||'') + '" class="admin-input" required/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Résumé</label><textarea name="summary" class="admin-input" rows="2">' + escHtml(v.summary||'') + '</textarea></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Contenu</label><textarea name="content" class="admin-input" rows="5">' + escHtml(v.content||'') + '</textarea></div>'
+    + '<div class="grid grid-cols-2 gap-3">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Catégorie</label>'
+    + '<select name="category" class="admin-input"><option value="actualite"' + (v.category==='actualite'?' selected':'') + '>Actualité</option><option value="alerte"' + (v.category==='alerte'?' selected':'') + '>Alerte</option><option value="tutorial"' + (v.category==='tutorial'?' selected':'') + '>Tutoriel</option><option value="article_maison"' + (v.category==='article_maison'?' selected':'') + '>Article maison</option></select></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Tags (virgule)</label><input name="tags" value="' + escHtml(Array.isArray(v.tags) ? v.tags.join(',') : (v.tags||'')) + '" class="admin-input" placeholder="ransomware, UEMOA"/></div>'
+    + '</div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">URL source</label><input type="url" name="source_url" value="' + escHtml(v.source_url||'') + '" class="admin-input" placeholder="https://…"/></div>'
+    + '<div class="flex items-center gap-3">'
+    + '<input type="checkbox" name="is_published" id="cb-published" value="true"' + (v.is_published?' checked':'') + ' class="w-4 h-4" style="accent-color:#00d4ff"/>'
+    + '<label for="cb-published" class="text-sm text-ed-muted">Publier immédiatement</label></div>'
+    + '<div id="article-form-error" class="msg-error hidden"></div>'
+    + '<div class="flex gap-3 pt-2">'
+    + '<button type="submit" class="btn-primary flex-1">' + (d ? 'Enregistrer' : 'Créer l\'article') + '</button>'
+    + '<button type="button" onclick="closeAdminModal()" class="btn-ghost-admin">Annuler</button>'
+    + '</div></form>';
+}
+
+window.submitArticleForm = async function(e, id) {
+  e.preventDefault();
+  var payload = {};
+  new FormData(e.target).forEach(function(v, k){ payload[k] = v; });
+  payload.is_published = !!e.target.is_published.checked;
+  const errEl = document.getElementById('article-form-error');
+  errEl.classList.add('hidden');
+  try {
+    var url = id ? '/api/v1/articles/' + id : '/api/v1/articles';
+    var method = id ? 'PUT' : 'POST';
+    const res = await apiFetch(url, { method: method, body: JSON.stringify(payload) });
+    if (res.ok) {
+      closeAdminModal();
+      showToast(id ? 'Article mis à jour' : 'Article créé');
+      loadArticles();
+    } else {
+      var d = await res.json().catch(function(){ return {}; });
+      throw new Error(d.detail || 'Erreur ' + res.status);
+    }
+  } catch(err) {
+    errEl.textContent = err.message;
+    errEl.classList.remove('hidden');
+  }
+};
+
+function buildAiArticleForm() {
+  return '<h2 class="font-display text-xl font-bold text-white mb-2">Générer un article avec IA</h2>'
+    + '<p class="text-ed-muted text-sm mb-6">L\'IA va générer un article de veille cybersécurité basé sur le sujet fourni.</p>'
+    + '<form onsubmit="submitAiArticle(event)" class="space-y-4">'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Sujet / thème *</label>'
+    + '<input name="topic" class="admin-input" placeholder="Ex: Ransomware LockBit Afrique de l\'Ouest 2026" required/></div>'
+    + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Catégorie</label>'
+    + '<select name="category" class="admin-input"><option value="actualite">Actualité</option><option value="alerte">Alerte</option><option value="tutorial">Tutoriel</option><option value="article_maison">Article maison</option></select></div>'
+    + '<div id="ai-article-error" class="msg-error hidden"></div>'
+    + '<div id="ai-article-loading" class="hidden text-center py-4">'
+    + '<div style="display:inline-block;width:24px;height:24px;border:3px solid #1e3a5f;border-top-color:#00d4ff;border-radius:50%;animation:spin .8s linear infinite"></div>'
+    + '<div class="text-xs text-ed-muted mt-2">Génération en cours…</div>'
+    + '</div>'
+    + '<div class="flex gap-3 pt-1">'
+    + '<button type="submit" class="btn-primary flex-1">Générer l\'article</button>'
+    + '<button type="button" onclick="closeAdminModal()" class="btn-ghost-admin">Annuler</button>'
+    + '</div></form>'
+    + '<style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
+}
+
+window.submitAiArticle = async function(e) {
+  e.preventDefault();
+  var topic    = e.target.topic.value;
+  var category = e.target.category.value;
+  const errEl  = document.getElementById('ai-article-error');
+  const loadEl = document.getElementById('ai-article-loading');
+  errEl.classList.add('hidden');
+  loadEl.classList.remove('hidden');
+  e.target.querySelector('button[type="submit"]').disabled = true;
+  try {
+    const res = await apiFetch('/api/v1/articles/generate-ai', {
+      method: 'POST',
+      body: JSON.stringify({ topic: topic, category: category })
+    });
+    if (res.ok) {
+      loadEl.classList.add('hidden');
+      closeAdminModal();
+      showToast('Article IA créé en brouillon');
+      loadArticles();
+    } else {
+      var d = await res.json().catch(function(){ return {}; });
+      throw new Error(d.detail || 'Erreur ' + res.status);
+    }
+  } catch(err) {
+    loadEl.classList.add('hidden');
+    e.target.querySelector('button[type="submit"]').disabled = false;
+    errEl.textContent = err.message || 'Erreur lors de la génération';
+    errEl.classList.remove('hidden');
+  }
+};
+
+// ── Bootstrap ────────────────────────────────────────
+(function init() {
+  try {
+    var stored = localStorage.getItem('edefence:adminToken');
+    if (stored && stored !== 'null') {
+      adminToken = stored;
+      showAdminApp();
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

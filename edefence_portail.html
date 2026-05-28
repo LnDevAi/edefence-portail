@@ -104,6 +104,9 @@ tailwind.config = {
         <button onclick="switchPortalTab('securite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Sécurité</button>
         <button onclick="switchPortalTab('wifi',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Audit WiFi</button>
         <button onclick="switchPortalTab('antivirus',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Antivirus</button>
+        <button onclick="switchPortalTab('boitier',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Boîtier</button>
+        <button onclick="switchPortalTab('soc',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">SOC</button>
+        <button onclick="switchPortalTab('sauvegarde',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Sauvegarde</button>
         <button onclick="switchPortalTab('conformite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Hub Conformité</button>
         <button onclick="switchPortalTab('academy',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Cyber-Academy</button>
       </div>
@@ -422,6 +425,76 @@ tailwind.config = {
           </div>
         </div>
 
+        <!-- ── BOITIER ── -->
+        <div id="ptab-boitier" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Boîtiers déployés</div><div class="text-3xl font-bold text-white font-display">12</div><div class="text-xs text-ed-muted mt-1">Clients actifs</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Menaces bloquées/mois</div><div class="text-3xl font-bold font-display" style="color:#00c896">4 847</div><div class="text-xs text-ed-muted mt-1">Filtrage pare-feu</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Disponibilité</div><div class="text-3xl font-bold font-display" style="color:#00d4ff">99.8%</div><div class="text-xs text-ed-muted mt-1">SLA garanti</div></div>
+          </div>
+          <div class="sec-label">Statuts boîtiers clients</div>
+          <div class="overflow-x-auto mb-5">
+            <table class="ed-table">
+              <thead><tr><th>Entreprise</th><th>Boîtier</th><th>Firmware</th><th>Statut</th><th>Dernière synchro</th></tr></thead>
+              <tbody>
+                <tr><td>SONABEL</td><td class="font-mono text-xs">ED-BOX-001</td><td class="font-mono text-xs">23.7.10</td><td><span class="badge badge-ok">Opérationnel</span></td><td class="text-xs text-ed-muted">Il y a 2h</td></tr>
+                <tr><td>ONATEL</td><td class="font-mono text-xs">ED-BOX-002</td><td class="font-mono text-xs">23.5.1</td><td><span class="badge badge-warn">Mise à jour disponible</span></td><td class="text-xs text-ed-muted">Hier 18:30</td></tr>
+                <tr><td>Burkina Bail</td><td class="font-mono text-xs">ED-BOX-003</td><td class="font-mono text-xs">22.10.1</td><td><span class="badge badge-crit">Firmware critique</span></td><td class="text-xs text-ed-muted">Il y a 3 jours</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button onclick="openModal('signup')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Demander un boîtier
+          </button>
+        </div>
+
+        <!-- ── SOC ── -->
+        <div id="ptab-soc" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Alertes aujourd'hui</div><div class="text-3xl font-bold font-display" style="color:#ffa500">127</div><div class="text-xs text-ed-muted mt-1">Analysées en temps réel</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Critiques</div><div class="text-3xl font-bold font-display" style="color:#ff3b5c">3</div><div class="text-xs text-ed-muted mt-1">Action immédiate requise</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Agents connectés</div><div class="text-3xl font-bold font-display" style="color:#00c896">47</div><div class="text-xs text-ed-muted mt-1">Wazuh SIEM</div></div>
+          </div>
+          <div class="sec-label">Dernières alertes SOC</div>
+          <div class="overflow-x-auto mb-5">
+            <table class="ed-table">
+              <thead><tr><th>Heure</th><th>Agent</th><th>Règle</th><th>Sévérité</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono text-xs">09:14:32</td><td class="font-mono text-xs">SONABEL-SRV01</td><td class="text-xs">Tentative de connexion brute-force</td><td><span class="badge badge-crit">Critique</span></td><td><span class="badge badge-warn">En cours</span></td></tr>
+                <tr><td class="font-mono text-xs">08:47:11</td><td class="font-mono text-xs">ONATEL-WS04</td><td class="text-xs">Exécution PowerShell suspecte</td><td><span class="badge badge-warn">Élevé</span></td><td><span class="badge badge-ok">Résolu</span></td></tr>
+                <tr><td class="font-mono text-xs">07:30:55</td><td class="font-mono text-xs">CBAIL-SRV02</td><td class="text-xs">Port scan détecté</td><td><span class="badge badge-warn">Moyen</span></td><td><span class="badge badge-ok">Résolu</span></td></tr>
+                <tr><td class="font-mono text-xs">03:22:08</td><td class="font-mono text-xs">SONABEL-DC01</td><td class="text-xs">Connexion hors plage horaire</td><td><span class="badge badge-crit">Critique</span></td><td><span class="badge badge-info">Analysé</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.2)">
+            <div class="pulse-dot"></div>
+            <span class="text-sm font-semibold" style="color:#00c896">Surveillance active 24/7</span>
+            <span class="text-xs text-ed-muted">— Centre SOC E-DEFENCE opérationnel</span>
+          </div>
+        </div>
+
+        <!-- ── SAUVEGARDE ── -->
+        <div id="ptab-sauvegarde" class="portal-tab">
+          <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Données protégées</div><div class="text-3xl font-bold text-white font-display">2.4 TB</div><div class="text-xs text-ed-muted mt-1">Cloud + NAS local</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Dernière sauvegarde</div><div class="text-3xl font-bold font-display" style="color:#00c896">Il y a 3h</div><div class="text-xs text-ed-muted mt-1">Automatique nocturne</div></div>
+            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Taux de succès</div><div class="text-3xl font-bold font-display" style="color:#00d4ff">98.7%</div><div class="text-xs text-ed-muted mt-1">30 derniers jours</div></div>
+          </div>
+          <div class="sec-label">Sauvegardes récentes</div>
+          <div class="overflow-x-auto">
+            <table class="ed-table">
+              <thead><tr><th>Entreprise</th><th>Type</th><th>Taille</th><th>Durée</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td>SONABEL</td><td class="text-xs">Complète</td><td class="font-mono text-xs">847 GB</td><td class="text-xs">2h 14min</td><td><span class="badge badge-ok">Succès</span></td></tr>
+                <tr><td>ONATEL</td><td class="text-xs">Incrémentale</td><td class="font-mono text-xs">12 GB</td><td class="text-xs">18min</td><td><span class="badge badge-ok">Succès</span></td></tr>
+                <tr><td>Burkina Bail</td><td class="text-xs">Complète</td><td class="font-mono text-xs">310 GB</td><td class="text-xs">1h 05min</td><td><span class="badge badge-crit">Échec</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div><!-- end tab contents -->
     </div><!-- end portal shell -->
   </div>
@@ -478,6 +551,87 @@ tailwind.config = {
         <h3 class="font-semibold text-white text-sm mb-2">Gestion des incidents</h3>
         <p class="text-xs text-ed-muted leading-relaxed">Procédures de réponse guidées pour contenir et résoudre les incidents de sécurité efficacement.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ NOS SERVICES ═══ -->
+<section id="services" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">NOS SERVICES</div>
+      <h2 class="font-display font-bold text-4xl text-white mb-3">Protection <span class="g-text">matérielle & opérationnelle</span></h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto">Boîtier durci, surveillance 24/7 et sauvegarde sécurisée — trois piliers pour une protection complète de votre infrastructure.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- CARTE 1 — BOÎTIER -->
+      <div class="service-card-blue rounded-2xl p-6 transition-all duration-300" style="background:rgba(255,255,255,.02);border:1px solid rgba(0,212,255,.2)">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.25)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 7h3M7 11h3M14 7h3M14 11h3"/></svg>
+        </div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00d4ff">Boîtier E-DEFENCE</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Boîtier de Sécurité E-DEFENCE</h3>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5">Boîtier durci OPNsense (Protectli) pré-configuré pour votre réseau — pare-feu nouvelle génération, détection d'intrusion, VPN, filtrage DNS.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Firewall OPNsense dernière génération</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>IDS/IPS Suricata intégré</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>VPN WireGuard pour télétravail sécurisé</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Filtrage DNS anti-phishing</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Monitoring temps réel inclus</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Installation & configuration sur site</li>
+        </ul>
+        <div class="flex items-center justify-between mb-4">
+          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#00d4ff">150 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+        </div>
+        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Demander un devis</button>
+      </div>
+
+      <!-- CARTE 2 — SOC (highlight) -->
+      <div class="service-card-green rounded-2xl p-6 transition-all duration-300 relative" style="background:rgba(0,200,150,.04);border:2px solid rgba(0,200,150,.35)">
+        <div class="absolute top-4 right-4 text-xs font-semibold px-2 py-0.5 rounded" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.3);color:#00c896">Le plus demandé</div>
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00c896">SOC E-DEFENCE</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">SOC E-DEFENCE — Surveillance 24/7</h3>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5">Centre des Opérations de Sécurité opéré par nos experts — détection, analyse et réponse aux incidents en temps réel avec Wazuh SIEM.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Surveillance active 24h/24, 7j/7</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>SIEM Wazuh avec agents déployés</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Détection comportementale (EDR)</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Rapport mensuel d'incidents</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Réponse aux incidents incluse</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Tableau de bord client dédié</li>
+        </ul>
+        <div class="flex items-center justify-between mb-4">
+          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#00c896">200 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+        </div>
+        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold" style="background:linear-gradient(135deg,#00c896,#00d4ff);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s">Demander un devis</button>
+      </div>
+
+      <!-- CARTE 3 — SAUVEGARDE -->
+      <div class="service-card-orange rounded-2xl p-6 transition-all duration-300" style="background:rgba(255,255,255,.02);border:1px solid rgba(255,165,0,.2)">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.25)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#ffa500">Sauvegarde Cloud</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Sauvegarde & Continuité</h3>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5">Protection de vos données critiques — sauvegarde automatisée cloud et NAS local, chiffrement AES-256, restauration garantie sous 4h.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Sauvegarde automatique quotidienne</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Chiffrement AES-256 at-rest</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Rétention 90 jours</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Restauration testée mensuellement</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Conformité CIL Burkina Faso</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Dashboard de monitoring inclus</li>
+        </ul>
+        <div class="flex items-center justify-between mb-4">
+          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#ffa500">75 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+        </div>
+        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg" style="background:linear-gradient(135deg,#ffa500,#ff8c00);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s">Demander un devis</button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -576,6 +730,142 @@ tailwind.config = {
           <div class="text-xs text-ed-muted">Niveau avancé</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ NOS PLATEFORMES ═══ -->
+<section id="plateformes" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">NOS PLATEFORMES</div>
+      <h2 class="font-display font-bold text-4xl text-white mb-3">L'écosystème <span class="g-text">E-DEFENCE</span></h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto">Deux plateformes complémentaires pour auditer votre sécurité et certifier vos équipes.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- E-AUDIT 360 -->
+      <div class="rounded-2xl p-8 relative overflow-hidden" style="background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.2)">
+        <div class="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10" style="background:radial-gradient(circle,#00d4ff,transparent);transform:translate(30%,-30%)"></div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(0,212,255,.15);border:1px solid rgba(0,212,255,.3)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+          </div>
+          <div>
+            <div class="text-xs text-ed-muted uppercase tracking-widest mb-0.5">Plateforme SaaS</div>
+            <div class="font-display font-bold text-xl text-white">E-AUDIT 360</div>
+          </div>
+        </div>
+        <p class="text-ed-muted text-sm leading-relaxed mb-6">Plateforme unifiée d'Audit &amp; Conformité 360° UEMOA — Audit IT 10 modules, Audit Web, Hub Conformité 12 référentiels, 14 services additionnels. Générez des rapports PDF professionnels en quelques minutes.</p>
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <div class="rounded-lg p-3" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15)">
+            <div class="text-lg font-bold text-white font-display">10</div>
+            <div class="text-xs text-ed-muted">Modules IT</div>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15)">
+            <div class="text-lg font-bold text-white font-display">12</div>
+            <div class="text-xs text-ed-muted">Référentiels</div>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15)">
+            <div class="text-lg font-bold text-white font-display">5</div>
+            <div class="text-xs text-ed-muted">Audits Web</div>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15)">
+            <div class="text-lg font-bold text-white font-display">IA</div>
+            <div class="text-xs text-ed-muted">Rapports Claude</div>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://audit.edefence.tech" target="_blank" rel="noopener" class="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">
+            Accéder à E-AUDIT 360
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+          <a href="https://audit.edefence.tech/demo" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-3 rounded-xl text-sm btn-ghost">
+            Démo
+          </a>
+        </div>
+      </div>
+
+      <!-- Cyber Academy -->
+      <div class="rounded-2xl p-8 relative overflow-hidden" style="background:rgba(0,200,150,.04);border:1px solid rgba(0,200,150,.2)">
+        <div class="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10" style="background:radial-gradient(circle,#00c896,transparent);transform:translate(30%,-30%)"></div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(0,200,150,.15);border:1px solid rgba(0,200,150,.3)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div>
+            <div class="text-xs text-ed-muted uppercase tracking-widest mb-0.5">Plateforme Certifiante</div>
+            <div class="font-display font-bold text-xl text-white">Cyber Academy</div>
+          </div>
+        </div>
+        <p class="text-ed-muted text-sm leading-relaxed mb-6">Plateforme phygitale d'immersion pratique en cybersécurité UEMOA — 10 certifications, Cyber Range k3s, IA TARGUI, badges blockchain Polygon. Mobile Money CinetPay accepté.</p>
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <div class="rounded-lg p-3" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15)">
+            <div class="text-lg font-bold text-white font-display">10</div>
+            <div class="text-xs text-ed-muted">Certifications</div>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15)">
+            <div class="text-lg font-bold text-white font-display">5</div>
+            <div class="text-xs text-ed-muted">Labs Cyber Range</div>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15)">
+            <div class="text-lg font-bold text-white font-display">IA</div>
+            <div class="text-xs text-ed-muted">Tuteur TARGUI</div>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15)">
+            <div class="text-lg font-bold text-white font-display">NFT</div>
+            <div class="text-xs text-ed-muted">Badges Blockchain</div>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://academy.edefence.tech" target="_blank" rel="noopener" class="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold" style="background:linear-gradient(135deg,#00c896,#00d4ff);color:#07111f">
+            Rejoindre l'Academy
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+          <a href="https://academy.edefence.tech/catalogue" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-3 rounded-xl text-sm btn-ghost">
+            Catalogue
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ ACTUALITÉS ═══ -->
+<section id="actualites" class="py-20" style="background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-10">
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">ACTUALITÉS</div>
+      <h2 class="font-display font-bold text-4xl text-white mb-3">Cyber-veille <span class="g-text">IA</span></h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto">Informations fraîches filtrées et synthétisées par IA — restez informé des menaces et tendances en cybersécurité.</p>
+    </div>
+    <div id="actualites-grid" class="grid md:grid-cols-3 gap-5 mb-8">
+      <!-- Skeleton loading -->
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="h-4 rounded mb-3" style="background:rgba(255,255,255,.06);width:60%"></div>
+        <div class="h-4 rounded mb-2" style="background:rgba(255,255,255,.04);width:90%"></div>
+        <div class="h-4 rounded mb-2" style="background:rgba(255,255,255,.04);width:80%"></div>
+        <div class="h-3 rounded" style="background:rgba(255,255,255,.03);width:40%"></div>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="h-4 rounded mb-3" style="background:rgba(255,255,255,.06);width:50%"></div>
+        <div class="h-4 rounded mb-2" style="background:rgba(255,255,255,.04);width:85%"></div>
+        <div class="h-4 rounded mb-2" style="background:rgba(255,255,255,.04);width:75%"></div>
+        <div class="h-3 rounded" style="background:rgba(255,255,255,.03);width:35%"></div>
+      </div>
+      <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
+        <div class="h-4 rounded mb-3" style="background:rgba(255,255,255,.06);width:65%"></div>
+        <div class="h-4 rounded mb-2" style="background:rgba(255,255,255,.04);width:90%"></div>
+        <div class="h-4 rounded mb-2" style="background:rgba(255,255,255,.04);width:70%"></div>
+        <div class="h-3 rounded" style="background:rgba(255,255,255,.03);width:45%"></div>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="/actualites" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm btn-ghost">
+        Voir toutes les actualités
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
 </section>
