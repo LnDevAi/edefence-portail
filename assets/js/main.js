@@ -19,6 +19,12 @@ async function loadIncludes() {
     loadInclude('include-footer', 'includes/footer.html')
   ]);
 
+  // Appliquer les traductions après insertion du header
+  if (typeof window.setLang === 'function') {
+    const saved = (function() { try { return localStorage.getItem('edefence:lang') || 'fr'; } catch(e) { return 'fr'; } })();
+    window.setLang(saved);
+  }
+
   // Après insertion, attacher l'écouteur pour le bouton theme
   const themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) themeBtn.addEventListener('click', toggleLightMode);
@@ -53,7 +59,7 @@ window.unlockReport = function() {
   const org   = document.getElementById('f-org').value.trim();
   const email = document.getElementById('f-email').value.trim();
   const size  = document.getElementById('f-size').value;
-  if (!org || !email || !size) { showToast('Veuillez remplir tous les champs.'); return; }
+  if (!org || !email || !size) { showToast(t('toast.fill_fields')); return; }
   document.getElementById('secu-blurred').classList.add('revealed');
   document.getElementById('frustration-gate').classList.add('hidden');
   document.getElementById('frustration-success').classList.remove('hidden');
@@ -65,38 +71,40 @@ window.toggleMobileNav = function() {
 };
 
 // ----- Modal & forms -----
-const FORMS = {
-  login: `
-    <h2 class="font-display text-2xl font-bold text-white mb-1">Bon retour</h2>
-    <p class="text-ed-muted text-sm mb-6">Connectez-vous à votre espace E DEFENCE</p>
-    <form onsubmit="handleAuth(event,'login')">
-      <div class="space-y-4">
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email</label><input type="email" class="ed-input text-sm" placeholder="contact@entreprise.com" required/></div>
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Mot de passe</label><input type="password" class="ed-input text-sm" placeholder="••••••••" required/></div>
-        <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Se connecter</button>
-      </div>
-    </form>
-    <p class="text-center text-xs text-ed-muted mt-4">Pas de compte ? <button onclick="openModal('signup')" class="hover:underline" style="color:var(--accent1)">Créer un accès gratuit</button></p>`,
-  signup: `
-    <h2 class="font-display text-2xl font-bold text-white mb-1">Accès gratuit</h2>
-    <p class="text-ed-muted text-sm mb-6">Créez votre compte et démarrez votre audit</p>
-    <form onsubmit="handleAuth(event,'signup')">
-      <div class="space-y-4">
-        <div class="grid grid-cols-2 gap-3">
-          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Prénom</label><input type="text" class="ed-input text-sm" required/></div>
-          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Nom</label><input type="text" class="ed-input text-sm" required/></div>
+function buildForms() {
+  return {
+    login: `
+      <h2 class="font-display text-2xl font-bold text-white mb-1">${t('modal.login.title')}</h2>
+      <p class="text-ed-muted text-sm mb-6">${t('modal.login.subtitle')}</p>
+      <form onsubmit="handleAuth(event,'login')">
+        <div class="space-y-4">
+          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.login.email')}</label><input type="email" class="ed-input text-sm" placeholder="contact@entreprise.com" required/></div>
+          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.login.password')}</label><input type="password" class="ed-input text-sm" placeholder="••••••••" required/></div>
+          <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">${t('modal.login.submit')}</button>
         </div>
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email professionnel</label><input type="email" class="ed-input text-sm" placeholder="contact@entreprise.com" required/></div>
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Organisation</label><input type="text" class="ed-input text-sm" placeholder="Nom de votre entreprise" required/></div>
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Mot de passe</label><input type="password" class="ed-input text-sm" placeholder="8 caractères minimum" required minlength="8"/></div>
-        <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Créer mon compte gratuit</button>
-      </div>
-    </form>
-    <p class="text-center text-xs text-ed-muted mt-4">Déjà un compte ? <button onclick="openModal('login')" class="hover:underline" style="color:var(--accent1)">Se connecter</button></p>`
-};
+      </form>
+      <p class="text-center text-xs text-ed-muted mt-4">${t('modal.login.no_account')} <button onclick="openModal('signup')" class="hover:underline" style="color:var(--accent1)">${t('modal.login.create')}</button></p>`,
+    signup: `
+      <h2 class="font-display text-2xl font-bold text-white mb-1">${t('modal.signup.title')}</h2>
+      <p class="text-ed-muted text-sm mb-6">${t('modal.signup.subtitle')}</p>
+      <form onsubmit="handleAuth(event,'signup')">
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.signup.first_name')}</label><input type="text" class="ed-input text-sm" required/></div>
+            <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.signup.last_name')}</label><input type="text" class="ed-input text-sm" required/></div>
+          </div>
+          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.signup.email')}</label><input type="email" class="ed-input text-sm" placeholder="contact@entreprise.com" required/></div>
+          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.signup.org')}</label><input type="text" class="ed-input text-sm" placeholder="${t('modal.signup.org_placeholder')}" required/></div>
+          <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">${t('modal.signup.password')}</label><input type="password" class="ed-input text-sm" placeholder="${t('modal.signup.password_hint')}" required minlength="8"/></div>
+          <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">${t('modal.signup.submit')}</button>
+        </div>
+      </form>
+      <p class="text-center text-xs text-ed-muted mt-4">${t('modal.signup.have_account')} <button onclick="openModal('login')" class="hover:underline" style="color:var(--accent1)">${t('modal.signup.connect')}</button></p>`
+  };
+}
 
 window.openModal = function(type) {
-  const content = FORMS[type] || '';
+  const content = buildForms()[type] || '';
   const target = document.getElementById('modal-content');
   if (target) target.innerHTML = content;
   const bd = document.getElementById('modal-bd');
@@ -116,7 +124,7 @@ document.addEventListener('click', function(e){
 window.handleAuth = function(e, type) {
   e.preventDefault();
   closeModal();
-  showToast(type==='login' ? 'Connexion réussie.' : 'Compte créé. Bienvenue sur E DEFENCE.');
+  showToast(type === 'login' ? t('toast.login_success') : t('toast.signup_success'));
 };
 
 window.handleContact = function(e) {
