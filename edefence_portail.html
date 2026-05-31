@@ -99,17 +99,17 @@ tailwind.config = {
 
       <!-- Tab nav -->
       <div class="flex overflow-x-auto" style="background:#07111f;border-bottom:2px solid #1e3a5f;scrollbar-width:none">
-        <button onclick="switchPortalTab('decouverte',this)" class="portal-nav-item active px-4 py-3 text-xs font-medium tracking-wide uppercase">Découverte</button>
-        <button onclick="switchPortalTab('inventaire',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Inventaire</button>
-        <button onclick="switchPortalTab('performance',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Performance</button>
-        <button onclick="switchPortalTab('securite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Sécurité</button>
-        <button onclick="switchPortalTab('wifi',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Audit WiFi</button>
-        <button onclick="switchPortalTab('antivirus',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Antivirus</button>
-        <button onclick="switchPortalTab('boitier',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Boîtier</button>
-        <button onclick="switchPortalTab('soc',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">SOC</button>
-        <button onclick="switchPortalTab('sauvegarde',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Sauvegarde</button>
-        <button onclick="switchPortalTab('conformite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Hub Conformité</button>
-        <button onclick="switchPortalTab('academy',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase">Cyber-Academy</button>
+        <button onclick="switchPortalTab('decouverte',this)" class="portal-nav-item active px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.decouverte">Découverte</button>
+        <button onclick="switchPortalTab('inventaire',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.inventaire">Inventaire</button>
+        <button onclick="switchPortalTab('performance',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.performance">Performance</button>
+        <button onclick="switchPortalTab('securite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.securite">Sécurité</button>
+        <button onclick="switchPortalTab('wifi',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.wifi">Audit WiFi</button>
+        <button onclick="switchPortalTab('antivirus',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.antivirus">Antivirus</button>
+        <button onclick="switchPortalTab('boitier',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.boitier">Boîtier</button>
+        <button onclick="switchPortalTab('soc',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.soc">SOC</button>
+        <button onclick="switchPortalTab('sauvegarde',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.sauvegarde">Sauvegarde</button>
+        <button onclick="switchPortalTab('conformite',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.conformite">Hub Conformité</button>
+        <button onclick="switchPortalTab('academy',this)" class="portal-nav-item px-4 py-3 text-xs font-medium tracking-wide uppercase" data-i18n="portal.tabs.academy">Cyber-Academy</button>
       </div>
 
       <!-- Tab contents -->
@@ -428,71 +428,374 @@ tailwind.config = {
 
         <!-- ── BOITIER ── -->
         <div id="ptab-boitier" class="portal-tab">
-          <div class="grid sm:grid-cols-3 gap-4 mb-6">
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Boîtiers déployés</div><div class="text-3xl font-bold text-white font-display">12</div><div class="text-xs text-ed-muted mt-1">Clients actifs</div></div>
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Menaces bloquées/mois</div><div class="text-3xl font-bold font-display" style="color:#00c896">4 847</div><div class="text-xs text-ed-muted mt-1">Filtrage pare-feu</div></div>
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Disponibilité</div><div class="text-3xl font-bold font-display" style="color:#00d4ff">99.8%</div><div class="text-xs text-ed-muted mt-1">SLA garanti</div></div>
+          <!-- KPI row -->
+          <div class="grid sm:grid-cols-3 gap-4 mb-5">
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="boitier.kpi_deployed">Boîtiers déployés</div>
+              <div class="text-3xl font-bold text-white font-display">12</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="boitier.kpi_clients">Clients actifs</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="boitier.kpi_threats">Menaces bloquées / mois</div>
+              <div class="text-3xl font-bold font-display" style="color:#00c896">4 847</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="boitier.kpi_firewall">Filtrage pare-feu</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="boitier.kpi_uptime">Disponibilité</div>
+              <div class="text-3xl font-bold font-display" style="color:#00d4ff">99.8%</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="boitier.kpi_sla">SLA garanti</div>
+            </div>
           </div>
-          <div class="sec-label">Statuts boîtiers clients</div>
-          <div class="overflow-x-auto mb-5">
-            <table class="ed-table">
-              <thead><tr><th>Entreprise</th><th>Boîtier</th><th>Firmware</th><th>Statut</th><th>Dernière synchro</th></tr></thead>
-              <tbody>
-                <tr><td>SONABEL</td><td class="font-mono text-xs">ED-BOX-001</td><td class="font-mono text-xs">23.7.10</td><td><span class="badge badge-ok">Opérationnel</span></td><td class="text-xs text-ed-muted">Il y a 2h</td></tr>
-                <tr><td>ONATEL</td><td class="font-mono text-xs">ED-BOX-002</td><td class="font-mono text-xs">23.5.1</td><td><span class="badge badge-warn">Mise à jour disponible</span></td><td class="text-xs text-ed-muted">Hier 18:30</td></tr>
-                <tr><td>Burkina Bail</td><td class="font-mono text-xs">ED-BOX-003</td><td class="font-mono text-xs">22.10.1</td><td><span class="badge badge-crit">Firmware critique</span></td><td class="text-xs text-ed-muted">Il y a 3 jours</td></tr>
-              </tbody>
-            </table>
+
+          <!-- Sub-tab nav -->
+          <div class="flex gap-1 mb-4 p-1 rounded-xl" style="background:rgba(255,255,255,.03);border:1px solid #1e3a5f;display:inline-flex">
+            <button onclick="switchSubTab('boitier','statuts',this)" class="boitier-sub active-sub px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="color:#00d4ff;background:rgba(0,212,255,.12)" data-i18n="boitier.tab_status">Statuts</button>
+            <button onclick="switchSubTab('boitier','alertes',this)" class="boitier-sub px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="color:#4a6b8a" data-i18n="boitier.tab_alerts">Alertes bloquées</button>
+            <button onclick="switchSubTab('boitier','firmware',this)" class="boitier-sub px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="color:#4a6b8a" data-i18n="boitier.tab_firmware">Firmware</button>
           </div>
-          <button onclick="openModal('signup')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Demander un boîtier
-          </button>
+
+          <!-- Sub-tab: Statuts -->
+          <div id="bsub-statuts" class="boitier-subtab">
+            <div class="sec-label mb-3" data-i18n="boitier.status_label">Statuts boîtiers clients</div>
+            <div class="overflow-x-auto mb-4">
+              <table class="ed-table">
+                <thead><tr>
+                  <th data-i18n="boitier.col_company">Entreprise</th>
+                  <th data-i18n="boitier.col_box">Boîtier</th>
+                  <th data-i18n="boitier.col_firmware">Firmware</th>
+                  <th data-i18n="boitier.col_status">Statut</th>
+                  <th data-i18n="boitier.col_sync">Dernière synchro</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td>SONABEL</td><td class="font-mono text-xs">ED-BOX-001</td><td class="font-mono text-xs">23.7.10</td><td><span class="badge badge-ok">Opérationnel</span></td><td class="text-xs text-ed-muted">Il y a 2h</td></tr>
+                  <tr><td>ONATEL</td><td class="font-mono text-xs">ED-BOX-002</td><td class="font-mono text-xs">23.5.1</td><td><span class="badge badge-warn">MAJ disponible</span></td><td class="text-xs text-ed-muted">Hier 18:30</td></tr>
+                  <tr><td>Burkina Bail</td><td class="font-mono text-xs">ED-BOX-003</td><td class="font-mono text-xs">22.10.1</td><td><span class="badge badge-crit">Firmware critique</span></td><td class="text-xs text-ed-muted">Il y a 3 jours</td></tr>
+                  <tr><td>BRAKINA</td><td class="font-mono text-xs">ED-BOX-004</td><td class="font-mono text-xs">23.7.10</td><td><span class="badge badge-ok">Opérationnel</span></td><td class="text-xs text-ed-muted">Il y a 1h</td></tr>
+                  <tr><td>FASOCIMENT</td><td class="font-mono text-xs">ED-BOX-005</td><td class="font-mono text-xs">23.7.10</td><td><span class="badge badge-ok">Opérationnel</span></td><td class="text-xs text-ed-muted">Il y a 4h</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Sub-tab: Alertes bloquées -->
+          <div id="bsub-alertes" class="boitier-subtab" style="display:none">
+            <div class="sec-label mb-3" data-i18n="boitier.alerts_label">Alertes bloquées récentes</div>
+            <div class="overflow-x-auto mb-4">
+              <table class="ed-table">
+                <thead><tr>
+                  <th data-i18n="boitier.col_box">Boîtier</th>
+                  <th data-i18n="boitier.col_threat">Menace</th>
+                  <th data-i18n="boitier.col_type">Type</th>
+                  <th data-i18n="boitier.col_src">IP source</th>
+                  <th data-i18n="boitier.col_date">Date</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td class="font-mono text-xs">ED-BOX-001</td><td class="text-xs">Brute-force SSH</td><td><span class="badge badge-crit">Intrusion</span></td><td class="font-mono text-xs">41.202.219.87</td><td class="font-mono text-xs">31/05 08:14</td></tr>
+                  <tr><td class="font-mono text-xs">ED-BOX-001</td><td class="text-xs">DNS rebinding</td><td><span class="badge badge-warn">DNS</span></td><td class="font-mono text-xs">185.220.101.9</td><td class="font-mono text-xs">30/05 22:47</td></tr>
+                  <tr><td class="font-mono text-xs">ED-BOX-002</td><td class="text-xs">Port scan agressif</td><td><span class="badge badge-warn">Scan</span></td><td class="font-mono text-xs">77.91.74.1</td><td class="font-mono text-xs">30/05 16:33</td></tr>
+                  <tr><td class="font-mono text-xs">ED-BOX-003</td><td class="text-xs">Malware C2 callback</td><td><span class="badge badge-crit">Malware</span></td><td class="font-mono text-xs">45.89.125.5</td><td class="font-mono text-xs">28/05 03:21</td></tr>
+                  <tr><td class="font-mono text-xs">ED-BOX-004</td><td class="text-xs">Phishing redirect</td><td><span class="badge badge-warn">Phishing</span></td><td class="font-mono text-xs">91.108.4.11</td><td class="font-mono text-xs">27/05 14:05</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Sub-tab: Firmware -->
+          <div id="bsub-firmware" class="boitier-subtab" style="display:none">
+            <div class="sec-label mb-3" data-i18n="boitier.firmware_label">Gestion des firmwares</div>
+            <div class="space-y-3 mb-4">
+              <!-- ED-BOX-001 OK -->
+              <div class="flex items-center gap-4 p-4 rounded-xl" style="background:rgba(0,200,150,.04);border:1px solid rgba(0,200,150,.2)">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.12)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-white">ED-BOX-001 — SONABEL</div>
+                  <div class="text-xs text-ed-muted font-mono mt-0.5">v23.7.10 (latest)</div>
+                </div>
+                <span class="badge badge-ok" data-i18n="boitier.up_to_date">À jour</span>
+              </div>
+              <!-- ED-BOX-002 update available -->
+              <div class="flex items-center gap-4 p-4 rounded-xl" style="background:rgba(255,165,0,.04);border:1px solid rgba(255,165,0,.2)">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.12)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-white">ED-BOX-002 — ONATEL</div>
+                  <div class="text-xs text-ed-muted font-mono mt-0.5">v23.5.1 → <span style="color:#ffa500">v23.7.10 disponible</span></div>
+                </div>
+                <button onclick="showToast(t('toast.firmware_scheduled'))" class="px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.3);color:#ffa500;cursor:pointer" data-i18n="boitier.update_btn">Mettre à jour</button>
+              </div>
+              <!-- ED-BOX-003 critical -->
+              <div class="flex items-center gap-4 p-4 rounded-xl" style="background:rgba(255,59,92,.04);border:1px solid rgba(255,59,92,.2)">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(255,59,92,.12)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium" style="color:#ff3b5c">ED-BOX-003 — Burkina Bail</div>
+                  <div class="text-xs text-ed-muted font-mono mt-0.5">v22.10.1 — <span style="color:#ff3b5c">CVE-2024-0771 critique</span></div>
+                </div>
+                <button onclick="showToast(t('toast.firmware_scheduled'))" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-ed-bg btn-primary" style="cursor:pointer" data-i18n="boitier.update_btn">Mettre à jour</button>
+              </div>
+              <!-- ED-BOX-004 OK -->
+              <div class="flex items-center gap-4 p-4 rounded-xl" style="background:rgba(0,200,150,.04);border:1px solid rgba(0,200,150,.2)">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.12)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-white">ED-BOX-004 — BRAKINA</div>
+                  <div class="text-xs text-ed-muted font-mono mt-0.5">v23.7.10 (latest)</div>
+                </div>
+                <span class="badge badge-ok" data-i18n="boitier.up_to_date">À jour</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Request form -->
+          <div class="mt-1">
+            <button id="boitier-req-btn" onclick="toggleBoitierForm()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span data-i18n="boitier.request_btn">Demander un boîtier</span>
+            </button>
+            <div id="boitier-req-form" style="display:none" class="mt-4 p-5 rounded-xl" style="border:1px solid rgba(0,212,255,.2);background:rgba(0,212,255,.03)">
+              <div style="border:1px solid rgba(0,212,255,.2);background:rgba(0,212,255,.03)" class="rounded-xl p-5">
+                <div class="font-semibold text-white text-sm mb-4" data-i18n="boitier.request_title">Demande de déploiement boîtier</div>
+                <form onsubmit="submitBoitierRequest(event)">
+                  <div class="grid sm:grid-cols-2 gap-3 mb-3">
+                    <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="boitier.request_org">Organisation</label><input type="text" class="ed-input text-sm" required/></div>
+                    <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="boitier.request_contact">Nom du contact</label><input type="text" class="ed-input text-sm" required/></div>
+                    <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="boitier.request_email">Email professionnel</label><input type="email" class="ed-input text-sm" required/></div>
+                    <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="boitier.request_phone">Téléphone</label><input type="tel" class="ed-input text-sm"/></div>
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="boitier.request_zone">Zone de déploiement</label>
+                    <select class="ed-input ed-select text-sm">
+                      <option value="">Sélectionner...</option>
+                      <option>Ouagadougou</option>
+                      <option>Bobo-Dioulasso</option>
+                      <option>Koudougou</option>
+                      <option>Banfora</option>
+                      <option>Autre</option>
+                    </select>
+                  </div>
+                  <div class="flex gap-2">
+                    <button type="submit" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary" data-i18n="boitier.request_submit">Envoyer la demande</button>
+                    <button type="button" onclick="toggleBoitierForm()" class="px-5 py-2.5 rounded-xl text-sm btn-ghost" data-i18n="boitier.request_cancel">Annuler</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- ── SOC ── -->
         <div id="ptab-soc" class="portal-tab">
-          <div class="grid sm:grid-cols-3 gap-4 mb-6">
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Alertes aujourd'hui</div><div class="text-3xl font-bold font-display" style="color:#ffa500">127</div><div class="text-xs text-ed-muted mt-1">Analysées en temps réel</div></div>
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Critiques</div><div class="text-3xl font-bold font-display" style="color:#ff3b5c">3</div><div class="text-xs text-ed-muted mt-1">Action immédiate requise</div></div>
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Agents connectés</div><div class="text-3xl font-bold font-display" style="color:#00c896">47</div><div class="text-xs text-ed-muted mt-1">Wazuh SIEM</div></div>
+          <!-- KPI row (4) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="soc.kpi_alerts">Alertes aujourd'hui</div>
+              <div class="text-3xl font-bold font-display" style="color:#ffa500">127</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="soc.kpi_realtime">Analysées en temps réel</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="soc.kpi_critical">Critiques</div>
+              <div class="text-3xl font-bold font-display" style="color:#ff3b5c">3</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="soc.kpi_action">Action immédiate requise</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="soc.kpi_agents">Agents connectés</div>
+              <div class="text-3xl font-bold font-display" style="color:#00c896">47</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="soc.kpi_wazuh">Wazuh SIEM</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="soc.kpi_mttr">MTTR moyen</div>
+              <div class="text-3xl font-bold font-display" style="color:#00d4ff">8 min</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="soc.kpi_response">Temps de réponse moyen</div>
+            </div>
           </div>
-          <div class="sec-label">Dernières alertes SOC</div>
-          <div class="overflow-x-auto mb-5">
+
+          <!-- Severity filter bar -->
+          <div class="flex gap-2 mb-4 flex-wrap">
+            <button onclick="filterSocAlerts('all',this)" class="soc-filter-btn active-filter px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff"><span data-i18n="soc.filter_all">Tous</span> (127)</button>
+            <button onclick="filterSocAlerts('critique',this)" class="soc-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="background:rgba(255,59,92,.06);border:1px solid rgba(255,59,92,.2);color:#ff3b5c"><span data-i18n="soc.filter_critical">Critique</span> (3)</button>
+            <button onclick="filterSocAlerts('eleve',this)" class="soc-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="background:rgba(255,165,0,.06);border:1px solid rgba(255,165,0,.2);color:#ffa500"><span data-i18n="soc.filter_high">Élevé</span> (18)</button>
+            <button onclick="filterSocAlerts('moyen',this)" class="soc-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all" style="background:rgba(255,255,255,.03);border:1px solid #1e3a5f;color:#4a6b8a"><span data-i18n="soc.filter_medium">Moyen</span> (106)</button>
+          </div>
+
+          <!-- Alerts table -->
+          <div class="sec-label mb-3" data-i18n="soc.alerts_label">Dernières alertes SOC</div>
+          <div class="overflow-x-auto mb-4">
             <table class="ed-table">
-              <thead><tr><th>Heure</th><th>Agent</th><th>Règle</th><th>Sévérité</th><th>Statut</th></tr></thead>
-              <tbody>
-                <tr><td class="font-mono text-xs">09:14:32</td><td class="font-mono text-xs">SONABEL-SRV01</td><td class="text-xs">Tentative de connexion brute-force</td><td><span class="badge badge-crit">Critique</span></td><td><span class="badge badge-warn">En cours</span></td></tr>
-                <tr><td class="font-mono text-xs">08:47:11</td><td class="font-mono text-xs">ONATEL-WS04</td><td class="text-xs">Exécution PowerShell suspecte</td><td><span class="badge badge-warn">Élevé</span></td><td><span class="badge badge-ok">Résolu</span></td></tr>
-                <tr><td class="font-mono text-xs">07:30:55</td><td class="font-mono text-xs">CBAIL-SRV02</td><td class="text-xs">Port scan détecté</td><td><span class="badge badge-warn">Moyen</span></td><td><span class="badge badge-ok">Résolu</span></td></tr>
-                <tr><td class="font-mono text-xs">03:22:08</td><td class="font-mono text-xs">SONABEL-DC01</td><td class="text-xs">Connexion hors plage horaire</td><td><span class="badge badge-crit">Critique</span></td><td><span class="badge badge-info">Analysé</span></td></tr>
+              <thead><tr>
+                <th data-i18n="soc.col_time">Heure</th>
+                <th data-i18n="soc.col_agent">Agent</th>
+                <th data-i18n="soc.col_rule">Règle déclenchée</th>
+                <th data-i18n="soc.col_severity">Sévérité</th>
+                <th data-i18n="soc.col_status">Statut</th>
+                <th data-i18n="soc.col_action">Action</th>
+              </tr></thead>
+              <tbody id="soc-alerts-body">
+                <tr data-sev="critique"><td class="font-mono text-xs">09:14:32</td><td class="font-mono text-xs">SONABEL-SRV01</td><td class="text-xs">Brute-force SSH détecté</td><td><span class="badge badge-crit">Critique</span></td><td><span class="badge badge-warn">En cours</span></td><td><button onclick="showToast(t('toast.request_sent'))" class="px-2 py-1 rounded text-xs" style="background:rgba(255,59,92,.1);border:1px solid rgba(255,59,92,.2);color:#ff3b5c;cursor:pointer" data-i18n="soc.btn_respond">Répondre</button></td></tr>
+                <tr data-sev="eleve"><td class="font-mono text-xs">08:47:11</td><td class="font-mono text-xs">ONATEL-WS04</td><td class="text-xs">Exécution PowerShell suspecte</td><td><span class="badge badge-warn">Élevé</span></td><td><span class="badge badge-ok">Résolu</span></td><td><button onclick="showToast(t('toast.request_sent'))" class="px-2 py-1 rounded text-xs" style="background:rgba(255,255,255,.04);border:1px solid #1e3a5f;color:#4a6b8a;cursor:pointer" data-i18n="soc.btn_close">Clore</button></td></tr>
+                <tr data-sev="moyen"><td class="font-mono text-xs">07:30:55</td><td class="font-mono text-xs">CBAIL-SRV02</td><td class="text-xs">Port scan agressif</td><td><span class="badge badge-info">Moyen</span></td><td><span class="badge badge-ok">Résolu</span></td><td><button onclick="showToast(t('toast.request_sent'))" class="px-2 py-1 rounded text-xs" style="background:rgba(255,255,255,.04);border:1px solid #1e3a5f;color:#4a6b8a;cursor:pointer" data-i18n="soc.btn_close">Clore</button></td></tr>
+                <tr data-sev="critique"><td class="font-mono text-xs">03:22:08</td><td class="font-mono text-xs">SONABEL-DC01</td><td class="text-xs">Connexion hors plage horaire</td><td><span class="badge badge-crit">Critique</span></td><td><span class="badge badge-info">Analysé</span></td><td><button onclick="showToast(t('toast.request_sent'))" class="px-2 py-1 rounded text-xs" style="background:rgba(255,59,92,.1);border:1px solid rgba(255,59,92,.2);color:#ff3b5c;cursor:pointer" data-i18n="soc.btn_respond">Répondre</button></td></tr>
+                <tr data-sev="eleve"><td class="font-mono text-xs">02:15:44</td><td class="font-mono text-xs">BRAKINA-WS01</td><td class="text-xs">Transfert de données anormal</td><td><span class="badge badge-warn">Élevé</span></td><td><span class="badge badge-ok">Résolu</span></td><td><button onclick="showToast(t('toast.request_sent'))" class="px-2 py-1 rounded text-xs" style="background:rgba(255,255,255,.04);border:1px solid #1e3a5f;color:#4a6b8a;cursor:pointer" data-i18n="soc.btn_close">Clore</button></td></tr>
+                <tr data-sev="moyen"><td class="font-mono text-xs">01:08:19</td><td class="font-mono text-xs">FASOCIMENT-SRV01</td><td class="text-xs">Tentative d'accès root</td><td><span class="badge badge-info">Moyen</span></td><td><span class="badge badge-warn">En cours</span></td><td><button onclick="showToast(t('toast.request_sent'))" class="px-2 py-1 rounded text-xs" style="background:rgba(255,59,92,.1);border:1px solid rgba(255,59,92,.2);color:#ff3b5c;cursor:pointer" data-i18n="soc.btn_respond">Répondre</button></td></tr>
               </tbody>
             </table>
           </div>
-          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.2)">
-            <div class="pulse-dot"></div>
-            <span class="text-sm font-semibold" style="color:#00c896">Surveillance active 24/7</span>
-            <span class="text-xs text-ed-muted">— Centre SOC E-DEFENCE opérationnel</span>
+
+          <!-- Bottom bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3 p-3 rounded-xl" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.2)">
+              <div class="pulse-dot"></div>
+              <span class="text-sm font-semibold" style="color:#00c896" data-i18n="soc.active">Surveillance active 24/7</span>
+              <span class="text-xs text-ed-muted" data-i18n="soc.active_sub">— Centre SOC E-DEFENCE opérationnel</span>
+            </div>
+            <button onclick="showToast(t('toast.report_generating'))" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium btn-ghost">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-i18n="soc.report_btn">Télécharger rapport mensuel</span>
+            </button>
           </div>
         </div>
 
         <!-- ── SAUVEGARDE ── -->
         <div id="ptab-sauvegarde" class="portal-tab">
-          <div class="grid sm:grid-cols-3 gap-4 mb-6">
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Données protégées</div><div class="text-3xl font-bold text-white font-display">2.4 TB</div><div class="text-xs text-ed-muted mt-1">Cloud + NAS local</div></div>
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Dernière sauvegarde</div><div class="text-3xl font-bold font-display" style="color:#00c896">Il y a 3h</div><div class="text-xs text-ed-muted mt-1">Automatique nocturne</div></div>
-            <div class="stat-mini"><div class="text-xs text-ed-muted uppercase tracking-wide mb-1">Taux de succès</div><div class="text-3xl font-bold font-display" style="color:#00d4ff">98.7%</div><div class="text-xs text-ed-muted mt-1">30 derniers jours</div></div>
+          <!-- KPI row (5) -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-5">
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="sauvegarde.kpi_protected">Données protégées</div>
+              <div class="text-2xl font-bold text-white font-display">2.4 TB</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="sauvegarde.kpi_support">Cloud + NAS local</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="sauvegarde.kpi_last">Dernière sauvegarde</div>
+              <div class="text-2xl font-bold font-display" style="color:#00c896">3h</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="sauvegarde.kpi_auto">Automatique nocturne</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="sauvegarde.kpi_rate">Taux de succès</div>
+              <div class="text-2xl font-bold font-display" style="color:#00d4ff">98.7%</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="sauvegarde.kpi_period">30 derniers jours</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="sauvegarde.kpi_rto">RTO garanti</div>
+              <div class="text-2xl font-bold font-display" style="color:#ffa500">4h</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="sauvegarde.kpi_rto_val">4 heures max</div>
+            </div>
+            <div class="stat-mini">
+              <div class="text-xs text-ed-muted uppercase tracking-wide mb-1" data-i18n="sauvegarde.kpi_rpo">RPO</div>
+              <div class="text-2xl font-bold text-white font-display">24h</div>
+              <div class="text-xs text-ed-muted mt-1" data-i18n="sauvegarde.kpi_rpo_val">24 heures</div>
+            </div>
           </div>
-          <div class="sec-label">Sauvegardes récentes</div>
-          <div class="overflow-x-auto">
+
+          <!-- Storage + Schedule row -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-5">
+            <!-- Storage breakdown -->
+            <div>
+              <div class="sec-label mb-3" data-i18n="sauvegarde.storage_label">Répartition du stockage</div>
+              <div class="p-4 rounded-xl" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+                <div class="flex justify-between text-xs mb-1.5"><span class="text-ed-muted">Cloud (Hetzner)</span><span class="text-white font-semibold">1.8 TB</span></div>
+                <div class="prog-track h-1.5 mb-4"><div class="prog-fill rounded-full" style="width:75%;background:linear-gradient(90deg,#00d4ff,#00c896)"></div></div>
+                <div class="flex justify-between text-xs mb-1.5"><span class="text-ed-muted">NAS local</span><span class="text-white font-semibold">600 GB</span></div>
+                <div class="prog-track h-1.5 mb-4"><div class="prog-fill rounded-full" style="width:25%;background:#ffa500"></div></div>
+                <div class="flex justify-between text-xs"><span class="text-ed-muted">Chiffrement</span><span class="font-semibold" style="color:#00c896">AES-256</span></div>
+              </div>
+            </div>
+            <!-- Schedule -->
+            <div>
+              <div class="sec-label mb-3" data-i18n="sauvegarde.schedule_label">Planification</div>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center p-2.5 rounded-lg text-xs" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full" style="background:#00c896"></div>
+                    <span class="text-ed-muted">Sauvegarde complète</span>
+                  </div>
+                  <span class="font-mono text-white">dim. 02:00</span>
+                </div>
+                <div class="flex justify-between items-center p-2.5 rounded-lg text-xs" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full" style="background:#00d4ff"></div>
+                    <span class="text-ed-muted">Incrémentale</span>
+                  </div>
+                  <span class="font-mono text-white">lun–sam 03:00</span>
+                </div>
+                <div class="flex justify-between items-center p-2.5 rounded-lg text-xs" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full" style="background:#ffa500"></div>
+                    <span class="text-ed-muted">Test de restauration</span>
+                  </div>
+                  <span class="font-mono text-white">1er du mois</span>
+                </div>
+                <div class="flex justify-between items-center p-2.5 rounded-lg text-xs" style="background:rgba(255,255,255,.02);border:1px solid #1e3a5f">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full" style="background:#ff3b5c"></div>
+                    <span class="text-ed-muted">Rétention</span>
+                  </div>
+                  <span class="font-mono text-white">90 <span data-i18n="sauvegarde.retention">jours</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backups table -->
+          <div class="sec-label mb-3" data-i18n="sauvegarde.backups_label">Sauvegardes récentes</div>
+          <div class="overflow-x-auto mb-4">
             <table class="ed-table">
-              <thead><tr><th>Entreprise</th><th>Type</th><th>Taille</th><th>Durée</th><th>Statut</th></tr></thead>
+              <thead><tr>
+                <th data-i18n="sauvegarde.col_company">Entreprise</th>
+                <th data-i18n="sauvegarde.col_type">Type</th>
+                <th data-i18n="sauvegarde.col_size">Taille</th>
+                <th data-i18n="sauvegarde.col_duration">Durée</th>
+                <th data-i18n="sauvegarde.col_status">Statut</th>
+                <th data-i18n="sauvegarde.col_action">Action</th>
+              </tr></thead>
               <tbody>
-                <tr><td>SONABEL</td><td class="text-xs">Complète</td><td class="font-mono text-xs">847 GB</td><td class="text-xs">2h 14min</td><td><span class="badge badge-ok">Succès</span></td></tr>
-                <tr><td>ONATEL</td><td class="text-xs">Incrémentale</td><td class="font-mono text-xs">12 GB</td><td class="text-xs">18min</td><td><span class="badge badge-ok">Succès</span></td></tr>
-                <tr><td>Burkina Bail</td><td class="text-xs">Complète</td><td class="font-mono text-xs">310 GB</td><td class="text-xs">1h 05min</td><td><span class="badge badge-crit">Échec</span></td></tr>
+                <tr>
+                  <td>SONABEL</td><td class="text-xs">Complète</td><td class="font-mono text-xs">847 GB</td><td class="text-xs">2h 14min</td>
+                  <td><span class="badge badge-ok">Succès</span></td>
+                  <td><button onclick="showToast(t('toast.restore_scheduled'))" class="px-2 py-1 rounded text-xs" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);color:#00d4ff;cursor:pointer" data-i18n="sauvegarde.restore_prefix">Restaurer</button></td>
+                </tr>
+                <tr>
+                  <td>ONATEL</td><td class="text-xs">Incrémentale</td><td class="font-mono text-xs">12 GB</td><td class="text-xs">18min</td>
+                  <td><span class="badge badge-ok">Succès</span></td>
+                  <td><button onclick="showToast(t('toast.restore_scheduled'))" class="px-2 py-1 rounded text-xs" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);color:#00d4ff;cursor:pointer" data-i18n="sauvegarde.restore_prefix">Restaurer</button></td>
+                </tr>
+                <tr>
+                  <td>Burkina Bail</td><td class="text-xs">Complète</td><td class="font-mono text-xs">310 GB</td><td class="text-xs text-ed-muted">—</td>
+                  <td><span class="badge badge-crit">Échec</span></td>
+                  <td><button onclick="retryBackup(this,'Burkina Bail')" class="px-2 py-1 rounded text-xs font-semibold" style="background:rgba(255,165,0,.1);border:1px solid rgba(255,165,0,.25);color:#ffa500;cursor:pointer" data-i18n="sauvegarde.retry_btn">Relancer</button></td>
+                </tr>
+                <tr>
+                  <td>BRAKINA</td><td class="text-xs">Complète</td><td class="font-mono text-xs">95 GB</td><td class="text-xs">42min</td>
+                  <td><span class="badge badge-ok">Succès</span></td>
+                  <td><button onclick="showToast(t('toast.restore_scheduled'))" class="px-2 py-1 rounded text-xs" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);color:#00d4ff;cursor:pointer" data-i18n="sauvegarde.restore_prefix">Restaurer</button></td>
+                </tr>
               </tbody>
             </table>
+          </div>
+
+          <!-- Restore points -->
+          <div class="p-4 rounded-xl" style="background:rgba(0,212,255,.03);border:1px solid rgba(0,212,255,.15)">
+            <div class="flex items-center justify-between mb-3">
+              <div class="text-xs font-semibold text-white" data-i18n="sauvegarde.restore_label">Points de restauration</div>
+              <span class="text-xs text-ed-muted">28 points · 90 <span data-i18n="sauvegarde.retention">jours de rétention</span></span>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="showToast(t('toast.restore_scheduled'))" class="px-3 py-1.5 rounded-lg text-xs font-medium btn-ghost">
+                <span data-i18n="sauvegarde.restore_prefix">Restaurer</span> SONABEL
+              </button>
+              <button onclick="showToast(t('toast.restore_scheduled'))" class="px-3 py-1.5 rounded-lg text-xs font-medium btn-ghost">
+                <span data-i18n="sauvegarde.restore_prefix">Restaurer</span> ONATEL
+              </button>
+              <button onclick="showToast(t('toast.restore_scheduled'))" class="px-3 py-1.5 rounded-lg text-xs font-medium btn-ghost">
+                <span data-i18n="sauvegarde.restore_prefix">Restaurer</span> Burkina Bail
+              </button>
+              <button onclick="showToast(t('toast.restore_scheduled'))" class="px-3 py-1.5 rounded-lg text-xs font-medium btn-ghost">
+                <span data-i18n="sauvegarde.restore_prefix">Restaurer</span> BRAKINA
+              </button>
+            </div>
           </div>
         </div>
 

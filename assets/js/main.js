@@ -47,6 +47,65 @@ function restoreLightModeFromStorage() {
 }
 
 // ----- Fonctions utilitaires visibles globalement (utilisées par les onclick HTML) -----
+
+// Boîtier: bascule les sous-onglets Statuts / Alertes / Firmware
+window.switchSubTab = function(prefix, id, el) {
+  document.querySelectorAll('.' + prefix + '-subtab').forEach(function(t) { t.style.display = 'none'; });
+  document.querySelectorAll('.' + prefix + '-sub').forEach(function(b) {
+    b.style.background = 'transparent';
+    b.style.color = '#4a6b8a';
+  });
+  var tab = document.getElementById(prefix.slice(0,1) + 'sub-' + id);
+  if (tab) tab.style.display = 'block';
+  if (el) { el.style.background = 'rgba(0,212,255,.12)'; el.style.color = '#00d4ff'; }
+};
+
+// Boîtier: affiche/masque le formulaire de demande
+window.toggleBoitierForm = function() {
+  var form = document.getElementById('boitier-req-form');
+  if (!form) return;
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+};
+
+// Boîtier: soumet la demande de déploiement
+window.submitBoitierRequest = function(e) {
+  e.preventDefault();
+  var form = document.getElementById('boitier-req-form');
+  if (form) form.style.display = 'none';
+  showToast(t('toast.request_sent'));
+};
+
+// SOC: filtre les alertes par sévérité
+window.filterSocAlerts = function(sev, el) {
+  document.querySelectorAll('.soc-filter-btn').forEach(function(b) {
+    b.style.background = 'rgba(255,255,255,.03)';
+    b.style.borderColor = '#1e3a5f';
+    b.style.color = '#4a6b8a';
+  });
+  if (el) { el.style.background = 'rgba(0,212,255,.12)'; el.style.borderColor = 'rgba(0,212,255,.3)'; el.style.color = '#00d4ff'; }
+  document.querySelectorAll('#soc-alerts-body tr').forEach(function(row) {
+    row.style.display = (sev === 'all' || row.dataset.sev === sev) ? '' : 'none';
+  });
+};
+
+// Sauvegarde: relance une sauvegarde échouée
+window.retryBackup = function(btn, name) {
+  if (btn) {
+    btn.textContent = '…';
+    btn.disabled = true;
+    setTimeout(function() {
+      var row = btn.closest('tr');
+      if (row) {
+        var badge = row.querySelector('.badge-crit');
+        if (badge) { badge.className = 'badge badge-warn'; badge.textContent = 'En cours'; }
+      }
+      btn.textContent = t('sauvegarde.retry_btn');
+      btn.disabled = false;
+    }, 1200);
+  }
+  showToast(t('toast.backup_retry'));
+};
+
 window.switchPortalTab = function(id, el) {
   document.querySelectorAll('.portal-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.portal-nav-item').forEach(b => b.classList.remove('active'));
