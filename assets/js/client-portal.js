@@ -85,6 +85,7 @@
       + 'max-height:90vh;'
       + 'overflow-y:auto;'
       + 'position:relative;'
+      + 'pointer-events:auto;'
       + '">'
       + '<button onclick="closeClientModal()" style="'
       + 'position:absolute;top:16px;right:16px;'
@@ -132,7 +133,7 @@
 
   var S = {
     label:   'display:block;font-size:11px;color:#4a6b8a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;font-weight:600',
-    input:   'width:100%;box-sizing:border-box;background:#0d1e33;border:1px solid #1e3a5f;border-radius:8px;padding:10px 12px;color:#e8f4ff;font-size:13px;outline:none',
+    input:   'width:100%;box-sizing:border-box;background:#0d1e33;border:1px solid #1e3a5f;border-radius:8px;padding:10px 12px;color:#e8f4ff;font-size:13px;outline:none;pointer-events:auto;user-select:text;-webkit-user-select:text',
     btnPrim: 'width:100%;padding:12px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;background:linear-gradient(135deg,#00d4ff,#00c896);color:#07111f',
     btnGhost:'background:none;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 14px;color:#e8f4ff;font-size:12px;cursor:pointer',
     link:    'color:#00d4ff;background:none;border:none;cursor:pointer;font-size:12px;text-decoration:underline',
