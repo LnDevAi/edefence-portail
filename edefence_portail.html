@@ -34,35 +34,35 @@ tailwind.config = {
     <div class="max-w-3xl mx-auto text-center">
       <div class="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-8 anim-1" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">
         <div class="pulse-dot"></div>
-        Protection active — Portail de cybersécurité d'entreprise
+        <span data-i18n="hero.badge">Protection active — Portail de cybersécurité d'entreprise</span>
       </div>
       <h1 class="font-display font-bold leading-none mb-6 anim-2" style="font-size:clamp(2rem,6vw,5rem)">
-        Sécurisez votre<br>
-        organisation avec<br>
+        <span data-i18n="hero.h1_1">Sécurisez votre</span><br>
+        <span data-i18n="hero.h1_2">organisation avec</span><br>
         <span class="g-text">E-DEFENCE</span>
       </h1>
-      <p class="text-ed-muted text-lg leading-relaxed mb-8 max-w-xl mx-auto anim-3">
+      <p class="text-ed-muted text-lg leading-relaxed mb-8 max-w-xl mx-auto anim-3" data-i18n="hero.desc">
         Portail unifié d'audit, d'inventaire et de formation en cybersécurité. Diagnostiquez vos vulnérabilités, corrigez-les, formez vos équipes.
       </p>
       <div class="flex flex-wrap justify-center gap-3 anim-4">
         <a href="#portail" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-ed-bg btn-primary text-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          Accéder au portail
+          <span data-i18n="hero.cta_portal">Accéder au portail</span>
         </a>
         <button onclick="openModal('signup')" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm btn-ghost">
-          Obtenir mon audit gratuit
+          <span data-i18n="hero.cta_audit">Obtenir mon audit gratuit</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
         </button>
       </div>
       <!-- KPI row -->
       <div class="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-6 sm:gap-8 mt-10 sm:mt-12 anim-4">
-        <div class="text-center"><div class="text-2xl font-bold text-white font-display">+2 4**</div><div class="text-xs text-ed-muted mt-0.5">Entreprises protégées</div></div>
+        <div class="text-center"><div class="text-2xl font-bold text-white font-display">+2 4**</div><div class="text-xs text-ed-muted mt-0.5" data-i18n="hero.kpi_companies">Entreprises protégées</div></div>
         <div class="hidden sm:block w-px bg-white/10 self-stretch"></div>
-        <div class="text-center"><div class="text-2xl font-bold text-white font-display">8</div><div class="text-xs text-ed-muted mt-0.5">Modules de sécurité</div></div>
+        <div class="text-center"><div class="text-2xl font-bold text-white font-display">8</div><div class="text-xs text-ed-muted mt-0.5" data-i18n="hero.kpi_modules">Modules de sécurité</div></div>
         <div class="hidden sm:block w-px bg-white/10 self-stretch"></div>
-        <div class="text-center"><div class="text-2xl font-bold text-white font-display">ISO 27001</div><div class="text-xs text-ed-muted mt-0.5">Référentiel couvert</div></div>
+        <div class="text-center"><div class="text-2xl font-bold text-white font-display">ISO 27001</div><div class="text-xs text-ed-muted mt-0.5" data-i18n="hero.kpi_iso">Référentiel couvert</div></div>
         <div class="hidden sm:block w-px bg-white/10 self-stretch"></div>
-        <div class="text-center"><div class="text-2xl font-bold text-white font-display">NIS2</div><div class="text-xs text-ed-muted mt-0.5">Conformité vérifiée</div></div>
+        <div class="text-center"><div class="text-2xl font-bold text-white font-display">NIS2</div><div class="text-xs text-ed-muted mt-0.5" data-i18n="hero.kpi_nis">Conformité vérifiée</div></div>
       </div>
     </div>
   </div>
@@ -72,9 +72,9 @@ tailwind.config = {
 <section id="portail" class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-10">
-      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896">PORTAIL UNIFIÉ</div>
-      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">Tableau de bord E-DEFENCE</h2>
-      <p class="text-ed-muted max-w-lg mx-auto text-sm">Centralisez votre posture de sécurité en un seul espace. Huit modules, une vision complète.</p>
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896" data-i18n="portal.badge">PORTAIL UNIFIÉ</div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3" data-i18n="portal.title">Tableau de bord E-DEFENCE</h2>
+      <p class="text-ed-muted max-w-lg mx-auto text-sm" data-i18n="portal.subtitle">Centralisez votre posture de sécurité en un seul espace. Huit modules, une vision complète.</p>
     </div>
 
     <!-- Portail shell -->
@@ -808,52 +808,52 @@ tailwind.config = {
 <section id="features" class="py-20" style="background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-12">
-      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896">FONCTIONNALITÉS</div>
-      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">Tout ce dont vous avez besoin</h2>
-      <p class="text-ed-muted text-sm max-w-lg mx-auto">Une plateforme conçue pour les équipes IT et les dirigeants qui veulent maîtriser leur sécurité sans complexité.</p>
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.25);color:#00c896" data-i18n="features.badge">FONCTIONNALITÉS</div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3" data-i18n="features.title">Tout ce dont vous avez besoin</h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto" data-i18n="features.subtitle">Une plateforme conçue pour les équipes IT et les dirigeants qui veulent maîtriser leur sécurité sans complexité.</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,212,255,.1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         </div>
-        <h3 class="font-semibold text-white text-sm mb-2">Audit automatisé</h3>
-        <p class="text-xs text-ed-muted leading-relaxed">Analyse complète de votre parc informatique, de votre réseau et de vos configurations en quelques minutes.</p>
+        <h3 class="font-semibold text-white text-sm mb-2" data-i18n="features.audit_title">Audit automatisé</h3>
+        <p class="text-xs text-ed-muted leading-relaxed" data-i18n="features.audit_desc">Analyse complète de votre parc informatique, de votre réseau et de vos configurations en quelques minutes.</p>
       </div>
       <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,200,150,.1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3 class="font-semibold text-white text-sm mb-2">Score de sécurité</h3>
-        <p class="text-xs text-ed-muted leading-relaxed">Un score global clair avec des axes d'amélioration priorisés pour guider vos actions correctrices.</p>
+        <h3 class="font-semibold text-white text-sm mb-2" data-i18n="features.score_title">Score de sécurité</h3>
+        <p class="text-xs text-ed-muted leading-relaxed" data-i18n="features.score_desc">Un score global clair avec des axes d'amélioration priorisés pour guider vos actions correctrices.</p>
       </div>
       <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(255,165,0,.1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <h3 class="font-semibold text-white text-sm mb-2">Alertes en temps réel</h3>
-        <p class="text-xs text-ed-muted leading-relaxed">Détection et notification immédiate de toute activité suspecte sur votre infrastructure.</p>
+        <h3 class="font-semibold text-white text-sm mb-2" data-i18n="features.alerts_title">Alertes en temps réel</h3>
+        <p class="text-xs text-ed-muted leading-relaxed" data-i18n="features.alerts_desc">Détection et notification immédiate de toute activité suspecte sur votre infrastructure.</p>
       </div>
       <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,212,255,.1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
         </div>
-        <h3 class="font-semibold text-white text-sm mb-2">Rapports de conformité</h3>
-        <p class="text-xs text-ed-muted leading-relaxed">Vérification automatique de votre conformité RGPD, ISO 27001 et NIS2 avec recommandations détaillées.</p>
+        <h3 class="font-semibold text-white text-sm mb-2" data-i18n="features.compliance_title">Rapports de conformité</h3>
+        <p class="text-xs text-ed-muted leading-relaxed" data-i18n="features.compliance_desc">Vérification automatique de votre conformité RGPD, ISO 27001 et NIS2 avec recommandations détaillées.</p>
       </div>
       <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,200,150,.1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
-        <h3 class="font-semibold text-white text-sm mb-2">Formation des équipes</h3>
-        <p class="text-xs text-ed-muted leading-relaxed">Modules de sensibilisation intégrés pour former l'ensemble de votre organisation aux bonnes pratiques.</p>
+        <h3 class="font-semibold text-white text-sm mb-2" data-i18n="features.training_title">Formation des équipes</h3>
+        <p class="text-xs text-ed-muted leading-relaxed" data-i18n="features.training_desc">Modules de sensibilisation intégrés pour former l'ensemble de votre organisation aux bonnes pratiques.</p>
       </div>
       <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(255,59,92,.1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
-        <h3 class="font-semibold text-white text-sm mb-2">Gestion des incidents</h3>
-        <p class="text-xs text-ed-muted leading-relaxed">Procédures de réponse guidées pour contenir et résoudre les incidents de sécurité efficacement.</p>
+        <h3 class="font-semibold text-white text-sm mb-2" data-i18n="features.incidents_title">Gestion des incidents</h3>
+        <p class="text-xs text-ed-muted leading-relaxed" data-i18n="features.incidents_desc">Procédures de réponse guidées pour contenir et résoudre les incidents de sécurité efficacement.</p>
       </div>
     </div>
   </div>
@@ -863,9 +863,9 @@ tailwind.config = {
 <section id="services" class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-12">
-      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">NOS SERVICES</div>
-      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">Protection <span class="g-text">matérielle & opérationnelle</span></h2>
-      <p class="text-ed-muted text-sm max-w-lg mx-auto">Boîtier durci, surveillance 24/7 et sauvegarde sécurisée — trois piliers pour une protection complète de votre infrastructure.</p>
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff" data-i18n="services.badge">NOS SERVICES</div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3"><span data-i18n="services.title_1">Protection</span> <span class="g-text" data-i18n="services.title_2">matérielle & opérationnelle</span></h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto" data-i18n="services.subtitle">Boîtier durci, surveillance 24/7 et sauvegarde sécurisée — trois piliers pour une protection complète de votre infrastructure.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
 
@@ -874,50 +874,50 @@ tailwind.config = {
         <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.25)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 7h3M7 11h3M14 7h3M14 11h3"/></svg>
         </div>
-        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00d4ff">Boîtier E-DEFENCE</div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00d4ff" data-i18n="services.boitier_badge">Boîtier E-DEFENCE</div>
         <div class="flex items-center gap-2 mb-2">
-          <h3 class="font-display font-bold text-xl text-white">Boîtier de Sécurité E-DEFENCE</h3>
+          <h3 class="font-display font-bold text-xl text-white" data-i18n="services.boitier_title">Boîtier de Sécurité E-DEFENCE</h3>
         </div>
         <div class="flex gap-2 mb-3">
-          <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:#00d4ff">Ménages</span>
-          <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);color:#00c896">PME</span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:#00d4ff" data-i18n="services.boitier_tags">Ménages</span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);color:#00c896" data-i18n="services.boitier_tags2">PME</span>
         </div>
-        <p class="text-sm text-ed-muted leading-relaxed mb-5">Boîtier durci pré-configuré pour votre domicile ou votre entreprise — protégez votre réseau, votre WiFi et tous vos équipements connectés dès le premier jour.</p>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5" data-i18n="services.boitier_desc">Boîtier durci pré-configuré pour votre domicile ou votre entreprise — protégez votre réseau, votre WiFi et tous vos équipements connectés dès le premier jour.</p>
         <ul class="space-y-2 mb-6">
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Firewall OPNsense nouvelle génération</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Protection WiFi — détection Evil Twin & intrus</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>IDS/IPS Suricata — blocage des menaces en temps réel</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Filtrage DNS anti-phishing & contrôle parental</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Suivi de votre protection via la plateforme & l'application</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Installation & configuration sur site incluses</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div><span data-i18n="services.boitier_f1">Firewall OPNsense nouvelle génération</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div><span data-i18n="services.boitier_f2">Protection WiFi — détection Evil Twin & intrus</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div><span data-i18n="services.boitier_f3">IDS/IPS Suricata — blocage des menaces en temps réel</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div><span data-i18n="services.boitier_f4">Filtrage DNS anti-phishing & contrôle parental</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div><span data-i18n="services.boitier_f5">Suivi de votre protection via la plateforme & l'application</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div><span data-i18n="services.boitier_f6">Installation & configuration sur site incluses</span></li>
         </ul>
         <div class="flex items-center justify-between mb-4">
-          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#00d4ff">15 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+          <div><div class="text-xs text-ed-muted" data-i18n="services.from">À partir de</div><div class="text-xl font-bold font-display" style="color:#00d4ff">15 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
         </div>
-        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Demander un devis</button>
+        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary" data-i18n="services.quote_btn">Demander un devis</button>
       </div>
 
       <!-- CARTE 2 — SOC (highlight) -->
       <div class="service-card-green rounded-2xl p-6 transition-all duration-300 relative" style="background:rgba(0,200,150,.04);border:2px solid rgba(0,200,150,.35)">
-        <div class="absolute top-4 right-4 text-xs font-semibold px-2 py-0.5 rounded" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.3);color:#00c896">Le plus demandé</div>
+        <div class="absolute top-4 right-4 text-xs font-semibold px-2 py-0.5 rounded" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.3);color:#00c896" data-i18n="services.popular">Le plus demandé</div>
         <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
-        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00c896">SOC E-DEFENCE</div>
-        <h3 class="font-display font-bold text-xl text-white mb-3">SOC E-DEFENCE — Surveillance 24/7</h3>
-        <p class="text-sm text-ed-muted leading-relaxed mb-5">Centre des Opérations de Sécurité opéré par nos experts — détection, analyse et réponse aux incidents en temps réel avec Wazuh SIEM.</p>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00c896" data-i18n="services.soc_badge">SOC E-DEFENCE</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="services.soc_title">SOC E-DEFENCE — Surveillance 24/7</h3>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5" data-i18n="services.soc_desc">Centre des Opérations de Sécurité opéré par nos experts — détection, analyse et réponse aux incidents en temps réel avec Wazuh SIEM.</p>
         <ul class="space-y-2 mb-6">
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Surveillance active 24h/24, 7j/7</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>SIEM Wazuh avec agents déployés</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Détection comportementale (EDR)</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Rapport mensuel d'incidents</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Réponse aux incidents incluse</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div>Tableau de bord client dédié</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div><span data-i18n="services.soc_f1">Surveillance active 24h/24, 7j/7</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div><span data-i18n="services.soc_f2">SIEM Wazuh avec agents déployés</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div><span data-i18n="services.soc_f3">Détection comportementale (EDR)</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div><span data-i18n="services.soc_f4">Rapport mensuel d'incidents</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div><span data-i18n="services.soc_f5">Réponse aux incidents incluse</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:9px">✓</div><span data-i18n="services.soc_f6">Tableau de bord client dédié</span></li>
         </ul>
         <div class="flex items-center justify-between mb-4">
-          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#00c896">200 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+          <div><div class="text-xs text-ed-muted" data-i18n="services.from">À partir de</div><div class="text-xl font-bold font-display" style="color:#00c896">200 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
         </div>
-        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold" style="background:linear-gradient(135deg,#00c896,#00d4ff);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s">Demander un devis</button>
+        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold" style="background:linear-gradient(135deg,#00c896,#00d4ff);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s" data-i18n="services.quote_btn">Demander un devis</button>
       </div>
 
       <!-- CARTE 3 — SAUVEGARDE -->
@@ -925,21 +925,21 @@ tailwind.config = {
         <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.25)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         </div>
-        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#ffa500">Sauvegarde Cloud</div>
-        <h3 class="font-display font-bold text-xl text-white mb-3">Sauvegarde & Continuité</h3>
-        <p class="text-sm text-ed-muted leading-relaxed mb-5">Protection de vos données critiques — sauvegarde automatisée cloud et NAS local, chiffrement AES-256, restauration garantie sous 4h.</p>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#ffa500" data-i18n="services.sav_badge">Sauvegarde Cloud</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="services.sav_title">Sauvegarde & Continuité</h3>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5" data-i18n="services.sav_desc">Protection de vos données critiques — sauvegarde automatisée cloud et NAS local, chiffrement AES-256, restauration garantie sous 4h.</p>
         <ul class="space-y-2 mb-6">
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Sauvegarde automatique quotidienne</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Chiffrement AES-256 at-rest</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Rétention 90 jours</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Restauration testée mensuellement</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Conformité CIL Burkina Faso</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div>Dashboard de monitoring inclus</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div><span data-i18n="services.sav_f1">Sauvegarde automatique quotidienne</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div><span data-i18n="services.sav_f2">Chiffrement AES-256 at-rest</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div><span data-i18n="services.sav_f3">Rétention 90 jours</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div><span data-i18n="services.sav_f4">Restauration testée mensuellement</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div><span data-i18n="services.sav_f5">Conformité CIL Burkina Faso</span></li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(255,165,0,.15);color:#ffa500;font-size:9px">✓</div><span data-i18n="services.sav_f6">Dashboard de monitoring inclus</span></li>
         </ul>
         <div class="flex items-center justify-between mb-4">
-          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#ffa500">75 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+          <div><div class="text-xs text-ed-muted" data-i18n="services.from">À partir de</div><div class="text-xl font-bold font-display" style="color:#ffa500">75 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
         </div>
-        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg" style="background:linear-gradient(135deg,#ffa500,#ff8c00);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s">Demander un devis</button>
+        <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg" style="background:linear-gradient(135deg,#ffa500,#ff8c00);color:#07111f;font-weight:700;border:none;cursor:pointer;transition:opacity .2s" data-i18n="services.quote_btn">Demander un devis</button>
       </div>
 
     </div>
@@ -950,49 +950,49 @@ tailwind.config = {
 <section id="parcours" class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-12">
-      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">PARCOURS GUIDÉS</div>
-      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">De la découverte à l'expertise</h2>
-      <p class="text-ed-muted text-sm max-w-lg mx-auto">Trois niveaux d'accompagnement pour sécuriser votre organisation progressivement.</p>
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff" data-i18n="parcours.badge">PARCOURS GUIDÉS</div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3" data-i18n="parcours.title">De la découverte à l'expertise</h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto" data-i18n="parcours.subtitle">Trois niveaux d'accompagnement pour sécuriser votre organisation progressivement.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
       <div class="card-border rounded-2xl p-6" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.25)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
-        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2">Découverte</div>
-        <h3 class="font-display font-bold text-xl text-white mb-3">Audit initial</h3>
-        <p class="text-sm text-ed-muted mb-4 leading-relaxed">Cartographiez votre parc, obtenez votre score et identifiez vos vulnérabilités prioritaires.</p>
+        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2" data-i18n="parcours.p1_level">Découverte</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="parcours.p1_title">Audit initial</h3>
+        <p class="text-sm text-ed-muted mb-4 leading-relaxed" data-i18n="parcours.p1_desc">Cartographiez votre parc, obtenez votre score et identifiez vos vulnérabilités prioritaires.</p>
         <div class="space-y-2 text-xs text-ed-muted">
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Inventaire automatique</div>
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Score de sécurité initial</div>
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Rapport de vulnérabilités</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p1_f1">Inventaire automatique</span></div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p1_f2">Score de sécurité initial</span></div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p1_f3">Rapport de vulnérabilités</span></div>
         </div>
       </div>
       <div class="rounded-2xl p-6" style="background:rgba(255,255,255,.02);border:2px solid rgba(0,212,255,.35)">
-        <div class="text-xs font-semibold px-2 py-0.5 rounded inline-block mb-3" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff">Le plus choisi</div>
+        <div class="text-xs font-semibold px-2 py-0.5 rounded inline-block mb-3" style="background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff" data-i18n="parcours.p2_badge">Le plus choisi</div>
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2">Protection</div>
-        <h3 class="font-display font-bold text-xl text-white mb-3">Sécurisation active</h3>
-        <p class="text-sm text-ed-muted mb-4 leading-relaxed">Corrigez vos failles, formez vos équipes et atteignez la conformité réglementaire.</p>
+        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2" data-i18n="parcours.p2_level">Protection</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="parcours.p2_title">Sécurisation active</h3>
+        <p class="text-sm text-ed-muted mb-4 leading-relaxed" data-i18n="parcours.p2_desc">Corrigez vos failles, formez vos équipes et atteignez la conformité réglementaire.</p>
         <div class="space-y-2 text-xs text-ed-muted">
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Plan de remédiation guidé</div>
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Formations sensibilisation</div>
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Suivi RGPD / NIS2 / ISO 27001</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p2_f1">Plan de remédiation guidé</span></div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p2_f2">Formations sensibilisation</span></div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p2_f3">Suivi RGPD / NIS2 / ISO 27001</span></div>
         </div>
       </div>
       <div class="card-border rounded-2xl p-6" style="background:rgba(255,255,255,.02)">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.25)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2">Maîtrise</div>
-        <h3 class="font-display font-bold text-xl text-white mb-3">Cyber-résilience</h3>
-        <p class="text-sm text-ed-muted mb-4 leading-relaxed">Anticipez les menaces, répondez aux incidents et maintenez un niveau d'excellence durable.</p>
+        <div class="text-xs text-ed-muted uppercase tracking-widest mb-2" data-i18n="parcours.p3_level">Maîtrise</div>
+        <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="parcours.p3_title">Cyber-résilience</h3>
+        <p class="text-sm text-ed-muted mb-4 leading-relaxed" data-i18n="parcours.p3_desc">Anticipez les menaces, répondez aux incidents et maintenez un niveau d'excellence durable.</p>
         <div class="space-y-2 text-xs text-ed-muted">
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Simulation d'attaques</div>
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Red team & pentest guidé</div>
-          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div>Certification E DEFENCE</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p3_f1">Simulation d'attaques</span></div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p3_f2">Red team & pentest guidé</span></div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:10px">✓</div><span data-i18n="parcours.p3_f3">Certification E DEFENCE</span></div>
         </div>
       </div>
     </div>
@@ -1004,40 +1004,40 @@ tailwind.config = {
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div>
-        <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-5" style="background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.25);color:#ffa500">CERTIFICATIONS</div>
-        <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-4">Des accréditations reconnues <span class="g-text-warm">à l'international</span></h2>
-        <p class="text-ed-muted text-base mb-6 leading-relaxed">Obtenez des certifications E DEFENCE et des badges numériques validés, partageables sur LinkedIn et vérifiables par vos recruteurs.</p>
+        <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-5" style="background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.25);color:#ffa500" data-i18n="certif.badge">CERTIFICATIONS</div>
+        <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-4"><span data-i18n="certif.title_1">Des accréditations reconnues</span> <span class="g-text-warm" data-i18n="certif.title_2">à l'international</span></h2>
+        <p class="text-ed-muted text-base mb-6 leading-relaxed" data-i18n="certif.desc">Obtenez des certifications E DEFENCE et des badges numériques validés, partageables sur LinkedIn et vérifiables par vos recruteurs.</p>
         <ul class="space-y-3 mb-8">
-          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Badges numériques vérifiables</li>
-          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Partageables LinkedIn, CV, e-mail</li>
-          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Préparation CCST, CyberOps Cisco</li>
-          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div>Reconnus dans 190 pays</li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div><span data-i18n="certif.f1">Badges numériques vérifiables</span></li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div><span data-i18n="certif.f2">Partageables LinkedIn, CV, e-mail</span></li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div><span data-i18n="certif.f3">Préparation CCST, CyberOps Cisco</span></li>
+          <li class="flex items-center gap-3 text-sm text-ed-muted"><div class="w-5 h-5 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,200,150,.15);color:#00c896;font-size:11px">✓</div><span data-i18n="certif.f4">Reconnus dans 190 pays</span></li>
         </ul>
         <button onclick="openModal('signup')" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-ed-bg btn-primary">
-          Obtenir ma certification
+          <span data-i18n="certif.cta">Obtenir ma certification</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(0,212,255,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div class="text-sm font-semibold text-white mb-1">Introduction Cybersécurité</div>
-          <div class="text-xs text-ed-muted">Badge E DEFENCE officiel</div>
+          <div class="text-sm font-semibold text-white mb-1" data-i18n="certif.c1_title">Introduction Cybersécurité</div>
+          <div class="text-xs text-ed-muted" data-i18n="certif.c1_sub">Badge E DEFENCE officiel</div>
         </div>
         <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(0,200,150,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-          <div class="text-sm font-semibold text-white mb-1">Conformité RGPD</div>
-          <div class="text-xs text-ed-muted">Accréditation entreprise</div>
+          <div class="text-sm font-semibold text-white mb-1" data-i18n="certif.c2_title">Conformité RGPD</div>
+          <div class="text-xs text-ed-muted" data-i18n="certif.c2_sub">Accréditation entreprise</div>
         </div>
         <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(255,165,0,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffa500" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
-          <div class="text-sm font-semibold text-white mb-1">Audit Réseau</div>
-          <div class="text-xs text-ed-muted">Certification technique</div>
+          <div class="text-sm font-semibold text-white mb-1" data-i18n="certif.c3_title">Audit Réseau</div>
+          <div class="text-xs text-ed-muted" data-i18n="certif.c3_sub">Certification technique</div>
         </div>
         <div class="card-border rounded-2xl p-5" style="background:rgba(255,255,255,.02)">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:rgba(255,59,92,.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
-          <div class="text-sm font-semibold text-white mb-1">Ethical Hacker</div>
-          <div class="text-xs text-ed-muted">Niveau avancé</div>
+          <div class="text-sm font-semibold text-white mb-1" data-i18n="certif.c4_title">Ethical Hacker</div>
+          <div class="text-xs text-ed-muted" data-i18n="certif.c4_sub">Niveau avancé</div>
         </div>
       </div>
     </div>
@@ -1048,9 +1048,9 @@ tailwind.config = {
 <section id="plateformes" class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-12">
-      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">NOS PLATEFORMES</div>
-      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">L'écosystème <span class="g-text">E-DEFENCE</span></h2>
-      <p class="text-ed-muted text-sm max-w-lg mx-auto">Deux plateformes complémentaires pour auditer votre sécurité et certifier vos équipes.</p>
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff" data-i18n="plateformes.badge">NOS PLATEFORMES</div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3"><span data-i18n="plateformes.title_1">L'écosystème</span> <span class="g-text">E-DEFENCE</span></h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto" data-i18n="plateformes.subtitle">Deux plateformes complémentaires pour auditer votre sécurité et certifier vos équipes.</p>
     </div>
     <div class="grid md:grid-cols-2 gap-8">
 
@@ -1062,11 +1062,11 @@ tailwind.config = {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
           </div>
           <div>
-            <div class="text-xs text-ed-muted uppercase tracking-widest mb-0.5">Plateforme SaaS</div>
-            <div class="font-display font-bold text-xl text-white">E-AUDIT 360</div>
+            <div class="text-xs text-ed-muted uppercase tracking-widest mb-0.5" data-i18n="plateformes.audit_type">Plateforme SaaS</div>
+            <div class="font-display font-bold text-xl text-white" data-i18n="plateformes.audit_title">E-AUDIT 360</div>
           </div>
         </div>
-        <p class="text-ed-muted text-sm leading-relaxed mb-6">Plateforme unifiée d'Audit &amp; Conformité 360° UEMOA — Audit IT 10 modules, Audit Web, Hub Conformité 12 référentiels, 14 services additionnels. Générez des rapports PDF professionnels en quelques minutes.</p>
+        <p class="text-ed-muted text-sm leading-relaxed mb-6" data-i18n="plateformes.audit_desc">Plateforme unifiée d'Audit &amp; Conformité 360° UEMOA — Audit IT 10 modules, Audit Web, Hub Conformité 12 référentiels, 14 services additionnels. Générez des rapports PDF professionnels en quelques minutes.</p>
         <div class="grid grid-cols-2 gap-3 mb-6">
           <div class="rounded-lg p-3" style="background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15)">
             <div class="text-lg font-bold text-white font-display">10</div>
@@ -1104,11 +1104,11 @@ tailwind.config = {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c896" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           </div>
           <div>
-            <div class="text-xs text-ed-muted uppercase tracking-widest mb-0.5">Plateforme Certifiante</div>
-            <div class="font-display font-bold text-xl text-white">Cyber Academy</div>
+            <div class="text-xs text-ed-muted uppercase tracking-widest mb-0.5" data-i18n="plateformes.academy_type">Plateforme Certifiante</div>
+            <div class="font-display font-bold text-xl text-white" data-i18n="plateformes.academy_title">Cyber Academy</div>
           </div>
         </div>
-        <p class="text-ed-muted text-sm leading-relaxed mb-6">Plateforme phygitale d'immersion pratique en cybersécurité UEMOA — 10 certifications, Cyber Range k3s, IA TARGUI, badges blockchain Polygon. Mobile Money CinetPay accepté.</p>
+        <p class="text-ed-muted text-sm leading-relaxed mb-6" data-i18n="plateformes.academy_desc">Plateforme phygitale d'immersion pratique en cybersécurité UEMOA — 10 certifications, Cyber Range k3s, IA TARGUI, badges blockchain Polygon. Mobile Money CinetPay accepté.</p>
         <div class="grid grid-cols-2 gap-3 mb-6">
           <div class="rounded-lg p-3" style="background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15)">
             <div class="text-lg font-bold text-white font-display">10</div>
@@ -1146,9 +1146,9 @@ tailwind.config = {
 <section id="actualites" class="py-20" style="background:rgba(0,212,255,.02);border-top:1px solid rgba(0,212,255,.06)">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-10">
-      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">ACTUALITÉS</div>
-      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">Cyber-veille <span class="g-text">IA</span></h2>
-      <p class="text-ed-muted text-sm max-w-lg mx-auto">Informations fraîches filtrées et synthétisées par IA — restez informé des menaces et tendances en cybersécurité.</p>
+      <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-4" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff" data-i18n="news.badge">ACTUALITÉS</div>
+      <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3"><span data-i18n="news.title_1">Cyber-veille</span> <span class="g-text" data-i18n="news.title_2">IA</span></h2>
+      <p class="text-ed-muted text-sm max-w-lg mx-auto" data-i18n="news.subtitle">Informations fraîches filtrées et synthétisées par IA — restez informé des menaces et tendances en cybersécurité.</p>
     </div>
     <div id="actualites-grid" class="grid md:grid-cols-3 gap-5 mb-8">
       <!-- Skeleton loading -->
@@ -1173,7 +1173,7 @@ tailwind.config = {
     </div>
     <div class="text-center">
       <a href="/actualites" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm btn-ghost">
-        Voir toutes les actualités
+        <span data-i18n="news.view_all">Voir toutes les actualités</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -1183,20 +1183,20 @@ tailwind.config = {
 <!-- ═══════════════════════════════════════ CONTACT ═══ -->
 <section id="contact" class="py-20">
   <div class="max-w-xl mx-auto px-4 sm:px-6 text-center">
-    <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-5" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff">CONTACT</div>
-    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3">Parlons de votre sécurité</h2>
-    <p class="text-ed-muted mb-8 text-sm">Notre équipe d'experts vous répond sous 24 heures ouvrées.</p>
+    <div class="inline-block text-xs font-semibold tracking-widest px-3 py-1.5 rounded-full mb-5" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:#00d4ff" data-i18n="contact.badge">CONTACT</div>
+    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white mb-3" data-i18n="contact.title">Parlons de votre sécurité</h2>
+    <p class="text-ed-muted mb-8 text-sm" data-i18n="contact.subtitle">Notre équipe d'experts vous répond sous 24 heures ouvrées.</p>
     <form onsubmit="handleContact(event)" class="space-y-4 text-left">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Prénom</label><input type="text" placeholder="Votre prénom" class="ed-input text-sm" required/></div>
-        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Nom</label><input type="text" placeholder="Votre nom" class="ed-input text-sm" required/></div>
+        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="contact.first_name">Prénom</label><input type="text" data-i18n-placeholder="contact.fp" placeholder="Votre prénom" class="ed-input text-sm" required/></div>
+        <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="contact.last_name">Nom</label><input type="text" data-i18n-placeholder="contact.lp" placeholder="Votre nom" class="ed-input text-sm" required/></div>
       </div>
-      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Email professionnel</label><input type="email" placeholder="contact@entreprise.com" class="ed-input text-sm" required/></div>
-      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Organisation</label><input type="text" placeholder="Nom de votre entreprise" class="ed-input text-sm" required/></div>
-      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Message</label><textarea rows="4" placeholder="Décrivez votre besoin..." class="ed-input text-sm resize-none" required></textarea></div>
-      <button type="submit" class="w-full py-3.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Envoyer le message</button>
+      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="contact.email">Email professionnel</label><input type="email" data-i18n-placeholder="contact.ep" placeholder="contact@entreprise.com" class="ed-input text-sm" required/></div>
+      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="contact.org">Organisation</label><input type="text" data-i18n-placeholder="contact.op" placeholder="Nom de votre entreprise" class="ed-input text-sm" required/></div>
+      <div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5" data-i18n="contact.message">Message</label><textarea rows="4" data-i18n-placeholder="contact.mp" placeholder="Décrivez votre besoin..." class="ed-input text-sm resize-none" required></textarea></div>
+      <button type="submit" class="w-full py-3.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary" data-i18n="contact.submit">Envoyer le message</button>
     </form>
-    <div id="contact-ok" class="hidden mt-4 p-4 rounded-xl text-sm" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.3);color:#00c896">Message envoyé. Nous vous répondrons sous 24 heures.</div>
+    <div id="contact-ok" class="hidden mt-4 p-4 rounded-xl text-sm" style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.3);color:#00c896" data-i18n="contact.success">Message envoyé. Nous vous répondrons sous 24 heures.</div>
   </div>
 </section>
 
