@@ -19,16 +19,14 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 _db_url = settings.DATABASE_URL
-_sync_url = _db_url.replace('postgresql+asyncpg://', 'postgresql://').replace(
-    'sqlite+aiosqlite://', 'sqlite://'
-)
-# Escape % for configparser interpolation
-config.set_main_option('sqlalchemy.url', _sync_url.replace('%', '%%'))
+# Keep asyncpg driver for async engine; escape % for configparser
+_async_url = _db_url if 'asyncpg' in _db_url else _db_url.replace('postgresql://', 'postgresql+asyncpg://')
+config.set_main_option('sqlalchemy.url', _async_url.replace('%', '%%'))
 
 
 def run_migrations_offline() -> None:
     context.configure(
-        url=_sync_url,
+        url=_async_url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={'paramstyle': 'named'},
@@ -50,7 +48,7 @@ def do_run_migrations(connection: Connection) -> None:
 
 async def run_async_migrations() -> None:
     configuration = config.get_section(config.config_ini_section, {})
-    configuration['sqlalchemy.url'] = _sync_url
+    configuration['sqlalchemy.url'] = _async_url
 
     connectable = async_engine_from_config(
         configuration,
