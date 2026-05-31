@@ -23,8 +23,6 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span>Espace Client</span>
         </button>
-        <button onclick="openModal('login')" class="hidden lg:block text-sm text-ed-muted hover:text-white transition-colors px-3 py-1.5" data-i18n="auth.login">Connexion</button>
-        <button onclick="openModal('signup')" class="hidden lg:flex text-sm font-semibold px-4 py-2 rounded-lg text-ed-bg btn-primary" data-i18n="auth.signup">Accès gratuit</button>
         <button id="theme-toggle" aria-label="Changer le thème" class="p-2 text-ed-muted hover:text-white" title="Changer la couleur">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         </button>
@@ -43,8 +41,10 @@
         <a href="#actualites" onclick="toggleMobileNav()" class="text-sm text-ed-muted" data-i18n="nav.news">Actualités</a>
         <a href="#contact" onclick="toggleMobileNav()" class="text-sm text-ed-muted" data-i18n="nav.contact">Contact</a>
         <div class="flex gap-3 pt-1">
-          <button onclick="openModal('login')" class="flex-1 py-2 text-sm btn-ghost rounded-lg" data-i18n="auth.login">Connexion</button>
-          <button onclick="openModal('signup')" class="flex-1 py-2 text-sm font-semibold rounded-lg btn-primary text-ed-bg" data-i18n="auth.register">S'inscrire</button>
+          <button onclick="openClientSpace(); toggleMobileNav();" class="flex-1 py-2 text-sm font-semibold rounded-lg text-ed-blue" style="border:1px solid rgba(0,212,255,.4);background:rgba(0,212,255,.06)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:4px;vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Espace Client
+          </button>
         </div>
       </div>
     </div>

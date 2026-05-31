@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import json
+import random
 import re
 import socket
 import ssl
+import string
 import uuid
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -15,22 +17,46 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_client_user
 from app.core.database import get_db
 from app.core.security import create_access_token, hash_password, verify_password
-from app.models.client import Client
-from app.models.contract import Contract
-from app.models.invoice import Invoice
+from app.models.client import Client, ClientStatus
+from app.models.contract import BillingPeriod, Contract, ContractStatus, ServiceType
+from app.models.invoice import Invoice, InvoiceStatus
 from app.models.service_request import ServiceRequest
 from app.schemas.client_portal import (
     AuditCheckResult,
     AuditRequest,
     AuditResponse,
     ClientLoginRequest,
+    ClientRegisterRequest,
     ClientSetPasswordRequest,
     ClientTokenResponse,
+    PayInvoiceRequest,
     ServiceRequestCreate,
     ServiceRequestResponse,
+    SubscribeRequest,
 )
 
 router = APIRouter(prefix="/client", tags=["client-portal"])
+
+# ── Service catalog ─────────────────────────────────────────────────────────
+
+CATALOG = [
+    {"id": "boitier", "name": "Boîtier EDR", "description": "Protection endpoint avancée — détection et réponse aux menaces en temps réel", "price_fcfa": 15000, "billing": "mensuel", "icon": "shield"},
+    {"id": "soc", "name": "SOC Managé", "description": "Surveillance 24/7 par nos experts certifiés — alertes et réponse incidents", "price_fcfa": 200000, "billing": "mensuel", "icon": "eye"},
+    {"id": "sauvegarde", "name": "Sauvegarde Cloud", "description": "Continuité métier garantie — RPO 1h, RTO 4h, chiffrement AES-256", "price_fcfa": 50000, "billing": "mensuel", "icon": "database"},
+    {"id": "audit360", "name": "Audit 360°", "description": "Diagnostic sécurité complet — rapport PDF + recommandations prioritisées", "price_fcfa": 500000, "billing": "unique", "icon": "search"},
+    {"id": "cyberacademy", "name": "Cyber Academy", "description": "Formation certifiante pour votre équipe — 10 modules, certif reconnue UEMOA", "price_fcfa": 100000, "billing": "mensuel", "icon": "book"},
+]
+
+CATALOG_MAP = {item["id"]: item for item in CATALOG}
+
+
+# ── Catalog (public) ─────────────────────────────────────────────────────────
+
+catalog_router = APIRouter(tags=["catalog"])
+
+@catalog_router.get("/catalog")
+async def get_catalog() -> list[dict]:
+    return CATALOG
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
@@ -52,6 +78,146 @@ async def client_login(
         client_id=str(client.id),
         company_name=client.company_name,
     )
+
+
+@router.post("/register", response_model=ClientTokenResponse, status_code=201)
+async def client_register(
+    payload: ClientRegisterRequest,
+    db: AsyncSession = Depends(get_db),
+) -> ClientTokenResponse:
+    # Check duplicate email
+    existing = await db.execute(select(Client).where(Client.email == payload.email))
+    if existing.scalar_one_or_none():
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Un compte avec cet email existe déjà")
+
+    client = Client(
+        company_name=payload.company_name,
+        contact_name=payload.contact_name,
+        email=payload.email,
+        phone=payload.phone,
+        sector=payload.sector,
+        city=payload.city,
+        country=payload.country,
+        status=ClientStatus.ACTIF,
+        is_portal_active=True,
+        password_hash=hash_password(payload.password),
+        portal_activated_at=datetime.now(timezone.utc),
+    )
+    db.add(client)
+    await db.commit()
+    await db.refresh(client)
+
+    token = create_access_token({"sub": str(client.id), "role": "client", "email": client.email})
+    return ClientTokenResponse(
+        access_token=token,
+        client_id=str(client.id),
+        company_name=client.company_name,
+    )
+
+
+# ── Subscribe ─────────────────────────────────────────────────────────────────
+
+@router.post("/subscribe", status_code=201)
+async def client_subscribe(
+    payload: SubscribeRequest,
+    current: dict = Depends(get_client_user),
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    cid = uuid.UUID(current["sub"])
+
+    # Validate service type
+    if payload.service_type not in CATALOG_MAP:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Service inconnu")
+
+    svc = CATALOG_MAP[payload.service_type]
+
+    # Check for existing active contract for this service
+    existing = await db.execute(
+        select(Contract).where(
+            Contract.client_id == cid,
+            Contract.service_type == ServiceType(payload.service_type),
+            Contract.status == ContractStatus.ACTIF,
+        )
+    )
+    if existing.scalar_one_or_none():
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Vous avez déjà un contrat actif pour ce service")
+
+    billing = BillingPeriod.UNIQUE if svc["billing"] == "unique" else BillingPeriod.MENSUEL
+    today = date.today()
+
+    contract = Contract(
+        client_id=cid,
+        service_type=ServiceType(payload.service_type),
+        status=ContractStatus.ACTIF,
+        start_date=today,
+        amount_fcfa=svc["price_fcfa"],
+        billing_period=billing,
+    )
+    db.add(contract)
+    await db.flush()  # get contract.id
+
+    # Generate unique invoice number
+    suffix = "".join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    invoice_number = f"FAC-{today.year}-{suffix}"
+
+    invoice = Invoice(
+        client_id=cid,
+        contract_id=contract.id,
+        invoice_number=invoice_number,
+        amount_fcfa=svc["price_fcfa"],
+        status=InvoiceStatus.EN_ATTENTE,
+        due_date=today + timedelta(days=30),
+    )
+    db.add(invoice)
+    await db.commit()
+    await db.refresh(invoice)
+
+    return {
+        "contract_id": str(contract.id),
+        "invoice_id": str(invoice.id),
+        "invoice_number": invoice.invoice_number,
+        "amount_fcfa": invoice.amount_fcfa,
+        "service_name": svc["name"],
+    }
+
+
+# ── Pay invoice ───────────────────────────────────────────────────────────────
+
+@router.post("/invoices/{invoice_id}/pay")
+async def pay_invoice(
+    invoice_id: uuid.UUID,
+    payload: PayInvoiceRequest,
+    current: dict = Depends(get_client_user),
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    cid = uuid.UUID(current["sub"])
+
+    result = await db.execute(select(Invoice).where(Invoice.id == invoice_id))
+    invoice = result.scalar_one_or_none()
+    if not invoice:
+        raise HTTPException(status_code=404, detail="Facture introuvable")
+    if invoice.client_id != cid:
+        raise HTTPException(status_code=403, detail="Accès refusé")
+    if invoice.status != InvoiceStatus.EN_ATTENTE:
+        raise HTTPException(status_code=409, detail="Cette facture n'est pas en attente de paiement")
+
+    invoice.status = InvoiceStatus.PAYE
+    invoice.paid_at = datetime.now(timezone.utc)
+    invoice.payment_method = payload.payment_method
+    invoice.payment_ref = payload.payment_ref or "".join(random.choices(string.ascii_uppercase + string.digits, k=12))
+
+    await db.commit()
+    await db.refresh(invoice)
+
+    return {
+        "id": str(invoice.id),
+        "invoice_number": invoice.invoice_number,
+        "amount_fcfa": invoice.amount_fcfa,
+        "status": invoice.status.value,
+        "paid_at": invoice.paid_at.isoformat(),
+        "payment_method": invoice.payment_method,
+        "payment_ref": invoice.payment_ref,
+    }
 
 
 # ── Profil ────────────────────────────────────────────────────────────────────

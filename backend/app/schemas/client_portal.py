@@ -13,6 +13,26 @@ class ClientLoginRequest(BaseModel):
     password: str
 
 
+class ClientRegisterRequest(BaseModel):
+    company_name: str
+    contact_name: str
+    email: EmailStr
+    password: str
+    phone: Optional[str] = None
+    sector: Optional[str] = None
+    city: Optional[str] = None
+    country: str = "Burkina Faso"
+
+
+class SubscribeRequest(BaseModel):
+    service_type: str  # use ServiceType enum values
+
+
+class PayInvoiceRequest(BaseModel):
+    payment_method: str
+    payment_ref: Optional[str] = None
+
+
 class ClientTokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

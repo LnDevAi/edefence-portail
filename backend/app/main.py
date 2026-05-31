@@ -23,6 +23,7 @@ app.include_router(contracts.router, prefix="/api/v1")
 app.include_router(invoices.router, prefix="/api/v1")
 app.include_router(stats.router, prefix="/api/v1")
 app.include_router(client_portal.router, prefix="/api/v1")
+app.include_router(client_portal.catalog_router, prefix="/api/v1")
 
 
 @app.on_event("startup")
