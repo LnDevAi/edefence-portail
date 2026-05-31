@@ -47,12 +47,11 @@
         'width:100%',
         'height:100%',
         'z-index:9999',
-        'background:rgba(0,0,0,0.75)',
+        'background:rgba(4,12,28,0.92)',
         'display:none',
         'align-items:center',
         'justify-content:center',
-        'backdrop-filter:blur(4px)',
-        '-webkit-backdrop-filter:blur(4px)',
+        'overflow-y:auto',
       ].join(';');
       bd.addEventListener('click', function (e) {
         if (e.target === bd) window.closeClientModal();
@@ -96,7 +95,7 @@
       + content
       + '</div>';
 
-    // Attach tab switcher after render
+    // Attach tab switcher + focus first input after render
     setTimeout(function () {
       var tabBtns = bd.querySelectorAll('[data-cp-tab]');
       tabBtns.forEach(function (btn) {
@@ -104,7 +103,9 @@
           cpSwitchTab(btn.dataset.cpTab);
         });
       });
-    }, 0);
+      var firstInput = bd.querySelector('input, select, textarea');
+      if (firstInput) firstInput.focus();
+    }, 80);
   }
 
   window.closeClientModal = function () {
