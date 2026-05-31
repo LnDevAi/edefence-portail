@@ -571,18 +571,24 @@ tailwind.config = {
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 7h3M7 11h3M14 7h3M14 11h3"/></svg>
         </div>
         <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#00d4ff">Boîtier E-DEFENCE</div>
-        <h3 class="font-display font-bold text-xl text-white mb-3">Boîtier de Sécurité E-DEFENCE</h3>
-        <p class="text-sm text-ed-muted leading-relaxed mb-5">Boîtier durci OPNsense (Protectli) pré-configuré pour votre réseau — pare-feu nouvelle génération, détection d'intrusion, VPN, filtrage DNS.</p>
+        <div class="flex items-center gap-2 mb-2">
+          <h3 class="font-display font-bold text-xl text-white">Boîtier de Sécurité E-DEFENCE</h3>
+        </div>
+        <div class="flex gap-2 mb-3">
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:#00d4ff">Ménages</span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);color:#00c896">PME</span>
+        </div>
+        <p class="text-sm text-ed-muted leading-relaxed mb-5">Boîtier durci pré-configuré pour votre domicile ou votre entreprise — protégez votre réseau, votre WiFi et tous vos équipements connectés dès le premier jour.</p>
         <ul class="space-y-2 mb-6">
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Firewall OPNsense dernière génération</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>IDS/IPS Suricata intégré</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>VPN WireGuard pour télétravail sécurisé</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Filtrage DNS anti-phishing</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Monitoring temps réel inclus</li>
-          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Installation & configuration sur site</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Firewall OPNsense nouvelle génération</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Protection WiFi — détection Evil Twin & intrus</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>IDS/IPS Suricata — blocage des menaces en temps réel</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Filtrage DNS anti-phishing & contrôle parental</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Suivi de votre protection via la plateforme & l'application</li>
+          <li class="flex items-center gap-2 text-xs text-ed-muted"><div class="w-4 h-4 rounded flex items-center justify-center flex-shrink-0" style="background:rgba(0,212,255,.15);color:#00d4ff;font-size:9px">✓</div>Installation & configuration sur site incluses</li>
         </ul>
         <div class="flex items-center justify-between mb-4">
-          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#00d4ff">150 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
+          <div><div class="text-xs text-ed-muted">À partir de</div><div class="text-xl font-bold font-display" style="color:#00d4ff">15 000 F CFA<span class="text-xs font-normal text-ed-muted">/mois</span></div></div>
         </div>
         <button onclick="openModal('signup')" class="w-full py-2.5 rounded-xl text-sm font-semibold text-ed-bg btn-primary">Demander un devis</button>
       </div>
