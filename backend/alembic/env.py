@@ -8,7 +8,6 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-# Import all models so Alembic can detect them
 from app.models import Base  # noqa: F401 — registers all tables
 from app.core.config import settings
 
@@ -19,22 +18,20 @@ if config.config_file_name is not None:
 
 target_metadata = Base.metadata
 
-# Build a synchronous URL from the async DATABASE_URL
 _db_url = settings.DATABASE_URL
-_sync_url = _db_url.replace("postgresql+asyncpg://", "postgresql://").replace(
-    "sqlite+aiosqlite://", "sqlite://"
+_sync_url = _db_url.replace('postgresql+asyncpg://', 'postgresql://').replace(
+    'sqlite+aiosqlite://', 'sqlite://'
 )
-config.set_main_option("sqlalchemy.url", _sync_url)
+# Escape % for configparser interpolation
+config.set_main_option('sqlalchemy.url', _sync_url.replace('%', '%%'))
 
 
 def run_migrations_offline() -> None:
-    """Run migrations in 'offline' mode."""
-    url = config.get_main_option("sqlalchemy.url")
     context.configure(
-        url=url,
+        url=_sync_url,
         target_metadata=target_metadata,
         literal_binds=True,
-        dialect_opts={"paramstyle": "named"},
+        dialect_opts={'paramstyle': 'named'},
         compare_type=True,
     )
     with context.begin_transaction():
@@ -52,14 +49,12 @@ def do_run_migrations(connection: Connection) -> None:
 
 
 async def run_async_migrations() -> None:
-    """Run migrations using an async engine."""
-    sync_url = config.get_main_option("sqlalchemy.url")
     configuration = config.get_section(config.config_ini_section, {})
-    configuration["sqlalchemy.url"] = sync_url
+    configuration['sqlalchemy.url'] = _sync_url
 
     connectable = async_engine_from_config(
         configuration,
-        prefix="sqlalchemy.",
+        prefix='sqlalchemy.',
         poolclass=pool.NullPool,
     )
 
@@ -70,7 +65,6 @@ async def run_async_migrations() -> None:
 
 
 def run_migrations_online() -> None:
-    """Run migrations in 'online' mode."""
     asyncio.run(run_async_migrations())
 
 

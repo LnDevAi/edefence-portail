@@ -47,18 +47,18 @@ class Contract(Base):
         index=True,
     )
     service_type: Mapped[ServiceType] = mapped_column(
-        Enum(ServiceType, schema="portail"), nullable=False
+        Enum(ServiceType, schema="portail", values_callable=lambda obj: [e.value for e in obj]), nullable=False
     )
     start_date: Mapped[date] = mapped_column(Date, nullable=False)
     end_date: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
     amount_fcfa: Mapped[int] = mapped_column(Integer, nullable=False)
     billing_period: Mapped[BillingPeriod] = mapped_column(
-        Enum(BillingPeriod, schema="portail"),
+        Enum(BillingPeriod, schema="portail", values_callable=lambda obj: [e.value for e in obj]),
         default=BillingPeriod.MENSUEL,
         nullable=False,
     )
     status: Mapped[ContractStatus] = mapped_column(
-        Enum(ContractStatus, schema="portail"),
+        Enum(ContractStatus, schema="portail", values_callable=lambda obj: [e.value for e in obj]),
         default=ContractStatus.ACTIF,
         nullable=False,
         index=True,

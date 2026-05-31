@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>E-DEFENCE — Administration</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/js/tailwind.js?v=3417"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <script>
@@ -21,7 +21,7 @@ tailwind.config = {
   }
 }
 </script>
-<link rel="stylesheet" href="assets/css/styles.css"/>
+<link rel="stylesheet" href="assets/css/styles.css?v=20260531"/>
 <style>
   body{font-family:'Inter',sans-serif;background:#07111f;color:#e8f4ff}
   ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#07111f}::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:3px}
@@ -545,7 +545,8 @@ async function loadDashboard() {
     const res2 = await apiFetch('/api/v1/clients?limit=5');
     const tbody = document.getElementById('dashboard-recent-clients');
     if (res2.ok) {
-      const clients = await res2.json();
+      const data2 = await res2.json();
+      const clients = Array.isArray(data2) ? data2 : (data2.items || []);
       allClients = clients;
       renderClientsRows(tbody, clients.slice(0,5));
     } else {
@@ -566,7 +567,8 @@ async function loadClients() {
   try {
     const res = await apiFetch('/api/v1/clients');
     if (!res.ok) throw new Error('Erreur ' + res.status);
-    const clients = await res.json();
+    const data = await res.json();
+    const clients = Array.isArray(data) ? data : (data.items || []);
     allClients = clients;
     renderClientsRows(tbody, clients, true);
   } catch(e) {
@@ -621,7 +623,8 @@ async function loadContracts() {
   try {
     const res = await apiFetch('/api/v1/contracts');
     if (!res.ok) throw new Error('Erreur ' + res.status);
-    const contracts = await res.json();
+    const data = await res.json();
+    const contracts = Array.isArray(data) ? data : (data.items || []);
     renderContracts(tbody, contracts);
   } catch(e) {
     errEl.textContent = 'Impossible de charger les contrats : ' + (e.message || 'API indisponible');
@@ -635,8 +638,8 @@ function renderContracts(tbody, contracts) {
     tbody.innerHTML = '<tr><td colspan="7" class="text-center py-6 text-ed-muted text-xs">Aucun contrat trouvé</td></tr>';
     return;
   }
-  var svcBadge = { boitier:'badge-boitier', soc:'badge-soc', sauvegarde:'badge-sauvegarde', eaudit360:'badge-eaudit', cyber_academy:'badge-academy' };
-  var svcLabel = { boitier:'Boîtier', soc:'SOC', sauvegarde:'Sauvegarde', eaudit360:'E-AUDIT 360', cyber_academy:'Cyber Academy' };
+  var svcBadge = { boitier:'badge-boitier', soc:'badge-soc', sauvegarde:'badge-sauvegarde', audit360:'badge-eaudit', cyberacademy:'badge-academy' };
+  var svcLabel = { boitier:'Boîtier', soc:'SOC', sauvegarde:'Sauvegarde', audit360:'E-AUDIT 360', cyberacademy:'Cyber Academy' };
   var stMap    = { actif:'badge-ok', expire:'badge-crit', suspendu:'badge-warn', resilie:'badge-muted' };
   tbody.innerHTML = contracts.map(function(c) {
     var sb = svcBadge[c.service_type] || 'badge-info';
@@ -676,7 +679,8 @@ async function loadInvoices() {
   try {
     const res = await apiFetch('/api/v1/invoices');
     if (!res.ok) throw new Error('Erreur ' + res.status);
-    allInvoices = await res.json();
+    const data = await res.json();
+    allInvoices = Array.isArray(data) ? data : (data.items || []);
     renderInvoices(tbody, allInvoices, currentFilter);
   } catch(e) {
     errEl.textContent = 'Impossible de charger les factures : ' + (e.message || 'API indisponible');
@@ -774,7 +778,8 @@ async function loadArticles() {
   try {
     const res = await apiFetch('/api/v1/articles');
     if (!res.ok) throw new Error('Erreur ' + res.status);
-    const articles = await res.json();
+    const data = await res.json();
+    const articles = Array.isArray(data) ? data : (data.items || []);
     renderArticles(tbody, articles);
   } catch(e) {
     errEl.textContent = 'Impossible de charger les articles : ' + (e.message || 'API indisponible');
@@ -926,8 +931,8 @@ function buildContratForm(d) {
     + '<option value="boitier"' + (v.service_type==='boitier'?' selected':'') + '>Boîtier E-DEFENCE</option>'
     + '<option value="soc"' + (v.service_type==='soc'?' selected':'') + '>SOC 24/7</option>'
     + '<option value="sauvegarde"' + (v.service_type==='sauvegarde'?' selected':'') + '>Sauvegarde Cloud</option>'
-    + '<option value="eaudit360"' + (v.service_type==='eaudit360'?' selected':'') + '>E-AUDIT 360</option>'
-    + '<option value="cyber_academy"' + (v.service_type==='cyber_academy'?' selected':'') + '>Cyber Academy</option>'
+    + '<option value="audit360"' + (v.service_type==='audit360'?' selected':'') + '>E-AUDIT 360</option>'
+    + '<option value="cyberacademy"' + (v.service_type==='cyberacademy'?' selected':'') + '>Cyber Academy</option>'
     + '</select></div>'
     + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Montant (F CFA) *</label><input type="number" name="amount_fcfa" value="' + (v.amount_fcfa||'') + '" class="admin-input" required/></div>'
     + '</div>'
@@ -937,7 +942,7 @@ function buildContratForm(d) {
     + '</div>'
     + '<div class="grid grid-cols-2 gap-3">'
     + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Facturation</label>'
-    + '<select name="billing_period" class="admin-input"><option value="mensuel"' + (v.billing_period==='mensuel'?' selected':'') + '>Mensuel</option><option value="trimestriel"' + (v.billing_period==='trimestriel'?' selected':'') + '>Trimestriel</option><option value="annuel"' + (v.billing_period==='annuel'?' selected':'') + '>Annuel</option></select></div>'
+    + '<select name="billing_period" class="admin-input"><option value="mensuel"' + (v.billing_period==='mensuel'?' selected':'') + '>Mensuel</option><option value="annuel"' + (v.billing_period==='annuel'?' selected':'') + '>Annuel</option><option value="unique"' + (v.billing_period==='unique'?' selected':'') + '>Unique</option></select></div>'
     + '<div><label class="block text-xs text-ed-muted uppercase tracking-wide mb-1.5">Statut</label>'
     + '<select name="status" class="admin-input"><option value="actif"' + (v.status==='actif'?' selected':'') + '>Actif</option><option value="suspendu"' + (v.status==='suspendu'?' selected':'') + '>Suspendu</option><option value="expire"' + (v.status==='expire'?' selected':'') + '>Expiré</option><option value="resilie"' + (v.status==='resilie'?' selected':'') + '>Résilié</option></select></div>'
     + '</div>'

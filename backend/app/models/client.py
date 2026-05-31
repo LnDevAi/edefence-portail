@@ -34,7 +34,7 @@ class Client(Base):
     city: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     country: Mapped[str] = mapped_column(String(100), default="Burkina Faso", nullable=False)
     status: Mapped[ClientStatus] = mapped_column(
-        Enum(ClientStatus, schema="portail"),
+        Enum(ClientStatus, schema="portail", values_callable=lambda obj: [e.value for e in obj]),
         default=ClientStatus.PROSPECT,
         nullable=False,
         index=True,

@@ -41,7 +41,7 @@ class Invoice(Base):
     invoice_number: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
     amount_fcfa: Mapped[int] = mapped_column(Integer, nullable=False)
     status: Mapped[InvoiceStatus] = mapped_column(
-        Enum(InvoiceStatus, schema="portail"),
+        Enum(InvoiceStatus, schema="portail", values_callable=lambda obj: [e.value for e in obj]),
         default=InvoiceStatus.EN_ATTENTE,
         nullable=False,
         index=True,

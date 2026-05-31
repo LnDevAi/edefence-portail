@@ -183,9 +183,11 @@ window.loadActualites = async function() {
   ];
 
   try {
-    const res = await fetch('http://localhost:8000/api/v1/articles?published=true&limit=6');
-    const articles = res.ok ? await res.json() : fallback;
-    renderActualites(container, (articles && articles.length) ? articles : fallback);
+    const res = await fetch('/api/v1/articles?published=true&limit=6');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const articles = Array.isArray(data) ? data : (data.items || []);
+    renderActualites(container, articles.length ? articles : fallback);
   } catch {
     renderActualites(container, fallback);
   }
