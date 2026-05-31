@@ -19,6 +19,10 @@
         <a href="#contact" class="text-sm text-ed-muted hover:text-ed-blue transition-colors" data-i18n="nav.contact">Contact</a>
       </div>
       <div class="flex items-center gap-3">
+        <button id="client-space-btn" onclick="openClientSpace()" class="hidden lg:flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-lg border border-ed-blue/40 text-ed-blue hover:bg-ed-blue/10 transition-colors" data-i18n="auth.client_space">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Espace Client</span>
+        </button>
         <button onclick="openModal('login')" class="hidden lg:block text-sm text-ed-muted hover:text-white transition-colors px-3 py-1.5" data-i18n="auth.login">Connexion</button>
         <button onclick="openModal('signup')" class="hidden lg:flex text-sm font-semibold px-4 py-2 rounded-lg text-ed-bg btn-primary" data-i18n="auth.signup">Accès gratuit</button>
         <button id="theme-toggle" aria-label="Changer le thème" class="p-2 text-ed-muted hover:text-white" title="Changer la couleur">

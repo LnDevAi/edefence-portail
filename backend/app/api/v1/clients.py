@@ -10,8 +10,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_admin_user
 from app.core.database import get_db
+from app.core.security import hash_password
 from app.models.client import Client, ClientStatus
 from app.schemas.client import ClientCreate, ClientListResponse, ClientResponse, ClientUpdate
+from app.schemas.client_portal import ClientSetPasswordRequest
 
 router = APIRouter(prefix="/clients", tags=["clients"])
 
@@ -81,6 +83,26 @@ async def update_client(
 
     for field, value in payload.model_dump(exclude_none=True).items():
         setattr(client, field, value)
+    client.updated_at = datetime.now(timezone.utc)
+    await db.flush()
+    await db.refresh(client)
+    return ClientResponse.model_validate(client)
+
+
+@router.post("/{client_id}/set-password", response_model=ClientResponse)
+async def set_client_password(
+    client_id: uuid.UUID,
+    payload: ClientSetPasswordRequest,
+    db: AsyncSession = Depends(get_db),
+    _admin: dict = Depends(get_admin_user),
+) -> ClientResponse:
+    result = await db.execute(select(Client).where(Client.id == client_id))
+    client = result.scalar_one_or_none()
+    if client is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Client introuvable")
+    client.password_hash = hash_password(payload.password)
+    client.is_portal_active = True
+    client.portal_activated_at = datetime.now(timezone.utc)
     client.updated_at = datetime.now(timezone.utc)
     await db.flush()
     await db.refresh(client)

@@ -14,7 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from app.api.v1 import auth, articles, clients, contracts, invoices, stats  # noqa: E402
+from app.api.v1 import auth, articles, clients, contracts, invoices, stats, client_portal  # noqa: E402
 
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(articles.router, prefix="/api/v1")
@@ -22,6 +22,7 @@ app.include_router(clients.router, prefix="/api/v1")
 app.include_router(contracts.router, prefix="/api/v1")
 app.include_router(invoices.router, prefix="/api/v1")
 app.include_router(stats.router, prefix="/api/v1")
+app.include_router(client_portal.router, prefix="/api/v1")
 
 
 @app.on_event("startup")

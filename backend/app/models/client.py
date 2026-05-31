@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Optional
 
-from sqlalchemy import DateTime, Enum, String, Text
+from sqlalchemy import Boolean, DateTime, Enum, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -12,6 +12,7 @@ from app.core.database import Base
 if TYPE_CHECKING:
     from app.models.contract import Contract
     from app.models.invoice import Invoice
+    from app.models.service_request import ServiceRequest
 
 
 class ClientStatus(str, enum.Enum):
@@ -40,6 +41,9 @@ class Client(Base):
         index=True,
     )
     notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    password_hash: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    is_portal_active: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    portal_activated_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
@@ -57,6 +61,9 @@ class Client(Base):
     )
     invoices: Mapped[list["Invoice"]] = relationship(
         "Invoice", back_populates="client", lazy="noload"
+    )
+    service_requests: Mapped[list["ServiceRequest"]] = relationship(
+        "ServiceRequest", back_populates="client", lazy="noload"
     )
 
     def __repr__(self) -> str:
