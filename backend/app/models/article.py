@@ -28,7 +28,7 @@ class Article(Base):
     source_url: Mapped[Optional[str]] = mapped_column(String(2000), nullable=True)
     image_url: Mapped[Optional[str]] = mapped_column(String(2000), nullable=True)
     category: Mapped[ArticleCategory] = mapped_column(
-        Enum(ArticleCategory, schema="portail"),
+        Enum(ArticleCategory, schema="portail", values_callable=lambda obj: [e.value for e in obj]),
         nullable=False,
         default=ArticleCategory.ACTUALITE,
     )
