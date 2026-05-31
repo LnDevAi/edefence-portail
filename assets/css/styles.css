@@ -209,4 +209,19 @@ body.light-mode a{ color: var(--accent1) }
   .admin-content{margin-left:0!important}
 }
 
+/* ─── Mobile responsive ─── */
+@media(max-width:640px){
+  /* Portal tab buttons — bigger tap targets */
+  .portal-nav-item{padding:12px 14px;font-size:10px}
+
+  /* Hero h1 — clamp tighter */
+  .hero-h1{font-size:clamp(2rem,8vw,2.8rem)}
+
+  /* Contact form — stack first/last name on very small screens */
+  #contact-grid{grid-template-columns:1fr}
+
+  /* Services section — single col stack */
+  .services-grid-md{grid-template-columns:1fr}
+}
+
 
