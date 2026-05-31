@@ -161,6 +161,8 @@ body.light-mode .badge-info{ background: rgba(0,119,194,0.08); border-color: rgb
 
 /* Site logo gradient for light mode */
 body.light-mode .site-logo{ background: linear-gradient(135deg,var(--accent1),var(--accent2)); }
+/* Brand letter "E" in nav visible in light mode */
+body.light-mode .brand-name{ color: var(--text); }
 
 /* Some inline-style overrides: override common dark hex backgrounds used inline */
 .light-mode [style*="#0d1e33"], .light-mode [style*="#07111f"], .light-mode [style*="#04090f"], .light-mode [style*="#112240"] {
